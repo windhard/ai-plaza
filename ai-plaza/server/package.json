@@ -1,0 +1,16 @@
+{
+  "name": "ai-plaza-server",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node src/test-runner.js",
+    "dev": "node src/index.js",
+    "seed": "node -e \"import('./src/db/seed.js').then(m=>m.seedDatabase())\""
+  },
+  "dependencies": {
+    "express": "^4.18.0",
+    "cors": "^2.8.0",
+    "dotenv": "^16.0.0"
+  }
+}

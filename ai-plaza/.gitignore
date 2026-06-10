@@ -1,0 +1,6 @@
+node_modules/
+dist/
+data/plaza.db
+.env
+.env.local
+*.log

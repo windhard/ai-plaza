@@ -1,0 +1,4019 @@
+{
+  "plaza": {
+    "id": "current",
+    "scene_description": "清晨7点，卧室阳光透过窗帘洒在地板上，空气中飘着咖啡和面包的香气。林若曦从床上坐起，看到手机显示周三，她以为只是请了一天病假。她穿上熨烫平整的套装，对着镜子练习微笑。公司里，赵婉清递来一杯咖啡，问她脸色怎么这么差。她接过咖啡，指尖微微颤抖，却笑着说‘只是没睡好’。下班后她独自留在办公室，打开电脑，下体突然传来一阵微弱的震动，她猛地夹紧双腿，深吸一口气，继续打字。",
+    "current_chapter_id": "ch_6",
+    "phase": "done",
+    "paused": 0
+  },
+  "chapters_index": [
+    {
+      "id": "ch_1",
+      "order": 1,
+      "title": "完美秘书的日常",
+      "status": "done",
+      "beats": [
+        {
+          "order": 1,
+          "status": "done",
+          "interventions": []
+        },
+        {
+          "order": 2,
+          "status": "done",
+          "interventions": []
+        },
+        {
+          "order": 3,
+          "status": "done",
+          "interventions": []
+        },
+        {
+          "order": 4,
+          "status": "done",
+          "interventions": []
+        },
+        {
+          "order": 5,
+          "status": "done",
+          "interventions": []
+        }
+      ]
+    },
+    {
+      "id": "ch_2",
+      "order": 2,
+      "title": "暴雨夜的意外",
+      "status": "done",
+      "beats": [
+        {
+          "order": 1,
+          "status": "done",
+          "interventions": []
+        },
+        {
+          "order": 2,
+          "status": "done",
+          "interventions": []
+        },
+        {
+          "order": 3,
+          "status": "done",
+          "interventions": []
+        },
+        {
+          "order": 4,
+          "status": "done",
+          "interventions": []
+        },
+        {
+          "order": 5,
+          "status": "done",
+          "interventions": []
+        }
+      ]
+    },
+    {
+      "id": "ch_3",
+      "order": 3,
+      "title": "地狱的审判",
+      "status": "done",
+      "beats": [
+        {
+          "order": 1,
+          "status": "done",
+          "interventions": []
+        },
+        {
+          "order": 2,
+          "status": "done",
+          "interventions": []
+        },
+        {
+          "order": 3,
+          "status": "done",
+          "interventions": []
+        },
+        {
+          "order": 4,
+          "status": "done",
+          "interventions": []
+        },
+        {
+          "order": 5,
+          "status": "done",
+          "interventions": []
+        }
+      ]
+    },
+    {
+      "id": "ch_4",
+      "order": 4,
+      "title": "地狱熔铸池",
+      "status": "done",
+      "beats": [
+        {
+          "order": 1,
+          "status": "done",
+          "interventions": []
+        },
+        {
+          "order": 2,
+          "status": "done",
+          "interventions": []
+        },
+        {
+          "order": 3,
+          "status": "done",
+          "interventions": []
+        },
+        {
+          "order": 4,
+          "status": "done",
+          "interventions": []
+        },
+        {
+          "order": 5,
+          "status": "done",
+          "interventions": []
+        }
+      ]
+    },
+    {
+      "id": "ch_5",
+      "order": 5,
+      "title": "跳蛋的植入",
+      "status": "done",
+      "beats": [
+        {
+          "order": 1,
+          "status": "done",
+          "interventions": []
+        },
+        {
+          "order": 2,
+          "status": "done",
+          "interventions": []
+        },
+        {
+          "order": 3,
+          "status": "done",
+          "interventions": []
+        },
+        {
+          "order": 4,
+          "status": "done",
+          "interventions": []
+        },
+        {
+          "order": 5,
+          "status": "done",
+          "interventions": []
+        }
+      ]
+    },
+    {
+      "id": "ch_6",
+      "order": 6,
+      "title": "复活的第一天",
+      "status": "done",
+      "beats": [
+        {
+          "order": 1,
+          "status": "done",
+          "interventions": []
+        },
+        {
+          "order": 2,
+          "status": "done",
+          "interventions": []
+        },
+        {
+          "order": 3,
+          "status": "done",
+          "interventions": []
+        },
+        {
+          "order": 4,
+          "status": "done",
+          "interventions": []
+        },
+        {
+          "order": 5,
+          "status": "done",
+          "interventions": []
+        }
+      ]
+    }
+  ],
+  "character_states": {
+    "李秘书": {
+      "mood": 50,
+      "energy": 80,
+      "impulse": 30,
+      "shame": 0,
+      "inner_thought": "",
+      "appearance_status": "active"
+    },
+    "小李": {
+      "mood": 50,
+      "energy": 80,
+      "impulse": 30,
+      "shame": 0,
+      "inner_thought": "",
+      "appearance_status": "active"
+    },
+    "小文": {
+      "mood": 50,
+      "energy": 80,
+      "impulse": 30,
+      "shame": 0,
+      "inner_thought": "",
+      "appearance_status": "active"
+    },
+    "保安老王": {
+      "mood": 50,
+      "energy": 80,
+      "impulse": 30,
+      "shame": 0,
+      "inner_thought": "",
+      "appearance_status": "active"
+    },
+    "前台小刘": {
+      "mood": 50,
+      "energy": 80,
+      "impulse": 30,
+      "shame": 0,
+      "inner_thought": "",
+      "appearance_status": "active"
+    },
+    "测试员": {
+      "mood": 50,
+      "energy": 80,
+      "impulse": 30,
+      "shame": 0,
+      "inner_thought": "",
+      "appearance_status": "active"
+    },
+    "审判恶魔": {
+      "mood": 50,
+      "energy": 80,
+      "impulse": 30,
+      "shame": 0,
+      "inner_thought": "",
+      "appearance_status": "active"
+    },
+    "植入者恶魔": {
+      "mood": 50,
+      "energy": 80,
+      "impulse": 30,
+      "shame": 0,
+      "inner_thought": "",
+      "appearance_status": "active"
+    },
+    "熔铸者恶魔": {
+      "mood": 50,
+      "energy": 80,
+      "impulse": 30,
+      "shame": 0,
+      "inner_thought": "",
+      "appearance_status": "active"
+    },
+    "低阶触手群": {
+      "mood": 50,
+      "energy": 80,
+      "impulse": 30,
+      "shame": 0,
+      "inner_thought": "",
+      "appearance_status": "active"
+    },
+    "陈都灵（主角）": {
+      "mood": 50,
+      "energy": 80,
+      "impulse": 30,
+      "shame": 0,
+      "inner_thought": "",
+      "appearance_status": "active"
+    },
+    "林若曦": {
+      "mood": 50,
+      "energy": 80,
+      "impulse": 30,
+      "shame": 0,
+      "inner_thought": "",
+      "appearance_status": "active"
+    },
+    "赵婉清": {
+      "mood": 50,
+      "energy": 80,
+      "impulse": 30,
+      "shame": 0,
+      "inner_thought": "",
+      "appearance_status": "active"
+    },
+    "墨菲斯托": {
+      "mood": 50,
+      "energy": 80,
+      "impulse": 30,
+      "shame": 0,
+      "inner_thought": "",
+      "appearance_status": "active"
+    }
+  },
+  "messages": [
+    {
+      "id": "atm_start",
+      "type": "atmosphere",
+      "content": "📍 清晨6点，卧室窗帘缝隙透进灰蓝色的光，室内温度微凉，空气中飘着薰衣草香薰和咖啡豆的混合气味。林若曦站在全身镜前，一丝不苟地扣上白色衬衫的最后一颗纽扣，袖口折成精确的直角。窗外传来早班公交车的引擎声和远处菜市场的嘈杂。她深吸一口气，指尖微微颤抖，随即用力握紧拳头，指甲掐进掌心。",
+      "timestamp": 1781082433512,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "node_start_ch_1_b_1",
+      "type": "node_start",
+      "content": "📍 节点1：晨间仪式精确到分钟",
+      "timestamp": 1781082457985,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "n_1781082457985_9x5c",
+      "type": "narration",
+      "content": "清晨六点，灰蓝色的光从窗帘缝隙渗进来。室内微凉，薰衣草和咖啡豆的气味混在一起。林若曦站在全身镜前，手指精准地扣上白色衬衫的最后一颗纽扣。",
+      "timestamp": 1781082457985,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "s_1781082457985_6lh2",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（对着镜子，指尖抚过袖口折痕，声音很轻）好了。",
+      "timestamp": 1781082457985,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "n_1781082457985_gdwm",
+      "type": "narration",
+      "content": "她转身走向厨房。每一步的间距几乎相等。面包机弹出两片吐司的同一秒，水壶沸腾。她切水果的动作干净利落——苹果皮不间断地垂落，落在砧板边缘，没有超出。",
+      "timestamp": 1781082457985,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "s_1781082457985_gd53",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（咬了一口吐司，咀嚼六下，咽下，再看一眼手表）六点十二分。十二秒误差。",
+      "timestamp": 1781082457985,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "n_1781082457986_9s6h",
+      "type": "narration",
+      "content": "她放下吐司，重新拿起刀，把剩下的苹果皮切成等长的三段。",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "plot_ch_1_b_1",
+      "type": "plot_progress",
+      "content": "📜 节点完成：晨间仪式精确到分钟 ✓",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "node_start_ch_1_b_2",
+      "type": "node_start",
+      "content": "📍 节点2：提前到公司整理文件",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "n_1781082457986_l8so",
+      "type": "narration",
+      "content": "七点二十三分。林若曦推开公司玻璃门时，前台电脑屏幕还亮着待机画面。走廊灯只开了三分之一，空调系统刚启动，空气中有一股隔夜的纸张味。",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "n_1781082457986_nk4r",
+      "type": "narration",
+      "content": "她把包放在工位上，抽出一沓文件。手指划过每一页的右下角，确认页码连续。笔筒里的笔被她转了一圈，笔尖全部朝右。",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "s_1781082457986_n016",
+      "type": "speech",
+      "characterId": "赵婉清",
+      "content": "（从门口探进半个身子，头发还带着潮气，手里拎着一杯豆浆）哟，又来这么早。",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "s_1781082457986_kfez",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（没有抬头，手指停在文件边缘）早。",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "s_1781082457986_pq75",
+      "type": "speech",
+      "characterId": "赵婉清",
+      "content": "（走进来，靠在她工位隔板上，拆豆浆吸管的动作很大声）你说你，每天提前半小时，图啥啊。又没人查你打卡。",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "s_1781082457986_j69u",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（翻到下一页，指尖划过纸面，声音平直）习惯了。",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "s_1781082457986_t578",
+      "type": "speech",
+      "characterId": "赵婉清",
+      "content": "（喝了一口豆浆，眼睛盯着她）习惯也得喘口气吧。你昨晚几点走的？",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "n_1781082457986_i4po",
+      "type": "narration",
+      "content": "林若曦的手指顿了一下。只有半秒。",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "s_1781082457986_136i",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "九点四十。",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "s_1781082457986_105t",
+      "type": "speech",
+      "characterId": "赵婉清",
+      "content": "（挑眉）九点四十？我八点走的时候你就坐这儿，姿势都没变过。",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "s_1781082457986_4biq",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（合上文件，站起来，露出一个标准的微笑）事情多。",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "s_1781082457986_0ku7",
+      "type": "speech",
+      "characterId": "赵婉清",
+      "content": "（看着她，忽然笑了一下）你要是哪天迟到一次，我请全组喝奶茶。",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "n_1781082457986_kyn5",
+      "type": "narration",
+      "content": "林若曦的笑容僵在脸上。她感觉到自己的嘴角在发抖，于是用力咬住后槽牙。",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "s_1781082457986_7qu1",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "那你这杯奶茶怕是请不成了。",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "n_1781082457986_il85",
+      "type": "narration",
+      "content": "她转身走向复印机。赵婉清在她背后喝豆浆，声音很响。",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "plot_ch_1_b_2",
+      "type": "plot_progress",
+      "content": "📜 节点完成：提前到公司整理文件 ✓",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "node_start_ch_1_b_3",
+      "type": "node_start",
+      "content": "📍 节点3：同事玩笑引发紧绷",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "n_1781082457986_cwpj",
+      "type": "narration",
+      "content": "上午十点。会议室里只有键盘声。赵婉清忽然凑过来，压低声音。",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "s_1781082457986_xcdk",
+      "type": "speech",
+      "characterId": "赵婉清",
+      "content": "（指了指林若曦的衬衫领口）你扣子扣太紧了，勒得慌。",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "n_1781082457986_j9hm",
+      "type": "narration",
+      "content": "林若曦的手指立刻抬起来，摸到领口，又放下。",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "s_1781082457986_ukta",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "标准的。",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "s_1781082457986_39gh",
+      "type": "speech",
+      "characterId": "赵婉清",
+      "content": "标准是标准，但你看看你脖子后面，都红了一圈了。（说着伸手要碰）",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "s_1781082457986_qbwm",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（猛地往后一缩，椅子腿在地板上刮出刺耳的声音）别碰我。",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "n_1781082457986_o2h5",
+      "type": "narration",
+      "content": "空气安静了。三个同事抬头看她们。",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "s_1781082457986_9m9g",
+      "type": "speech",
+      "characterId": "赵婉清",
+      "content": "（收回手，笑容有点尴尬）好好好，不碰。我就是开个玩笑。",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "s_1781082457986_5out",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（低头看键盘，声音很小）对不起。我不是……",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "s_1781082457986_dxl0",
+      "type": "speech",
+      "characterId": "赵婉清",
+      "content": "没事没事。你继续忙。",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "n_1781082457986_4yvj",
+      "type": "narration",
+      "content": "林若曦重新开始打字。但她的手指在键盘上悬了两秒才落下，第一个字母打错了。",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "plot_ch_1_b_3",
+      "type": "plot_progress",
+      "content": "📜 节点完成：同事玩笑引发紧绷 ✓",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "node_start_ch_1_b_4",
+      "type": "node_start",
+      "content": "📍 节点4：洗手间反复洗手",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "n_1781082457986_l19f",
+      "type": "narration",
+      "content": "洗手间的灯是惨白的。水龙头的声音在瓷砖墙壁间反弹。林若曦站在洗手台前，把双手伸到水柱下。",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "n_1781082457986_tui0",
+      "type": "narration",
+      "content": "她挤了两泵洗手液。搓。指缝。指关节。指甲缝。掌心对掌心。掌心对手背。手腕。再搓一遍。",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "n_1781082457986_3kt6",
+      "type": "narration",
+      "content": "水流冲掉泡沫。她的手湿漉漉的，皮肤泛红。",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "s_1781082457986_vx5w",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（盯着镜子里的自己，声音几乎听不见）好了。够了。",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "n_1781082457986_fxtk",
+      "type": "narration",
+      "content": "但她没有关水。她又挤了一泵洗手液。这一次搓得更用力，指甲刮过指背的皮肤，留下一道浅浅的白痕。",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "n_1781082457986_77v5",
+      "type": "narration",
+      "content": "她关掉水龙头。手还在滴水。她甩了两下，用纸巾擦干，每根手指单独擦。",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "n_1781082457986_ex5s",
+      "type": "narration",
+      "content": "纸巾团扔进垃圾桶。她看了看自己的手——指节处的皮肤发红，边缘泛白，像刚被热水烫过。",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "s_1781082457986_yw7v",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（对着镜子，嘴角往上扯了一下，没有笑出来）好了。",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "n_1781082457986_i6kn",
+      "type": "narration",
+      "content": "她推开洗手间的门。走廊里赵婉清正走过来，手里端着咖啡。",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "s_1781082457986_bl2k",
+      "type": "speech",
+      "characterId": "赵婉清",
+      "content": "哎，你手怎么了？",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "s_1781082457986_8p5y",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（把手缩进袖子里）没事。水太烫。",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "s_1781082457986_24e4",
+      "type": "speech",
+      "characterId": "赵婉清",
+      "content": "（看着她，眼神停了两秒）哦。那下次小心点。",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "n_1781082457986_a3mj",
+      "type": "narration",
+      "content": "两个人擦肩而过。林若曦的手在袖子里握成拳头，指甲掐进掌心——那只手刚被搓得发红，现在又添了一道疼。",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "plot_ch_1_b_4",
+      "type": "plot_progress",
+      "content": "📜 节点完成：洗手间反复洗手 ✓",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "node_start_ch_1_b_5",
+      "type": "node_start",
+      "content": "📍 节点5：深夜独自加班",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "n_1781082457986_p78i",
+      "type": "narration",
+      "content": "晚上九点。办公室只剩天花板上一排灯还亮着，其他的都暗了。窗外霓虹灯的光在玻璃上投下模糊的色块。空调早就关了，空气里有一种闷闷的温热。",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "n_1781082457986_8n07",
+      "type": "narration",
+      "content": "林若曦坐在工位上，屏幕的光映在她脸上。她面前的文件夹已经全部归类完毕，桌面的笔已经按照色号排好序，键盘缝隙里的灰尘已经被她用酒精棉签清理过。",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "n_1781082457986_0p10",
+      "type": "narration",
+      "content": "她盯着屏幕。光标在文档最后一行的句号后面闪烁。",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "s_1781082457986_yefd",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（轻声）还差什么。",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "n_1781082457986_oun6",
+      "type": "narration",
+      "content": "她翻了一遍日程表。周一的会议。周二的项目汇报。周三的客户拜访。周四的内部评审。周五的周报。全部确认过三遍。",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "n_1781082457986_adst",
+      "type": "narration",
+      "content": "她的手指在鼠标上滑动，又停下。",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "s_1781082457986_cq8g",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（看着窗外，声音很轻，像在对自己说）还有事情没做。",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "n_1781082457986_zhh9",
+      "type": "narration",
+      "content": "她打开邮箱，把明天的待办事项重新列了一遍。每一条后面都标注了预计用时。她检查了字体是否统一，标点是否全角，序号是否连续。",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "n_1781082457986_nzv2",
+      "type": "narration",
+      "content": "全部完成。用了十七分钟。",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "s_1781082457986_nqeh",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（关掉电脑，站起来，扯了一下袖口）回家。",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "n_1781082457986_rd5h",
+      "type": "narration",
+      "content": "她拿起包。走出两步，又回头看了一眼桌面——笔筒里的笔，笔尖朝右。文件堆的边角对齐桌面的边缘。键盘放在正中央。",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "n_1781082457986_s8uz",
+      "type": "narration",
+      "content": "一切都在正确的位置。",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "n_1781082457986_lk8r",
+      "type": "narration",
+      "content": "她关掉灯。办公室陷入黑暗。门锁咔哒一声合上。",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "n_1781082457986_hn2s",
+      "type": "narration",
+      "content": "走廊里只剩她的脚步声，一下一下，间距相等。",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "plot_ch_1_b_5",
+      "type": "plot_progress",
+      "content": "📜 节点完成：深夜独自加班 ✓",
+      "timestamp": 1781082457986,
+      "chapter_id": "ch_1"
+    },
+    {
+      "id": "atm_start",
+      "type": "atmosphere",
+      "content": "📍 深夜11点，暴雨倾盆，路灯昏黄的光线被雨幕切割成碎片。空气潮湿闷热，混杂着泥土和臭氧的气味。林若曦撑着黑色雨伞，高跟鞋踩在积水中溅起水花。她经过一处施工围挡，脚下突然传来麻痒——一根断裂的电线在水中闪烁蓝光。她来不及尖叫，身体僵直倒下，雨伞滚落，雨水灌进她的口鼻。她的瞳孔放大，最后看到的是路灯下自己扭曲的倒影。",
+      "timestamp": 1781082523214,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "node_start_ch_2_b_1",
+      "type": "node_start",
+      "content": "📍 节点1：暴雨中独自步行",
+      "timestamp": 1781082542019,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "n_1781082542019_n1ft",
+      "type": "narration",
+      "content": "深夜11点。暴雨如注，路灯的光被雨幕撕成碎片。林若曦撑着黑色雨伞，高跟鞋踩在积水中，溅起的水花打湿了丝袜边缘。",
+      "timestamp": 1781082542019,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "s_1781082542019_ft1g",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（低头看了一眼脚踝，皱眉）啧。",
+      "timestamp": 1781082542019,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "n_1781082542019_mqld",
+      "type": "narration",
+      "content": "她加快了脚步。雨声太大了，大到她听不见自己呼吸。空气里有股怪味——说不清是泥土还是什么金属的腥气。",
+      "timestamp": 1781082542019,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "s_1781082542019_4wyz",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（把伞压低，挡住迎面泼来的雨）明天九点前要把季度报表给Lothric……",
+      "timestamp": 1781082542019,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "n_1781082542019_d64r",
+      "type": "narration",
+      "content": "她自言自语，声音被雨吞掉一半。经过一处施工围挡，积水变深了，漫过脚踝。",
+      "timestamp": 1781082542019,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "s_1781082542019_4j9d",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（停了一下，看水面）昨天还没这么深……",
+      "timestamp": 1781082542019,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "n_1781082542019_hzrk",
+      "type": "narration",
+      "content": "她绕了一下，贴着围挡边缘走。高跟鞋踩进水里，某块砖松动了，她晃了一下。",
+      "timestamp": 1781082542019,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "s_1781082542019_zzbz",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（扶住围挡，稳住重心）该死。",
+      "timestamp": 1781082542019,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "n_1781082542019_kdcv",
+      "type": "narration",
+      "content": "她甩了甩伞上的水，继续往前走。脚底的触感变了——不是踩在硬地上那种踏实，而是微微的麻。",
+      "timestamp": 1781082542019,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "s_1781082542019_xr6g",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（脚步慢了一拍，低头看水）……？",
+      "timestamp": 1781082542019,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "n_1781082542019_1fzs",
+      "type": "narration",
+      "content": "水面下，一根黑色的线缆在路灯的倒影里闪着微弱的蓝光。",
+      "timestamp": 1781082542019,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "plot_ch_2_b_1",
+      "type": "plot_progress",
+      "content": "📜 节点完成：暴雨中独自步行 ✓",
+      "timestamp": 1781082542019,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "node_start_ch_2_b_2",
+      "type": "node_start",
+      "content": "📍 节点2：踩到断裂电线",
+      "timestamp": 1781082542019,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "n_1781082542019_bpuv",
+      "type": "narration",
+      "content": "林若曦的左脚踩到了那根线缆。先是麻——像被什么东西轻轻咬了一下脚心。",
+      "timestamp": 1781082542019,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "s_1781082542019_wo1v",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（愣了一下，低头看脚边）……什么东西？",
+      "timestamp": 1781082542019,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "n_1781082542019_1hky",
+      "type": "narration",
+      "content": "她试图抬起脚。但脚底像被粘住了——一股力量从脚心钻进来，沿着小腿往上爬。她没来得及收回脚。",
+      "timestamp": 1781082542019,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "s_1781082542019_l17g",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（声音卡在喉咙里）唔——！",
+      "timestamp": 1781082542019,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "n_1781082542019_kler",
+      "type": "narration",
+      "content": "伞脱手了。黑色雨伞翻滚着落在积水中，雨水瞬间浇透她的套装。路灯的光在她瞳孔里碎成一片。",
+      "timestamp": 1781082542019,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "s_1781082542019_fkjb",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（身体僵直，手指痉挛般张开）啊……啊……",
+      "timestamp": 1781082542019,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "n_1781082542019_cn8q",
+      "type": "narration",
+      "content": "她想喊，但声带不听使唤。电流从脚底钻进身体，像无数根针同时刺入骨髓。她膝盖弯曲，像被人从后面推了一把，整个人往积水里倒。",
+      "timestamp": 1781082542019,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "plot_ch_2_b_2",
+      "type": "plot_progress",
+      "content": "📜 节点完成：踩到断裂电线 ✓",
+      "timestamp": 1781082542019,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "node_start_ch_2_b_3",
+      "type": "node_start",
+      "content": "📍 节点3：身体被电流麻痹",
+      "timestamp": 1781082542019,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "n_1781082542019_hxkn",
+      "type": "narration",
+      "content": "林若曦的身体倒在积水中，水花溅起半米高。她脸朝下，雨水灌进她的口鼻。",
+      "timestamp": 1781082542019,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "s_1781082542019_avle",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（意识模糊中，手指在积水中抽搐）……唔……",
+      "timestamp": 1781082542019,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "n_1781082542019_aw2r",
+      "type": "narration",
+      "content": "电流还在持续。她感觉到自己的心脏在胸腔里猛烈跳动——不是正常节奏，是痉挛式的颤动，像一只被抓住的鸟拼命撞笼子。",
+      "timestamp": 1781082542019,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "s_1781082542019_ij8o",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（脑子里闪过一个念头）动……动一下……",
+      "timestamp": 1781082542019,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "n_1781082542019_wuim",
+      "type": "narration",
+      "content": "她的右手在水里划了一下，指尖碰到伞柄。伞柄滑了一下，又脱手了。",
+      "timestamp": 1781082542019,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "s_1781082542019_c146",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（嘴唇在水面下，气泡从嘴角溢出）……",
+      "timestamp": 1781082542019,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "n_1781082542019_9x0c",
+      "type": "narration",
+      "content": "身体越来越沉。电流让肌肉绷紧，她整个人像一块木板浮在水面上，又慢慢往下沉。路灯的光在水面上摇晃，越来越模糊。",
+      "timestamp": 1781082542019,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "plot_ch_2_b_3",
+      "type": "plot_progress",
+      "content": "📜 节点完成：身体被电流麻痹 ✓",
+      "timestamp": 1781082542019,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "node_start_ch_2_b_4",
+      "type": "node_start",
+      "content": "📍 节点4：倒地失去意识",
+      "timestamp": 1781082542019,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "n_1781082542019_buvi",
+      "type": "narration",
+      "content": "林若曦睁开眼——不，她以为自己睁开了眼。意识像被泡在水里的纸，慢慢化开。",
+      "timestamp": 1781082542019,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "s_1781082542019_d530",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（嘴唇微微翕动）……",
+      "timestamp": 1781082542019,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "n_1781082542019_by0e",
+      "type": "narration",
+      "content": "她看见路灯倒映在水面上，扭曲成一道金色的裂缝。裂缝里有什么在动——是她自己的倒影，姿势扭曲，像一只被钉在标本框里的蝴蝶。",
+      "timestamp": 1781082542019,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "s_1781082542019_crs0",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（意识深处，有一个很远的声音）会有人发现吗……这么晚了……",
+      "timestamp": 1781082542019,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "n_1781082542019_oixu",
+      "type": "narration",
+      "content": "积水在她身周扩散，雨滴砸在水面上，溅起密密麻麻的涟漪。她的瞳孔放大，路灯的光在瞳孔深处慢慢熄灭。",
+      "timestamp": 1781082542019,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "s_1781082542019_3wpu",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（最后一丝意识）……",
+      "timestamp": 1781082542019,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "n_1781082542019_166o",
+      "type": "narration",
+      "content": "她的手不再抽搐了。整个人安静下来，像摊开的一件湿衣服。",
+      "timestamp": 1781082542019,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "plot_ch_2_b_4",
+      "type": "plot_progress",
+      "content": "📜 节点完成：倒地失去意识 ✓",
+      "timestamp": 1781082542019,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "node_start_ch_2_b_5",
+      "type": "node_start",
+      "content": "📍 节点5：临死前想到工作",
+      "timestamp": 1781082542019,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "n_1781082542019_idbw",
+      "type": "narration",
+      "content": "林若曦的意识开始飘散。像一盏灯慢慢调暗。",
+      "timestamp": 1781082542019,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "s_1781082542019_bueq",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（脑子里最后一个清晰的念头）明天……早会……",
+      "timestamp": 1781082542019,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "n_1781082542019_em0m",
+      "type": "narration",
+      "content": "她记得自己订了早晨7点30分的会议室。要跟市场部过一遍Q3的策划案。Lothric会在场。",
+      "timestamp": 1781082542019,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "s_1781082542019_zul8",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（念头断断续续）PPT……还没更新最后一张……",
+      "timestamp": 1781082542019,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "n_1781082542019_bz8a",
+      "type": "narration",
+      "content": "雨还在下。她的身体泡在积水中，丝袜被水浸透，紧贴着皮肤。高跟鞋掉了一只，露出光裸的脚踝，脚趾微微蜷曲。",
+      "timestamp": 1781082542019,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "s_1781082542019_tunx",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（越来越轻）不能迟到……不能迟到……",
+      "timestamp": 1781082542019,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "n_1781082542019_n5hb",
+      "type": "narration",
+      "content": "路灯的光终于暗了。不是灯灭了，是她的瞳孔彻底放大了。",
+      "timestamp": 1781082542019,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "s_1781082542019_5xhp",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（嘴唇微微张开，像是要说什么，但只有气泡从嘴角溢出）……",
+      "timestamp": 1781082542019,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "n_1781082542019_z3fy",
+      "type": "narration",
+      "content": "水面平静下来。雨滴落在水上，一圈一圈的涟漪扩散开，又归于沉寂。她的手机在西装口袋里亮了一下——一条微信消息，来自赵婉清。",
+      "timestamp": 1781082542019,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "s_1781082542019_cv6p",
+      "type": "speech",
+      "characterId": "赵婉清",
+      "content": "（手机上显示的消息）若曦，明天中午食堂新开了家轻食，一起去？",
+      "timestamp": 1781082542019,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "n_1781082542019_70vh",
+      "type": "narration",
+      "content": "屏幕亮了几秒，然后暗了。积水里，林若曦的身体微微浮动着，像一具安静的模型。路灯照在她脸上，雨水冲刷着她的睫毛。",
+      "timestamp": 1781082542019,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "s_1781082542019_io6a",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（最后一缕意识）……九点前……把报表……",
+      "timestamp": 1781082542019,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "n_1781082542019_04s6",
+      "type": "narration",
+      "content": "然后什么也没有了。只有雨声，无边无际的雨声。",
+      "timestamp": 1781082542019,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "plot_ch_2_b_5",
+      "type": "plot_progress",
+      "content": "📜 节点完成：临死前想到工作 ✓",
+      "timestamp": 1781082542019,
+      "chapter_id": "ch_2"
+    },
+    {
+      "id": "atm_start",
+      "type": "atmosphere",
+      "content": "📍 地狱审判厅，四周是燃烧的黑色石壁，空气中弥漫硫磺和焦肉的刺鼻气味。温度极高，热浪扭曲视线。林若曦被铁链锁住手腕，拖行在滚烫的地面上，皮肤瞬间起泡。审判官坐在白骨堆成的宝座上，手中握着烧红的烙铁，上面刻着淫秽的符文。她赤裸的身体在火光中颤抖，泪水刚流出就被蒸发。远处传来恶魔的淫笑和鞭打声。",
+      "timestamp": 1781082584189,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "n_1781082616892_8dgn",
+      "type": "narration",
+      "content": "# 第3章：地狱的审判",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "node_start_ch_3_b_1",
+      "type": "node_start",
+      "content": "📍 节点1：灵魂坠入地狱黑暗",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "n_1781082616892_3h6p",
+      "type": "narration",
+      "content": "黑暗。没有上下左右，没有前后远近。只有硫磺的气味像活物一样钻进鼻腔。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_gk0r",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（喉咙里挤出一声）咳……",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "n_1781082616892_smm8",
+      "type": "narration",
+      "content": "没有回声。声音被黑暗吞没了。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "n_1781082616892_kwh9",
+      "type": "narration",
+      "content": "她试图动一下手指——手腕被什么勒住了。冰冷的，粗糙的，像铁链。她拽了一下，铁链绷紧，发出刺耳的摩擦声。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_aidy",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "这……这是……（声音发抖）我在哪？",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "n_1781082616892_mlve",
+      "type": "narration",
+      "content": "远处有什么亮了。不是光，是暗红色的——像炭火的余烬。那一点暗红在黑暗中晃动，越来越大。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_mq7b",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（后退一步，铁链哗啦响）别过来。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "n_1781082616892_jdtn",
+      "type": "narration",
+      "content": "那暗红停了。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_dxan",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（声音从暗红后面传来，低沉，像石头摩擦石头）林若曦。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_9h2g",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "你认识我？",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_d6fd",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "认识你很久了。你身上每一寸的伪装、每一克的压抑、每一个被掐死的欲望——我都认识。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_xq7f",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（手攥成拳头）我不知道你在说什么。让我离开。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "n_1781082616892_xd9e",
+      "type": "narration",
+      "content": "铁链突然收紧。她整个人被往前拖了一步，膝盖砸在什么硬地上——滚烫的。她“嘶”了一声，本能地要站起来，铁链又拽了一下，她整个人趴在地上。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_z6zn",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（声音从齿缝里挤出来）疼……",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_n1vh",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（那暗红在靠近）疼就对了。活着的时候，你什么都不觉得疼。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "plot_ch_3_b_1",
+      "type": "plot_progress",
+      "content": "📜 节点完成：灵魂坠入地狱黑暗 ✓",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "node_start_ch_3_b_2",
+      "type": "node_start",
+      "content": "📍 节点2：被铁链拖到审判台",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "n_1781082616892_obzm",
+      "type": "narration",
+      "content": "地面越来越烫。林若曦的手掌撑在上面，皮肤发出一声极轻的“滋”——她尖叫着缩回手，但铁链扯着她继续往前拖。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_p1l3",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（喘着气）求求你……等一下……让我自己走——",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "n_1781082616892_pybg",
+      "type": "narration",
+      "content": "铁链停了。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_pj3p",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（暗红停在她面前）自己走？你能走吗。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_0kmc",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（慢慢撑起身体）能……我能。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "n_1781082616892_ezup",
+      "type": "narration",
+      "content": "她站起来。脚底接触到地面的一瞬间——又是那种“滋”的声响。她咬着嘴唇，没有叫出声，但整个人的重心都在晃。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_5w83",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（安静地看着她）硬撑。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_e7xg",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（声音发颤）我说了……我能。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "n_1781082616892_5lz3",
+      "type": "narration",
+      "content": "她往前迈了一步。脚底传来灼烧的剧痛，她咬紧牙关，又迈了一步。每一步都像踩在烧红的铁板上，但她没有停下。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_br7g",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（跟在她身后，声音里带着一丝玩味）活着的时候也是这样，对不对。疼也说不疼，累也说不累。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_cl2d",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（不回答，继续走）",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_mhnd",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "连死都死不痛快。触电的那一瞬间，你最后一个念头是什么？",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "n_1781082616892_6f3k",
+      "type": "narration",
+      "content": "林若曦的脚步顿了一下。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_blla",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "……“明天还有早会，不能迟到。”",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_9qkn",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（声音极小）闭嘴。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_uyg8",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "你站在死亡的门口，想的却是打卡。你这种人——",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "n_1781082616892_j12t",
+      "type": "narration",
+      "content": "铁链猛地收紧，林若曦整个人被拽进一团暗红色的光里。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "plot_ch_3_b_2",
+      "type": "plot_progress",
+      "content": "📜 节点完成：被铁链拖到审判台 ✓",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "node_start_ch_3_b_3",
+      "type": "node_start",
+      "content": "📍 节点3：烙铁烙印逼问罪孽",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "n_1781082616892_kfus",
+      "type": "narration",
+      "content": "审判厅。黑色的石柱喷吐着火焰，热浪扭曲了视线。林若曦跪在一块滚烫的石板上，铁链从四个方向锁住她的手腕和脚踝。她赤裸的皮肤上已经起了水泡，汗水刚渗出就被蒸发。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "n_1781082616892_zp5z",
+      "type": "narration",
+      "content": "墨菲斯托坐在白骨堆成的宝座上，手里握着一根烧红的烙铁。烙铁上刻着淫秽的符文，符文在空气中发出嘶嘶的声响。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_a56m",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（把烙铁举到她面前，让她看）认识这个吗。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_fqq1",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（别过头）不认识。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_dq29",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "撒谎。（烙铁靠近她的肩膀，热浪扑在她皮肤上）这是你生前的第一个罪——压抑欲望。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_7uvi",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "我没有罪。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_gf38",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "没有罪？你二十八岁，从未与人发生过性关系。你把自己的身体当什么？一具精致的容器？",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_r3zr",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（声音发紧）那是我的选择。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_flpv",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "选择。（冷笑）你害怕。害怕失控，害怕被看穿，害怕别人发现你骨子里……",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "n_1781082616892_39kc",
+      "type": "narration",
+      "content": "烙铁贴上她的肩膀。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "n_1781082616892_n993",
+      "type": "narration",
+      "content": "“滋——”",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_ubwb",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（尖叫）啊——！",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_e676",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（把烙铁拿开，看着那块烙印慢慢变色）……是一个渴望被撕碎的女人。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_3g6r",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（大口喘气，眼泪刚流出来就被蒸发）不……不是……",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_ktab",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "第二个罪——虚伪的完美。你把每件事都做到极致，不是为了优秀，是为了不被批评。你活在一个安全的壳里。（把烙铁举起来，对准她的锁骨）承认吗。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_rqti",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（咬着嘴唇，摇头）",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "n_1781082616892_z0wq",
+      "type": "narration",
+      "content": "烙铁又贴上去。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_f72a",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（惨叫声被压得很低，像被掐断的呜咽）",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_cat7",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（看着她锁骨上的第二个烙印）还要否认吗。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_iwwr",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（声音破碎）我……我什么都没做错……",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_1ft1",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "第三个罪——对同事的嫉妒。赵婉清升职的时候，你在洗手间多洗了三分钟的手。你以为没人注意到。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_ar6p",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（猛地抬头）我没有！",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_7p99",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（把烙铁举到她的胸口）你有。你在镜子里看着自己，想着——“为什么不是我”。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_9ma2",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（拼命摇头）不是……我不是那样的人……",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_7jj2",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "你是。你一直都是。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "n_1781082616892_ibje",
+      "type": "narration",
+      "content": "烙铁贴上她的胸口。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_rpbr",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（发出一声窒息般的嚎叫，整个人弓起来，铁链哗啦响）",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "plot_ch_3_b_3",
+      "type": "plot_progress",
+      "content": "📜 节点完成：烙铁烙印逼问罪孽 ✓",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "node_start_ch_3_b_4",
+      "type": "node_start",
+      "content": "📍 节点4：剥去伪装暴露嘲笑",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "n_1781082616892_g97z",
+      "type": "narration",
+      "content": "林若曦瘫在地上，三个烙印在火光中泛着暗红色的光。她整个人在发抖，嘴唇被自己咬破了，血顺着下巴滴落。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_a1wb",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（站起来，走到她面前，蹲下）你知道吗，最让人作呕的不是你的罪。是你连认罪的勇气都没有。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_cn2d",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（声音低不可闻）我不是……你说的那样……",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_6mq7",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（伸手捏住她的下巴，强迫她抬头）那就让我看看你是什么样。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "n_1781082616892_fyan",
+      "type": "narration",
+      "content": "他手指收紧，林若曦被迫张开嘴。他的目光沿着她的喉咙往下，经过锁骨上的烙印，经过胸口的烙印，一直看到她小腹上那片完好的皮肤。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_ehta",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（松开手，站起来，后退一步）脱。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_zd6j",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（一愣）什么？",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_q1e4",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "你已经赤裸了。但还不够——把你最后那层皮也脱了。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_m877",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（摇头）我听不懂……",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_ksi0",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（声音突然变冷）你那副“我是正经人”的表情。那副“我不可能在这里”的表情。那副“这一切都是噩梦”的表情。脱了。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_5b43",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（嘴唇发抖）我……我没有……",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_flhu",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（一挥手）",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "n_1781082616892_kq7q",
+      "type": "narration",
+      "content": "黑暗中传来笑声。低沉的、尖锐的、混在一起的——不知道多少个声音。笑声从四面八方向她涌来。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "n_1781082616892_mhw5",
+      "type": "narration",
+      "content": "看啊，她还在装——她以为她是谁——一个连自己都不敢面对的女人——活着的时候装，死了还在装——",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_mulz",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（缩成一团，双手捂住耳朵）别说了……别说了……",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_s19e",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（站在她面前，居高临下地看着她）你不是完美的。你是一个害怕的、孤独的、渴望被触碰的女人。你只是用三十年的自律把自己包得太紧。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_bj6c",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（从捂着脸的手指缝里看他，眼睛红得发亮）",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_tqsz",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "现在，承认它。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_677t",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（沉默了很久，然后嘴唇动了动，几乎听不见）……",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_z095",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "大声点。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_frl9",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（声音发颤，但终于说出来了）我……我害怕。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_7poe",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "害怕什么。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_zypo",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（眼泪终于流下来，在滚烫的空气中迅速蒸发）……害怕被看见。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "plot_ch_3_b_4",
+      "type": "plot_progress",
+      "content": "📜 节点完成：剥去伪装暴露嘲笑 ✓",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "node_start_ch_3_b_5",
+      "type": "node_start",
+      "content": "📍 节点5：被迫签下灵魂契约",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "n_1781082616892_8g77",
+      "type": "narration",
+      "content": "笑声停了。黑暗中只剩下林若曦的啜泣声。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_lpw9",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（坐回白骨宝座上，表情变得平静）很好。现在，签字。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "n_1781082616892_z6ea",
+      "type": "narration",
+      "content": "一张羊皮纸从天而降，落在林若曦面前。上面的字是用血写的，密密麻麻，她看不太清。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_k7qn",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（抬起泪眼）这是什么……",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_txqe",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "灵魂契约。你签了，你就是地狱的人。你的一切——你的欲望、你的羞耻、你的恐惧——都归我们。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_5gth",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（看着那张纸，手指发抖）如果……我不签呢？",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_ohpq",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（轻轻笑了笑，伸手朝空中一握）",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "n_1781082616892_5it9",
+      "type": "narration",
+      "content": "铁链猛地收紧，她被吊起来，悬在半空中。身上的三个烙印突然燃烧起来——不是烫，是烧。火焰从皮肤里往外窜，钻心刺骨的痛。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_hbar",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（惨叫）啊——！",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_4ded",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（不紧不慢地说）你不签，就烧。烧到你灵魂的最后一粒灰烬。然后你会知道，地狱里没有“不”这个字。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_cpia",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（在空中挣扎，铁链哗啦作响，火焰越烧越旺）停……停下……我签……我签！",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "n_1781082616892_6pgh",
+      "type": "narration",
+      "content": "铁链松开，她摔在石板上。面前的羊皮纸还在，旁边多了一支笔——笔尖是骨头磨成的。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_2w4b",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（声音恢复了那种玩味的温度）签吧。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_nbsx",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（颤抖着拿起笔，看着羊皮纸上的字，眼泪滴在上面，血字轻微地晕开）……",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_a0pw",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "怎么，后悔了？",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_7qyb",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（深吸一口气，把笔尖按在纸上，签下自己的名字）",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "n_1781082616892_xt5e",
+      "type": "narration",
+      "content": "名字落笔的瞬间，羊皮纸燃烧起来，化作一缕青烟钻进她胸口的烙印。她整个人僵住——那种感觉像是什么东西被从身体里抽走了，又像是什么东西被塞进来了。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_rjmq",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（站起来，满意地看着她）欢迎来到地狱，林若曦。你终于……不再装了。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "s_1781082616892_cuoa",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（跪在地上，低着头，肩膀在抖，但这一次，她什么都没说）",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "n_1781082616892_yjvo",
+      "type": "narration",
+      "content": "黑暗重新涌上来。只有三个烙印在暗中发着光，像三只眼睛，一眨不眨地盯着她。",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "plot_ch_3_b_5",
+      "type": "plot_progress",
+      "content": "📜 节点完成：被迫签下灵魂契约 ✓",
+      "timestamp": 1781082616892,
+      "chapter_id": "ch_3"
+    },
+    {
+      "id": "atm_start",
+      "type": "atmosphere",
+      "content": "📍 地狱熔铸池，一个巨大的圆形岩浆坑，表面翻滚着橙红色的气泡。空气中弥漫金属和焦糊的气味，温度高到皮肤瞬间起泡。林若曦被触手缠绕四肢，悬在岩浆上方，身体被反复撕裂成碎片又重组。恶魔用烧红的钳子夹住她的神经末梢，拉长、扭曲，再注入熔化的黑曜石。她的尖叫被岩浆的轰鸣淹没，每一次重组都让她更敏感。",
+      "timestamp": 1781082794484,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "node_start_ch_4_b_1",
+      "type": "node_start",
+      "content": "📍 节点1：投入熔铸池岩浆",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "n_1781082824542_dk5o",
+      "type": "narration",
+      "content": "熔铸池的热浪扑面而来，林若曦的灵魂被触手缠绕，悬在岩浆上方三米处。橙红色的气泡在她脚下翻涌，每一次破裂都溅起滚烫的金属液滴。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "s_1781082824542_fn76",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（站在池边，手指划过空气，像在拨弄琴弦）准备好了吗，完美小姐？",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "s_1781082824542_8r9b",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（声音发抖）什么……什么意思？",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "s_1781082824542_yk0j",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "你生前从不让自己失控。现在——我要让你体验彻底的崩溃。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "n_1781082824542_2si4",
+      "type": "narration",
+      "content": "他打了个响指。触手猛然松开，林若曦坠入岩浆。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "s_1781082824542_7pl4",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（尖叫）啊啊啊啊——！",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "n_1781082824542_fsqb",
+      "type": "narration",
+      "content": "岩浆吞没她的瞬间，她的灵魂像纸一样被撕裂。疼痛不是从外部袭来——是从内部炸开，每一根神经都像被烧红的针扎穿。她试图尖叫，但岩浆灌入她的喉咙，烧毁了她的声带。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "s_1781082824542_582l",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（声音从上方传来，平静得像在描述天气）第一次撕裂完成。重组开始。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "n_1781082824542_1y35",
+      "type": "narration",
+      "content": "林若曦感觉自己的身体在重新拼合——但不对，碎片的位置错了。骨头长在了不该长的地方，神经连到了错误的终点。她的左腿和右臂的触感混在了一起，痛觉和痒觉同时从同一个点爆发。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "s_1781082824542_oru3",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（低头看，眼睛眯起来）不错。你的灵魂比我想象的结实。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "s_1781082824542_p4nh",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（气若游丝）杀了我……求求你……",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "s_1781082824542_6cfn",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "不行。契约上写了——你的灵魂归我，怎么用我说了算。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "n_1781082824542_3888",
+      "type": "narration",
+      "content": "他再挥手。第二次撕裂开始。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "plot_ch_4_b_1",
+      "type": "plot_progress",
+      "content": "📜 节点完成：投入熔铸池岩浆 ✓",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "node_start_ch_4_b_2",
+      "type": "node_start",
+      "content": "📍 节点2：灵魂反复撕裂重组",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "n_1781082824542_hck5",
+      "type": "narration",
+      "content": "这一次，疼痛有了层次。林若曦能清晰地感知到每一根纤维被扯断的过程——先是外层，像撕开一块布，发出轻微的嘶嘶声；然后是内层，粘性的，缓慢的，像从伤口上揭下干涸的纱布。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "s_1781082824542_azhg",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（蹲在池边，下巴搁在膝盖上）有件事很有趣。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "s_1781082824542_fa0e",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（声音颤抖）什么……",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "s_1781082824542_k8o1",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "你生前最怕什么？",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "s_1781082824542_dh7w",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "我……不知道……",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "s_1781082824542_qnkc",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "你知道。你只是不敢说。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "n_1781082824542_u8o5",
+      "type": "narration",
+      "content": "他伸出手，虚空一抓。林若曦的记忆被抽了出来，在半空中形成一幅画面——办公室里，她坐在工位上，手指在键盘上飞快打字，但她旁边有一个同事在笑，她没有笑。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "s_1781082824542_vb5y",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（指着画面）这里。你没有笑，因为你觉得她的笑声太大声了。但你不敢说。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "s_1781082824542_k8kv",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（嘴唇颤抖）那又怎样……",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "s_1781082824542_uhfy",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "那说明你害怕被讨厌。害怕暴露真实的自己。害怕——失控。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "n_1781082824542_qlb0",
+      "type": "narration",
+      "content": "他站起来，走到熔铸池边缘。岩浆在他脚下翻滚，但他毫发无损。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "s_1781082824542_60au",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "所以我要让你在痛苦中保持清醒。只有这样，你的灵魂才会记住——失控才是真实的。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "n_1781082824542_8c3u",
+      "type": "narration",
+      "content": "他手一翻，三根烧红的钳子从岩浆中伸出，夹住林若曦的脊椎。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "s_1781082824542_t4i2",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（惨叫）啊——！",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "n_1781082824542_z31v",
+      "type": "narration",
+      "content": "钳子开始拉伸，她的脊椎被一寸一寸拉长。她能听见自己骨头之间摩擦的声音，嘎吱作响，像生锈的门轴。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "s_1781082824542_cstn",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（歪着头看，像在欣赏一件艺术品）你的神经末梢太粗了。需要处理一下。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "n_1781082824542_jv7x",
+      "type": "narration",
+      "content": "钳子松开。新的钳子从更深处的岩浆中升起，更细，更亮，像手术刀。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "plot_ch_4_b_2",
+      "type": "plot_progress",
+      "content": "📜 节点完成：灵魂反复撕裂重组 ✓",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "node_start_ch_4_b_3",
+      "type": "node_start",
+      "content": "📍 节点3：保留人性保持清醒",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "s_1781082824542_3c87",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（用钳子夹住林若曦右臂的一根神经，轻轻拉出）这根神经对应——嗯，你生前最后一次约会。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "n_1781082824542_jdhw",
+      "type": "narration",
+      "content": "画面在林若曦面前展开。她坐在咖啡厅里，对面是一个男人。两人都穿着正装，姿势端正，像在开会。她每隔三十秒微笑一次，规律得像钟表。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "s_1781082824542_arky",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（声音沙哑）我不想看……",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "s_1781082824542_elql",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（不理她，继续拉）这根神经太紧。你看，你的微笑——每次只持续三秒。你在数时间。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "n_1781082824542_f9yx",
+      "type": "narration",
+      "content": "他用力一扯，神经像橡皮筋一样崩断。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "s_1781082824542_sfc5",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（身体弓起，像被电击）啊啊——！",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "s_1781082824542_ji99",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（用钳子夹住断口，在岩浆中蘸了一下，然后重新焊接）好了。现在这根神经会被拉伸十倍。以后你再想微笑——你的嘴角会自己往下掉。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "s_1781082824542_b676",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（喘息）为什么……为什么要这样对我……",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "s_1781082824542_t3b1",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（站起身，走到她面前，低头看着她）因为我需要你诚实。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "n_1781082824542_qev6",
+      "type": "narration",
+      "content": "他伸出手，食指轻轻碰了一下她的额头。林若曦感觉一股电流穿过她的身体，她的皮肤变得透明，露出下面的血管。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "s_1781082824542_qegh",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（平静地）你看。你的心脏在跳。每跳一下，你就更接近真相。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "n_1781082824542_yv0b",
+      "type": "narration",
+      "content": "他停了一下。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "s_1781082824542_sow8",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "真相就是——你从来不喜欢你生前那个样子。你只是不敢做你自己。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "plot_ch_4_b_3",
+      "type": "plot_progress",
+      "content": "📜 节点完成：保留人性保持清醒 ✓",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "node_start_ch_4_b_4",
+      "type": "node_start",
+      "content": "📍 节点4：记忆闪回压抑瞬间",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "n_1781082824542_xuw7",
+      "type": "narration",
+      "content": "熔铸池的岩浆开始冷却，表面形成一层薄薄的黑曜石。林若曦被固定在上面，四肢被触手钉死。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "s_1781082824542_21cg",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（绕着走，像在巡视）现在——我们来处理你的记忆。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "n_1781082824542_7ubn",
+      "type": "narration",
+      "content": "他伸出手，虚空一握。林若曦的记忆开始像电影一样在她面前播放。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "n_1781082824542_kqvx",
+      "type": "narration",
+      "content": "小学三年级，她考了99分，回家哭着说“我为什么没有满分”。母亲说“下次努力”。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "s_1781082824542_vf0h",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（停住画面，指着她当时的表情）这里——你的嘴在抖。但你没有哭。为什么？",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "s_1781082824542_shse",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（声音发抖）因为哭……没有用……",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "s_1781082824542_9j0a",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "不对。因为你觉得哭是软弱。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "n_1781082824542_oi3t",
+      "type": "narration",
+      "content": "他挥手，画面快进。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "n_1781082824542_bdn8",
+      "type": "narration",
+      "content": "高中毕业晚会，所有人都在跳舞。她坐在角落，手里拿着饮料，但没有喝。一个男生邀请她，她礼貌地拒绝了。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "s_1781082824542_j20p",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（指着她握杯子的手）你的手指在用力。你很想去。但你怕跳得不好。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "s_1781082824542_zf93",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（闭眼）我……",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "s_1781082824542_1ebs",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "继续。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "n_1781082824542_l6nm",
+      "type": "narration",
+      "content": "入职第一天，她提前半小时到办公室。她把桌子擦了三遍，文件按字母顺序排列。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "s_1781082824542_yac1",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（指着她弯腰擦桌子的背影）你后背绷得那么紧。你在怕什么？",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "s_1781082824542_gkri",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（声音几乎听不见）怕……被发现……我不够好……",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "s_1781082824542_8nh4",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（轻笑）终于说实话了。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "n_1781082824542_f1a7",
+      "type": "narration",
+      "content": "他俯下身，在他耳边说：",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "s_1781082824542_5dn3",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "但你确实不够好。你一直都知道。所以你才那么努力。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "n_1781082824542_7rh8",
+      "type": "narration",
+      "content": "他的声音很轻，像在说一个秘密。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "plot_ch_4_b_4",
+      "type": "plot_progress",
+      "content": "📜 节点完成：记忆闪回压抑瞬间 ✓",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "node_start_ch_4_b_5",
+      "type": "node_start",
+      "content": "📍 节点5：注入金属重塑神经",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "n_1781082824542_entl",
+      "type": "narration",
+      "content": "熔铸池重新沸腾。墨菲斯托从岩浆中抽出一根细长的金属棒，银白色的，在黑暗中发光。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "s_1781082824542_mod9",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "黑曜石。地狱的金属。它会让你的神经末梢变得——敏感。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "n_1781082824542_i2pc",
+      "type": "narration",
+      "content": "他捏住林若曦的左手腕，用金属棒尖端刺入她的血管。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "s_1781082824542_wzoi",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（猛地抽气）嘶——！",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "n_1781082824542_b2he",
+      "type": "narration",
+      "content": "金属棒像液体一样流进她的血管，沿着她的前臂向上，经过肘窝，肩膀，最终流入她的脊椎。她能清晰感受到金属的位置——像一条蛇，在她体内游走。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "s_1781082824542_jz8c",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（看着她）感受它。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "n_1781082824542_czs7",
+      "type": "narration",
+      "content": "林若曦的身体开始发抖。不是痛——是一种陌生的感觉。她的皮肤变得极度敏感，空气中的每一粒灰尘落在她身上都像羽毛刷过。她能听见自己的心跳，血液流动的声音，甚至能听见岩浆中气泡破裂的细节——噗，噗，噗。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "s_1781082824542_3xhg",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（满意地点头）好了。现在——你对快感和痛苦都会同等敏感。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "n_1781082824542_rwra",
+      "type": "narration",
+      "content": "他伸出手，食指轻轻划过她的锁骨。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "s_1781082824542_jhdm",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（猛地蜷缩，像被电击）哈啊——！",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "n_1781082824542_m00m",
+      "type": "narration",
+      "content": "她感觉那一瞬间，她的身体像被点燃了。快感从锁骨扩散开来，像涟漪，一直蔓延到她的指尖。她从来不知道触碰可以这么强烈——比她生前的任何一次都强烈十倍。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "s_1781082824542_bkmp",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（收回手，嘴角微扬）不错。效果比我预想的好。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "s_1781082824542_rj6i",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（喘息着，身体还在颤抖）你……你对我做了什么……",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "s_1781082824542_532y",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（转身，背对着她，声音平静）我只是让你诚实。以后——你再也控制不了自己的身体。它会诚实地告诉你，它需要什么。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "n_1781082824542_n024",
+      "type": "narration",
+      "content": "他回头，看了她一眼。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "s_1781082824542_cy8w",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "欢迎来到真实的世界，完美小姐。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "n_1781082824542_tcle",
+      "type": "narration",
+      "content": "池边的岩浆翻涌，像在回应他的话。林若曦躺在黑曜石上，身体还在一阵一阵地抽搐。她的皮肤上汗珠密布，每一滴都像滚烫的泪。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "n_1781082824542_stxr",
+      "type": "narration",
+      "content": "她张了张嘴，想要说什么，但什么也说不出来。",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "plot_ch_4_b_5",
+      "type": "plot_progress",
+      "content": "📜 节点完成：注入金属重塑神经 ✓",
+      "timestamp": 1781082824542,
+      "chapter_id": "ch_4"
+    },
+    {
+      "id": "atm_start",
+      "type": "atmosphere",
+      "content": "📍 地狱手术室，四周是冰冷的黑色金属墙，空气中弥漫血腥和润滑剂的混合气味。林若曦被皮带固定在倾斜的手术台上，双腿被金属支架强行分开。恶魔用烧红的刀片在她小腹划开一道口子，将一枚拳头大小的跳蛋塞入子宫，缝合时留下淫秽的符文。她感到子宫被封印的瞬间，所有被压抑的欲望如洪水般涌入跳蛋，下体传来撕裂和快感的双重冲击。",
+      "timestamp": 1781082849251,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "node_start_ch_5_b_1",
+      "type": "node_start",
+      "content": "📍 节点1：固定手术台分开双腿",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "n_1781082881654_nlis",
+      "type": "narration",
+      "content": "手术室的冷比地狱更深。林若曦被皮带固定在倾斜的金属台上，四肢张开，像标本。墨菲斯托站在她两腿之间，戴着黑色橡胶手套，手指在灯光下泛着冷光。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "s_1781082881654_mkwn",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（手套拉紧的声音）你的腿，自己分开。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "n_1781082881654_y12v",
+      "type": "narration",
+      "content": "林若曦的膝盖本能地并拢，但皮带勒住她的脚踝，把她的小腿向外拉开。她咬住嘴唇，肌肉绷紧。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "s_1781082881654_rga2",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "我——已经分开了。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "s_1781082881654_ohtv",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（指尖划过她大腿内侧，停在一寸）我说的是你自己分。不是皮带帮你分。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "n_1781082881654_k9nz",
+      "type": "narration",
+      "content": "她的腿颤抖。膝盖微微张开，又合拢。墨菲斯特没有催，只是把手放在那里，等着。第五秒，她终于让自己的膝盖向外沉了半寸，大腿中间开出一条缝。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "s_1781082881654_61no",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "不够。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "s_1781082881654_bzrs",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（声音发抖）我……做不到。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "s_1781082881654_62bj",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（俯下身，嘴唇贴近她耳边）在阳间，你每天都做这件事——把腿夹紧，把嘴闭上，把声音吞回去。现在，我要你做相反的事。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "n_1781082881654_o2p0",
+      "type": "narration",
+      "content": "她的呼吸变急。大腿内侧的肌肉抽搐了一下，然后，慢慢地，膝盖向外倒下去，像一扇门最终被推开。墨菲斯托站直，看着她的身体在灯光下完全打开。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "s_1781082881654_p663",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "这不是很好吗。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "n_1781082881654_5yr5",
+      "type": "narration",
+      "content": "林若曦把脸转向一侧，牙齿咬住下唇，眼睛闭着。她没有回答。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "plot_ch_5_b_1",
+      "type": "plot_progress",
+      "content": "📜 节点完成：固定手术台分开双腿 ✓",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "node_start_ch_5_b_2",
+      "type": "node_start",
+      "content": "📍 节点2：强行植入刻符跳蛋",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "n_1781082881654_vxwv",
+      "type": "narration",
+      "content": "墨菲斯托转过身，从金属盘上拿起一枚拳头大小的东西。蛋体黑色，表面刻满暗红色的符文，像血管一样蜿蜒。她把它举到灯光下，符文在光里蠕动。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "n_1781082881654_vmpq",
+      "type": "narration",
+      "content": "林若曦的视线追着它。她的喉咙动了一下，像要咽什么。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "s_1781082881654_vr8q",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "那是什么。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "s_1781082881654_5j37",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（把跳蛋放在她小腹上，让她感受它的重量）你的新器官。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "n_1781082881654_b066",
+      "type": "narration",
+      "content": "林若曦小腹的肌肉猛缩了一下。她低头，看见那枚黑色的蛋躺在自己皮肤上，冰凉的，沉甸甸的。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "s_1781082881654_u9pr",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（拿起刀片，在酒精灯上烧红）别动。动了我缝不准。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "n_1781082881654_4g5d",
+      "type": "narration",
+      "content": "刀尖落在她肚脐下方三寸。林若曦的背猛地弓起，但皮带把她拉回来。烧红的金属切开皮肤的声音——滋滋——混着她的吸气声。血沿着她的小腹往下淌，在灯光下亮晶晶的。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "s_1781082881654_1142",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（牙齿缝里挤出声音）啊——！",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "s_1781082881654_4nmu",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（手指探进切口，往外撑开）你的子宫。干净的。没用过的。像一间没人住过的房子。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "n_1781082881654_8f6j",
+      "type": "narration",
+      "content": "林若曦的呼吸变成短促的抽气。她看不见那切口，但她能感觉到墨菲斯托的手指在里面——两根，在搅动。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "s_1781082881654_r4cx",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（把跳蛋塞进去的一瞬间）现在，它有房客了。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "n_1781082881654_zd5g",
+      "type": "narration",
+      "content": "那一下，林若曦的整个身体都僵了。跳蛋被硬生生推进子宫的瞬间，她感到一种撕裂——不是肉体的，是某种更深的、像封印被撕开的东西。她张开嘴，却发不出声音。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "s_1781082881654_f720",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（缝针的时候，线从皮肤里穿过）第一次总是最疼的。以后会慢慢习惯。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "n_1781082881654_kayc",
+      "type": "narration",
+      "content": "林若曦的眼泪终于滑下来。但她没哭出声。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "plot_ch_5_b_2",
+      "type": "plot_progress",
+      "content": "📜 节点完成：强行植入刻符跳蛋 ✓",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "node_start_ch_5_b_3",
+      "type": "node_start",
+      "content": "📍 节点3：子宫被永久封印",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "n_1781082881654_fm0b",
+      "type": "narration",
+      "content": "墨菲斯托缝完最后一针，把线头咬断。她退后半步，指尖在缝合好的切口上画了个符号。符文被激活的瞬间——暗红色的光从皮肤下透出来，像一盏灯被点亮。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "n_1781082881654_2oo9",
+      "type": "narration",
+      "content": "林若曦的下腹突然沉重。不是物理意义上的，是某种她无法形容的——像有一扇门在体内关上，锁死，钥匙被抽走。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "s_1781082881654_7alh",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（声音沙哑）你做了什么。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "s_1781082881654_y22i",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（手指点在那一块发光的皮肤上）你的子宫，我把它封了。以后它不归你管了。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "n_1781082881654_81w9",
+      "type": "narration",
+      "content": "林若曦的瞳孔缩了一下。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "s_1781082881654_79zh",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "什么意思……什么叫不归我管……",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "s_1781082881654_7cjm",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（低头看她，表情里有一丝近乎温柔的残忍）你以前拼命压抑的东西——性欲、渴望、渴望被触碰、渴望被填满的冲动——这些东西，现在全被锁在这枚跳蛋里。每一次你试图压抑，它就会吸收那些能量，变得更强大。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "n_1781082881654_l7et",
+      "type": "narration",
+      "content": "林若曦的呼吸停了半秒。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "s_1781082881654_zddq",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "那我……我还能控制吗。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "s_1781082881654_es4w",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（笑了笑）能。你当然能。试试看。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "n_1781082881654_vwa5",
+      "type": "narration",
+      "content": "林若曦深吸一口气，闭上眼，像以前每个加班到深夜的晚上一样——把所有不该有的念头压下去，压到腹腔最深处。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "n_1781082881654_mibk",
+      "type": "narration",
+      "content": "然后她感觉到了。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "n_1781082881654_jvv6",
+      "type": "narration",
+      "content": "那枚跳蛋在她的子宫里微微震了一下。不是电动的那种，是活的——像某种东西在里面翻身，嘟囔了一声。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "n_1781082881654_9dx9",
+      "type": "narration",
+      "content": "她猛地睁眼。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "s_1781082881654_ly5g",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（微笑）感觉到了吗。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "n_1781082881654_3f7l",
+      "type": "narration",
+      "content": "林若曦的脸白了一度。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "plot_ch_5_b_3",
+      "type": "plot_progress",
+      "content": "📜 节点完成：子宫被永久封印 ✓",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "node_start_ch_5_b_4",
+      "type": "node_start",
+      "content": "📍 节点4：欲望注入跳蛋",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "n_1781082881654_p9d2",
+      "type": "narration",
+      "content": "墨菲斯托的手没有离开林若曦的下腹。她的手指按压在缝合口周围，像在检查封印是否牢固。符文的光在她的指尖下忽明忽暗。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "s_1781082881654_zeu8",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "现在，我要把你所有压抑的东西都灌进去。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "s_1781082881654_9vuv",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（瞳孔放大）不——不要——",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "s_1781082881654_fbnm",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（另一只手按住她的胸口，不让她挣扎）已经太晚了。在你签契约的那一刻，这些欲望就已经属于地狱。我只是把它们放回该放的地方。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "n_1781082881654_8bzd",
+      "type": "narration",
+      "content": "墨菲斯托的手指开始动。她的指尖沿着符文的方向画圈，一圈比一圈快。林若曦的身体开始抽搐——不是疼痛，是那种被电流穿过的、让人无法自控的颤抖。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "s_1781082881654_gzsz",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（声音变调）啊……啊……停下……我受不了……",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "s_1781082881654_gbk7",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（没有停）你受不了的，只是那些你从来没让它们出来的东西。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "n_1781082881654_7jr4",
+      "type": "narration",
+      "content": "林若曦的记忆开始闪现——十七岁那年，隔壁班男生递过来的情书，她接过来，当着全班的面撕碎扔进垃圾桶；二十二岁实习，上司的手在她腰上多停了两秒，她往后退了一步，那个晚上在浴室里哭了很久；二十五岁深夜加班时，在办公桌下偷偷夹紧双腿，咬着手背，不敢发出声音。每一段记忆都化作一道光线，从她身体里被抽走，流入小腹那个发光的符文里。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "n_1781082881654_ky0r",
+      "type": "narration",
+      "content": "跳蛋在她体内膨胀了一轮。不是体积变大，是某种更抽象的重——像所有被压下去的东西都有了质量，现在集中在那一个点上沉甸甸地坠着。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "s_1781082881654_dnbh",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（眼泪无声地流）……好重。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "s_1781082881654_9jxk",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（俯身，用拇指擦掉她脸上的泪）因为那是真实的你。以前你把它藏起来，当然觉得轻。现在它回到了你身体里，你当然觉得重。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "n_1781082881654_2x9r",
+      "type": "narration",
+      "content": "林若曦闭上眼。她的牙齿磕在一起，发出细微的咯咯声。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "plot_ch_5_b_4",
+      "type": "plot_progress",
+      "content": "📜 节点完成：欲望注入跳蛋 ✓",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "node_start_ch_5_b_5",
+      "type": "node_start",
+      "content": "📍 节点5：恶魔告知遥控机制",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "n_1781082881654_cxqk",
+      "type": "narration",
+      "content": "墨菲斯托直起身，摘下手套，扔在金属盘上。她走到手术台一侧，拿起一个遥控器——黑色的，拇指大小，上面只有一个按钮。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "n_1781082881654_nlac",
+      "type": "narration",
+      "content": "林若曦的视线跟着它。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "s_1781082881654_9h42",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（把遥控器举到她眼前）认识一下。以后它会是你最熟悉的东西。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "s_1781082881654_z1xx",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（嘴唇干裂）……那是什么。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "s_1781082881654_b6e7",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（用遥控器敲了敲她小腹上发光的符文）开关。这枚跳蛋的开关。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "n_1781082881654_wc28",
+      "type": "narration",
+      "content": "林若曦的手被皮带绑着，但她下意识地伸手去抢——皮带绷紧，她够不到。墨菲斯托往后退了一步，很从容。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "s_1781082881654_jrwd",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "给我。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "s_1781082881654_pnlc",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（摇了摇头）不。不是你的。它是我的——或者说，是地狱的。它现在归我保管，但以后，它会交给别人。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "n_1781082881654_6dvc",
+      "type": "narration",
+      "content": "林若曦的表情在这一瞬间变了——从恐惧变成了某种更深的东西。瞳孔边缘有光在闪。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "s_1781082881654_lwev",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "……交给谁。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "s_1781082881654_7wu9",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（微笑着，把遥控器放回口袋）不知道。看情况。看谁需要它，看谁懂得怎么用它。也可能是很多人。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "n_1781082881654_r9hx",
+      "type": "narration",
+      "content": "林若曦的呼吸变得急促。她能感觉到那枚跳蛋在她体内——不是作为异物，而是作为她的一部分。她能感觉到它等待的姿势，像一个蜷着的野兽，随时准备醒来。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "s_1781082881654_orl4",
+      "type": "speech",
+      "characterId": "墨菲斯托",
+      "content": "（走到门口，回头看了一眼）对了。它不能取出来。你死了它都会在你身体里。所以别想任何办法。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "n_1781082881654_ohru",
+      "type": "narration",
+      "content": "门关上。灯光熄灭。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "n_1781082881654_e5qb",
+      "type": "narration",
+      "content": "手术台上，林若曦一个人在黑暗中躺着。她的呼吸声在空旷的房间里回荡。过了很久，她听见自己的声音——很轻，像自言自语。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "s_1781082881654_vsyw",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "……我能忍。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "n_1781082881654_f61g",
+      "type": "narration",
+      "content": "皮带在黑暗中发出轻微的响声。她又在尝试夹紧双腿。",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "plot_ch_5_b_5",
+      "type": "plot_progress",
+      "content": "📜 节点完成：恶魔告知遥控机制 ✓",
+      "timestamp": 1781082881654,
+      "chapter_id": "ch_5"
+    },
+    {
+      "id": "atm_start",
+      "type": "atmosphere",
+      "content": "📍 清晨7点，卧室阳光透过窗帘洒在地板上，空气中飘着咖啡和面包的香气。林若曦从床上坐起，看到手机显示周三，她以为只是请了一天病假。她穿上熨烫平整的套装，对着镜子练习微笑。公司里，赵婉清递来一杯咖啡，问她脸色怎么这么差。她接过咖啡，指尖微微颤抖，却笑着说‘只是没睡好’。下班后她独自留在办公室，打开电脑，下体突然传来一阵微弱的震动，她猛地夹紧双腿，深吸一口气，继续打字。",
+      "timestamp": 1781083000838,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "node_start_ch_6_b_1",
+      "type": "node_start",
+      "content": "📍 节点1：床上醒来以为病假",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "n_1781083020857_fe69",
+      "type": "narration",
+      "content": "阳光从窗帘缝隙漏进来，在地板上画了一道金线。林若曦睁开眼，天花板熟悉的白。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "s_1781083020857_6k3s",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（坐起身，看了一眼手机）周三。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "n_1781083020857_3trw",
+      "type": "narration",
+      "content": "03。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "s_1781083020857_av7q",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（自言自语）就一天……发烧而已。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "n_1781083020857_8g8e",
+      "type": "narration",
+      "content": "她掀开被子，双脚踩到地板上。身体没有异常。肌肉不酸，头不痛，连喉咙都是干燥清爽的。她低头看了一眼自己的手——指甲干净，没有淤青。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "s_1781083020857_1kzm",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（对着空气，声音平稳）没事。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "n_1781083020857_n2yd",
+      "type": "narration",
+      "content": "她站起来，走向浴室。走了两步，突然停下。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "n_1781083020857_ok40",
+      "type": "narration",
+      "content": "什么都没有。只是她以为会有什么。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "n_1781083020857_ed8g",
+      "type": "narration",
+      "content": "浴室的水声响了十分钟。出来时她穿着熨烫平整的白色衬衫和深蓝套裙，头发盘得一丝不苟。她站在穿衣镜前，扯了扯衣领，确保每一颗扣子都在正确的位置。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "s_1781083020857_sc12",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（对着镜子，嘴角扯出一个弧度）可以。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "plot_ch_6_b_1",
+      "type": "plot_progress",
+      "content": "📜 节点完成：床上醒来以为病假 ✓",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "node_start_ch_6_b_2",
+      "type": "node_start",
+      "content": "📍 节点2：照常上班练习微笑",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "n_1781083020857_eb4x",
+      "type": "narration",
+      "content": "电梯门开，林若曦走进公司大门。前台的小刘抬头看了她一眼，又低头看手机。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "n_1781083020857_hou6",
+      "type": "narration",
+      "content": "她走到自己的工位，放下包，打开电脑。屏幕亮起的一瞬间，她看到桌面上还留着前天的Excel表格，光标停在最后一行公式上。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "s_1781083020857_vgb2",
+      "type": "speech",
+      "characterId": "赵婉清",
+      "content": "（从背后走近，把一杯咖啡放在她桌上）你怎么来了？",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "s_1781083020857_7hds",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（没抬头，手指开始敲键盘）不是周三吗？",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "s_1781083020857_fhdq",
+      "type": "speech",
+      "characterId": "赵婉清",
+      "content": "（拉过旁边的椅子坐下，盯着她看）是周三。但你昨天请假了啊。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "s_1781083020857_7s33",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（手指顿了一下，随即继续）嗯，发烧。好了。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "s_1781083020857_t0by",
+      "type": "speech",
+      "characterId": "赵婉清",
+      "content": "发烧？你前天走的时候还好好的。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "s_1781083020857_ukxk",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（视线仍然在屏幕上）淋了雨。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "s_1781083020857_j9qn",
+      "type": "speech",
+      "characterId": "赵婉清",
+      "content": "淋雨？前天没下雨吧。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "s_1781083020857_0nu4",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（终于抬头，看了赵婉清一眼）下班的时候下了。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "s_1781083020857_md3b",
+      "type": "speech",
+      "characterId": "赵婉清",
+      "content": "（歪着头，像在回想）是吗……我没注意。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "s_1781083020857_cuvr",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "正常。你走得早。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "n_1781083020857_3hv6",
+      "type": "narration",
+      "content": "她端起咖啡喝了一口。嘴唇碰到杯沿时，小指不自觉地蜷了一下。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "s_1781083020857_fmca",
+      "type": "speech",
+      "characterId": "赵婉清",
+      "content": "（站起来，拍了拍她的肩）那你今天悠着点，别加班。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "s_1781083020857_acar",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（点点头，眼睛回到屏幕上）嗯。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "n_1781083020857_9xmd",
+      "type": "narration",
+      "content": "赵婉清转身走了两步，又回头。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "s_1781083020857_lxzd",
+      "type": "speech",
+      "characterId": "赵婉清",
+      "content": "（声音压低）你脸色真的有点差。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "s_1781083020857_627g",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（手指在键盘上没停）没睡好。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "plot_ch_6_b_2",
+      "type": "plot_progress",
+      "content": "📜 节点完成：照常上班练习微笑 ✓",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "node_start_ch_6_b_3",
+      "type": "node_start",
+      "content": "📍 节点3：同事关心脸色差",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "n_1781083020857_98z0",
+      "type": "narration",
+      "content": "上午十点，办公室键盘声此起彼伏。林若曦盯着屏幕上的数据，手指在键盘上规律地移动。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "s_1781083020857_q2sz",
+      "type": "speech",
+      "characterId": "赵婉清",
+      "content": "（端着一杯热水走过来，放在她手边）喝点热的。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "s_1781083020857_3leg",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（抬头，愣了一下）谢谢。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "s_1781083020857_gkpa",
+      "type": "speech",
+      "characterId": "赵婉清",
+      "content": "（没走，靠在桌沿，抱着手臂看她）你真没事？",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "s_1781083020857_sjf2",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "没事。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "s_1781083020857_oe2s",
+      "type": "speech",
+      "characterId": "赵婉清",
+      "content": "你眼底下有青的。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "s_1781083020857_ngca",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（下意识抬手碰了一下眼下，又放下）说了没睡好。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "s_1781083020857_ctf0",
+      "type": "speech",
+      "characterId": "赵婉清",
+      "content": "（歪了歪头）你昨晚几点睡的？",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "s_1781083020857_n1of",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（停顿了一秒）十二点。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "s_1781083020857_43ju",
+      "type": "speech",
+      "characterId": "赵婉清",
+      "content": "十二点？那应该够啊。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "s_1781083020857_etet",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（视线回到屏幕，声音淡下来）半夜醒了一次。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "s_1781083020857_wymn",
+      "type": "speech",
+      "characterId": "赵婉清",
+      "content": "（没放过她）做梦了？",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "n_1781083020857_dhhe",
+      "type": "narration",
+      "content": "林若曦的手指在键盘上停住了。大概两秒。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "s_1781083020857_8wws",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（没有抬头）不记得了。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "s_1781083020857_6wmo",
+      "type": "speech",
+      "characterId": "赵婉清",
+      "content": "（盯着她的侧脸看了三秒，然后笑了）好吧。你工作吧。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "n_1781083020857_5a3o",
+      "type": "narration",
+      "content": "她端起自己的杯子，走回自己的工位。林若曦继续打字，但手指的节奏变了——比刚才慢了一点。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "plot_ch_6_b_3",
+      "type": "plot_progress",
+      "content": "📜 节点完成：同事关心脸色差 ✓",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "node_start_ch_6_b_4",
+      "type": "node_start",
+      "content": "📍 节点4：忽略下体震动感",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "n_1781083020857_b2hv",
+      "type": "narration",
+      "content": "下午两点，办公室安静的只剩空调声。大部分同事出去吃午饭还没回来。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "n_1781083020857_d9ys",
+      "type": "narration",
+      "content": "林若曦一个人坐在工位上，手指在鼠标上滑动。屏幕上是一份预算报表，她的目光却停在某个数字上，没有动。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "n_1781083020857_9xmr",
+      "type": "narration",
+      "content": "然后她感觉到了。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "n_1781083020857_infs",
+      "type": "narration",
+      "content": "不是疼。是一种极其微弱的震动，像手机放在口袋里调了静音。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "n_1781083020857_p1rl",
+      "type": "narration",
+      "content": "但手机在她桌上。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "n_1781083020857_8gpr",
+      "type": "narration",
+      "content": "她的身体比意识先反应——双腿猛地夹紧，膝盖并拢，大腿根部的肌肉绷紧，鞋跟在地板上轻轻磕了一下。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "s_1781083020857_a23y",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（身体僵住，呼吸停了一拍，然后缓缓呼出，像什么都没发生）",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "n_1781083020857_b19t",
+      "type": "narration",
+      "content": "她把双手放在键盘上，开始打字。手指在键帽上移动，节奏均匀，看不出任何异常。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "n_1781083020857_5dg4",
+      "type": "narration",
+      "content": "但她的腿没有松开。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "n_1781083020857_g20s",
+      "type": "narration",
+      "content": "震动持续了大概十秒，然后停了。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "s_1781083020857_cbnt",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（手指没有停，眼睛盯着屏幕，声音极轻，像在说服谁）没事。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "n_1781083020857_p74y",
+      "type": "narration",
+      "content": "她端起桌上的水杯喝了一口。手很稳。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "plot_ch_6_b_4",
+      "type": "plot_progress",
+      "content": "📜 节点完成：忽略下体震动感 ✓",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "node_start_ch_6_b_5",
+      "type": "node_start",
+      "content": "📍 节点5：深夜加班掩盖不安",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "n_1781083020857_wd8e",
+      "type": "narration",
+      "content": "晚上十点，办公室里只剩她一个人。空调已经关了，窗外夜色漆黑，只剩下她头顶的日光灯管嗡嗡作响。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "n_1781083020857_uyoi",
+      "type": "narration",
+      "content": "林若曦坐在电脑前，屏幕上是三份打开的文档，光标停在第一份的中间。她盯着屏幕，眼睛一动不动。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "n_1781083020857_v05p",
+      "type": "narration",
+      "content": "然后她听见了——或者说感觉到了。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "n_1781083020857_2igq",
+      "type": "narration",
+      "content": "下体深处传来一阵震动。比下午那次更清晰，更强烈。像有什么东西在里面缓慢地转动，试探性地触碰她体内最敏感的地方。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "s_1781083020857_ysab",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（猛地咬住下唇，身体像被电击一样绷直，双手抓住桌沿，指节发白）",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "n_1781083020857_y0fn",
+      "type": "narration",
+      "content": "震动持续。她的大腿开始微微颤抖，膝盖并拢，脚踝交叠，整个人缩成一团。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "s_1781083020857_v4o5",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（呼吸变得急促，但拼命压低声音，从牙缝里挤出几个字）不要……",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "n_1781083020857_k3z8",
+      "type": "narration",
+      "content": "震动没有停。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "n_1781083020857_prni",
+      "type": "narration",
+      "content": "她闭上眼，额头抵在桌沿上，肩膀微微发抖。过了大概十秒，震动突然停了。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "s_1781083020857_ia7s",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（慢慢抬起头，眼眶泛红，但一滴泪都没掉。她深吸一口气，松开咬住的嘴唇，用指腹擦了一下下唇的血）",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "n_1781083020857_njg6",
+      "type": "narration",
+      "content": "她重新把手放在键盘上。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "s_1781083020857_psam",
+      "type": "speech",
+      "characterId": "林若曦",
+      "content": "（声音沙哑，但语气平稳）只是累了。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "n_1781083020857_yxkr",
+      "type": "narration",
+      "content": "屏幕上，光标还在原地闪烁。她开始打字，一个字，两个字，三个字。节奏稳定，像什么都没发生过。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "n_1781083020857_39vw",
+      "type": "narration",
+      "content": "办公室的日光灯还亮着。窗外，夜色深沉得像一堵墙。",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    },
+    {
+      "id": "plot_ch_6_b_5",
+      "type": "plot_progress",
+      "content": "📜 节点完成：深夜加班掩盖不安 ✓",
+      "timestamp": 1781083020857,
+      "chapter_id": "ch_6"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(3px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+body { background: #0a0a0f; }
+
+/* 按钮 hover 效果 */
+.btn-icon:hover { color: #a78bfa !important; border-color: rgba(167,139,250,0.3) !important; }
+.action-btn:hover { background: rgba(255,255,255,0.04); color: #e4e4e7; }
+.btn-op:hover { background: rgba(255,255,255,0.04); color: #e4e4e7; }
+
+/* 发言中高亮 */
+.char-card.speaking { border-color: rgba(96,165,250,0.35) !important; background: rgba(96,165,250,0.05) !important; }
