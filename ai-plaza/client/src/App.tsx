@@ -115,7 +115,8 @@ export default function App() {
   const msgEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => { loadAll(); fetch('/api/directors').then(r=>r.json()).then(j=>{ setDirectors(j.data||[]); setSelectedDirector(j.data?.[0]?.id || 'default'); }); }, []);
-  useEffect(() => { msgEndRef.current?.scrollIntoView({ behavior: 'smooth' }); }, [typingIdx]);
+  // 滚动：typingIdx 变化或消息数增长时自动滚到底部
+  useEffect(() => { msgEndRef.current?.scrollIntoView({ behavior: generating ? 'auto' : 'smooth' }); }, [typingIdx, messages.length]);
 
   // 新消息到达时：生成中不重置 typingIdx（由打字完成驱动），其余场景保持原逻辑
   useEffect(() => {
