@@ -154,8 +154,8 @@ function buildPromptContext(chapterId, poolInterventions, directorId) {
   ].filter(Boolean).join('\n\n');
 
   const systemPrompt = director.persona
-    ? `${director.persona}\n\n只输出内容，不要任何开场白或结束语。`
-    : '只输出内容，不要任何开场白或结束语。';
+    ? `${director.persona}\n\n【铁律】所有角色说的话必须独占一行，格式为『角色名：台词』或『角色名：（动作）台词』。括号内是该说话者的神态动作。禁止在叙事段落中用引号嵌入对话——凡是角色开口，必须换行、署名、用脚本格式。禁止输出markdown标题（# ##等）。只输出表演内容，不要任何开场白或结束语。`
+    : '【铁律】所有角色说的话必须独占一行，格式为『角色名：台词』或『角色名：（动作）台词』。括号内是该说话者的神态动作。禁止在叙事段落中用引号嵌入对话——凡是角色开口，必须换行、署名、用脚本格式。禁止输出markdown标题（# ##等）。只输出表演内容，不要任何开场白或结束语。';
 
   return { systemPrompt, userPrompt, director, charInfos, beatRows, scenePrompt, ch };
 }
