@@ -384,17 +384,30 @@ export default function App() {
       {/* ═══════════ 左栏 260px ═══════════ */}
       <aside style={{ width: 260, minWidth: 260, background: BG_PANEL, borderRight: BORDER, display: 'flex', flexDirection: 'column' }}>
         <div style={{ padding: '10px 14px', borderBottom: BORDER, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span style={{ fontSize: 10, textTransform: 'uppercase', letterSpacing: 1, color: TEXT_MUTED }}>👥 角色（{characters.length}人）</span>
+          <span style={{ fontSize: 10, textTransform: 'uppercase', letterSpacing: 1, color: TEXT_MUTED }}>👥 角色（{characters.length}人 · 出场{activeCastIds.length}人）</span>
           <button className="btn-icon" title="从MD文件读取/更新角色人格" onClick={async () => { await fetch('/api/reload-characters', { method: 'POST' }); await loadAll(); }}
             style={{ width: 28, height: 28, borderRadius: 6, border: BORDER, background: 'transparent', color: TEXT_MUTED, cursor: 'pointer', fontSize: 13, lineHeight: '28px' }}>📂</button>
         </div>
+        <div style={{ fontSize: 8, color: TEXT_MUTED, padding: '2px 14px' }}>点击角色卡片切换本章出场 · 红框=出场</div>
         <div style={{ flex: 1, overflow: 'auto', padding: 6, display: 'flex', flexDirection: 'column', gap: 4 }}>
           {characters.map(ch => {
             const st = states[ch.id];
             const mood = st?.mood ?? 50; const energy = st?.energy ?? 80; const impulse = st?.impulse ?? 30;
             const isInCast = activeCastIds.includes(ch.id) || activeCastIds.includes(ch.name);
+            const toggleCast = async () => {
+              if (!activeChapterId) return;
+              const chp = chapters.find(c => c.id === activeChapterId);
+              if (!chp) return;
+              let newCast = [...activeCastIds];
+              const matchById = newCast.includes(ch.id);
+              const matchByName = newCast.includes(ch.name);
+              if (matchById) { newCast = newCast.filter(x => x !== ch.id); }
+              else if (matchByName) { newCast = newCast.filter(x => x !== ch.name); }
+              else { newCast.push(ch.id); }
+              await updateChapter(activeChapterId, { cast_list: JSON.stringify(newCast) });
+            };
             return (
-              <div key={ch.id} className="char-card" style={{ padding: '8px 10px', borderRadius: 8, border: isInCast ? `2px solid ${RED}` : BORDER, background: 'rgba(255,255,255,0.01)', cursor: 'pointer', transition: 'border-color .15s' }}>
+              <div key={ch.id} className="char-card" onClick={toggleCast} title="点击切换本章出场" style={{ padding: '8px 10px', borderRadius: 8, border: isInCast ? `2px solid ${RED}` : BORDER, background: 'rgba(255,255,255,0.01)', cursor: 'pointer', transition: 'border-color .15s', opacity: isInCast ? 1 : 0.5 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
                   <div style={{ width: 32, height: 32, borderRadius: '50%', background: BG_INPUT, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16, flexShrink: 0 }}>{ch.emoji || '👤'}</div>
                   <div style={{ flex: 1, minWidth: 0 }}><div style={{ fontSize: 12, fontWeight: 700 }}>{ch.name}</div><div style={{ fontSize: 9, color: TEXT_MUTED }}>{ch.title}</div></div>
