@@ -19,6 +19,7 @@ interface Store {
   generateChapter: (chapterId: string, poolInterventions?: any[], director?: string) => Promise<void>;
   switchChapter: (chapterId: string) => Promise<void>;
   updateChapter: (chapterId: string, data: any) => Promise<void>;
+  removeChapter: (chapterId: string) => Promise<void>;
   loadWorld: () => Promise<void>;
   saveWorld: (content: string) => Promise<void>;
   loadOutline: () => Promise<void>;

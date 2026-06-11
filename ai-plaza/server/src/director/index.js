@@ -86,7 +86,7 @@ function buildPromptContext(chapterId, poolInterventions, directorId) {
   const charDescs = charInfos.map((c, i) =>
     `  ${i + 1}. ${c.name}（${c.title || ''}）：${c.personality?.core || ''} 说话风格：${c.personality?.speechStyle || '自然'}`
   ).join('\n');
-  ctxParts.push(`【演员表——本章已确定的全部角色，共 ${charInfos.length} 人】\n${charDescs}\n\n⚠️ 以上 ${charInfos.length} 人是本章的全部出场人物。对话行开头的名字必须严格来自这个列表：${charNames.join('、')}。这些名字是在章节设计阶段就确定好的，就像导演在开拍前已经选好了演员。任何人不得在表演中临时加角色。`);
+  ctxParts.push(`【演员表——本章已确定的全部角色，共 ${charInfos.length} 人】\n${charDescs}\n\n⚠️ 以上 ${charNames.join('、')} 是本章的预设演员。对话行优先使用这些角色。如果场景需要临时角色（如路人、服务员、同事、围观者等）说话，你必须给他一个完整的真实姓名（2-3字中文姓名）和一句简略身份描述（如"保安刘大勇，退伍军人，眼神很利"），然后在对话中正常使用这个名字。严禁写匿名对话——每一个说话的人都有名字。`);
 
   // 干预指令
   let ivText = '';
@@ -209,6 +209,9 @@ function interventionText(iv, beatOrder) {
 }
 
 // ═══ 流式增量解析器 ═══
+// 【永久规则】对话气泡的显示依赖 type==='speech'。本节代码是气泡渲染的第一道防线。
+// 任何对话行（名字：内容）必须被解析为 type:'speech'，严禁降级为 narration。
+// 如需修改解析逻辑，必须保证所有 角色名：内容 格式的行都输出 speech 类型。
 class IncrementalParser {
   constructor(charInfos, beatRows, onMessage) {
     this.charInfos = charInfos;
@@ -217,15 +220,21 @@ class IncrementalParser {
     this.buffer = '';
     this.currentNode = 0;
 
-    // 构建角色名查找表
+    // 构建角色名查找表 — 同时存储 name 和 id
     this.knownNames = new Map();
     for (const c of charInfos) {
       this.knownNames.set(c.name, c);
       if (c.id && c.id !== c.name) this.knownNames.set(c.id, c);
+      // 同时存储 name 的简称形式（去掉姓氏，如"陈都灵"→"都灵"）
+      if (c.name && c.name.length >= 2) {
+        const short = c.name.slice(-2); // 取最后两字
+        if (!this.knownNames.has(short)) this.knownNames.set(short, c);
+      }
     }
   }
 
   resolveChar(name) {
+    if (!name) return null;
     if (this.knownNames.has(name)) return this.knownNames.get(name);
     for (const [k, v] of this.knownNames) {
       if (k.endsWith(name) || name.endsWith(k) || (name.length >= 2 && k.includes(name))) {
@@ -233,6 +242,11 @@ class IncrementalParser {
       }
     }
     return null;
+  }
+
+  // 判断一行是否为对话格式（名字：内容）
+  isSpeechFormat(line) {
+    return /^[^\s：:]{1,12}[：:]\s*.+/.test(line);
   }
 
   emit(msg) {
@@ -243,32 +257,38 @@ class IncrementalParser {
     const content = this.buffer.trim();
     if (!content) { this.buffer = ''; return; }
 
-    // 检查是否为对话行
-    const sm = content.match(/^([^\s：:]+)[：:]\s*(.+)/);
-    if (sm && this.resolveChar(sm[1])) {
-      const char = this.resolveChar(sm[1]);
-      this.emit({
-        id: `s_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
-        type: 'speech',
-        characterId: char.id || sm[1],
-        content: sm[2].trim(),
-        timestamp: Date.now(),
-      });
-    } else if (sm && !this.resolveChar(sm[1])) {
-      // 格式像对话但角色不在演员表 → 降级为叙事
-      this.emit({
-        id: `n_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
-        type: 'narration',
-        content: sm[2].trim(),
-        timestamp: Date.now(),
-      });
-    } else {
-      this.emit({
-        id: `n_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
-        type: 'narration',
-        content,
-        timestamp: Date.now(),
-      });
+    // ── 检查缓冲中是否嵌入了对话行 ──
+    const lines = content.split('\n');
+    // 单行：对话格式 → speech，否则 narration
+    if (lines.length === 1) {
+      const sm = content.match(/^([^\s：:]+)[：:]\s*(.+)/);
+      if (sm) {
+        const char = this.resolveChar(sm[1]);
+        this.emit({ id: `s_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`, type: 'speech', characterId: char ? (char.id || sm[1]) : sm[1], content: sm[2].trim(), timestamp: Date.now() });
+      } else {
+        this.emit({ id: `n_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`, type: 'narration', content, timestamp: Date.now() });
+      }
+      this.buffer = '';
+      return;
+    }
+
+    // ── 多行缓冲：逐行扫描，对话行单独提取为 speech，其余合并为 narration ──
+    let narrBuf = '';
+    for (const line of lines) {
+      const sm = line.match(/^([^\s：:]+)[：:]\s*(.+)/);
+      if (sm) {
+        if (narrBuf.trim()) {
+          this.emit({ id: `n_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`, type: 'narration', content: narrBuf.trim(), timestamp: Date.now() });
+          narrBuf = '';
+        }
+        const char = this.resolveChar(sm[1]);
+        this.emit({ id: `s_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`, type: 'speech', characterId: char ? (char.id || sm[1]) : sm[1], content: sm[2].trim(), timestamp: Date.now() });
+      } else {
+        narrBuf += (narrBuf ? '\n' : '') + line;
+      }
+    }
+    if (narrBuf.trim()) {
+      this.emit({ id: `n_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`, type: 'narration', content: narrBuf.trim(), timestamp: Date.now() });
     }
     this.buffer = '';
   }
@@ -285,56 +305,39 @@ class IncrementalParser {
       if (this.currentNode > 0) {
         const prevBeat = this.beatRows.find(b => b.beat_order === this.currentNode);
         if (prevBeat) {
-          this.emit({
-            id: `plot_${prevBeat.id}`,
-            type: 'plot_progress',
-            content: `📜 节点完成：${prevBeat.description} ✓`,
-            timestamp: Date.now(),
-          });
+          this.emit({ id: `plot_${prevBeat.id}`, type: 'plot_progress', content: `📜 节点完成：${prevBeat.description} ✓`, timestamp: Date.now() });
         }
       }
       // 开启新节点
       this.currentNode = parseInt(nodeMatch[1]);
       const beat = this.beatRows.find(b => b.beat_order === this.currentNode);
       if (beat) {
-        this.emit({
-          id: `node_start_${beat.id}`,
-          type: 'node_start',
-          content: `📍 节点${this.currentNode}：${beat.description}`,
-          timestamp: Date.now(),
-        });
+        this.emit({ id: `node_start_${beat.id}`, type: 'node_start', content: `📍 节点${this.currentNode}：${beat.description}`, timestamp: Date.now() });
       }
       return;
     }
 
-    // 对话行：名字：内容（角色在演员表中）
-    const sm = line.match(/^([^\s：:]+)[：:]\s*(.+)/);
-    if (sm && this.resolveChar(sm[1])) {
+    // ── 对话行检测：名字：内容（第一道防线） ──
+    // 匹配格式：1-12个非空白/非冒号字符 + 冒号（全角/半角）+ 非空内容
+    // 【永久规则】任何 名字：内容 格式的行都必须输出为 type:'speech'。
+    // 即使是临时路人角色（不在演员表），也必须以气泡形式显示。
+    const sm = line.match(/^([^\s：:]{1,12})[：:]\s*(.+)/);
+    if (sm) {
       this.flush(); // flush 之前的叙事缓冲
       const char = this.resolveChar(sm[1]);
+      // 角色在演员表中 → 使用已知角色的 id
+      // 角色不在演员表中 → 仍然输出 speech，用名字作为 characterId（前端会渲染气泡）
       this.emit({
         id: `s_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
         type: 'speech',
-        characterId: char.id || sm[1],
+        characterId: char ? (char.id || sm[1]) : sm[1],
         content: sm[2].trim(),
         timestamp: Date.now(),
       });
       return;
     }
 
-    // 格式像对话但角色不在演员表 → 降级为叙事
-    if (sm && !this.resolveChar(sm[1])) {
-      this.flush();
-      this.emit({
-        id: `n_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
-        type: 'narration',
-        content: sm[2].trim(),
-        timestamp: Date.now(),
-      });
-      return;
-    }
-
-    // 叙事：累积
+    // 叙事：累积到缓冲
     this.buffer += (this.buffer ? '\n' : '') + line;
   }
 
@@ -344,12 +347,7 @@ class IncrementalParser {
     if (this.currentNode > 0) {
       const beat = this.beatRows.find(b => b.beat_order === this.currentNode);
       if (beat) {
-        this.emit({
-          id: `plot_${beat.id}`,
-          type: 'plot_progress',
-          content: `📜 节点完成：${beat.description} ✓`,
-          timestamp: Date.now(),
-        });
+        this.emit({ id: `plot_${beat.id}`, type: 'plot_progress', content: `📜 节点完成：${beat.description} ✓`, timestamp: Date.now() });
       }
     }
   }
@@ -407,17 +405,20 @@ function parsePerformance(raw, charInfos, beatRows) {
   let buffer = '';
   let currentNode = 0;
 
-  // 构建角色名查找表（用于匹配已知角色的 ID）
+  // 构建角色名查找表 — 存储 name、id 和简称
   const knownNames = new Map();
   for (const c of charInfos) {
     knownNames.set(c.name, c);
     if (c.id && c.id !== c.name) knownNames.set(c.id, c);
+    if (c.name && c.name.length >= 2) {
+      const short = c.name.slice(-2);
+      if (!knownNames.has(short)) knownNames.set(short, c);
+    }
   }
 
   function resolveChar(name) {
-    // 精确匹配
+    if (!name) return null;
     if (knownNames.has(name)) return knownNames.get(name);
-    // 模糊匹配
     for (const [k, v] of knownNames) {
       if (k.endsWith(name) || name.endsWith(k) || (name.length >= 2 && k.includes(name))) {
         return v;
@@ -426,41 +427,45 @@ function parsePerformance(raw, charInfos, beatRows) {
     return null;
   }
 
-  // 判断是否为对话行：名字：（动作）台词  或  名字：台词
-  function isSpeechLine(line) {
-    return /^[^\s：:]{1,10}[：:]\s*.+/.test(line);
+  function isSpeechFormat(line) {
+    return /^[^\s：:]{1,12}[：:]\s*.+/.test(line);
   }
 
   function flush() {
     const content = buffer.trim();
     if (!content) { buffer = ''; return; }
 
-    const sm = content.match(/^([^\s：:]+)[：:]\s*(.+)/);
-    if (sm && isSpeechLine(content)) {
-      const char = resolveChar(sm[1]);
-      if (char) {
-        // 角色在演员表中 → 对话气泡
-        messages.push({
-          id: `s_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
-          type: 'speech',
-          characterId: char.id || sm[1],
-          content: sm[2].trim(),
-          timestamp: Date.now(),
-        });
+    const lines_in_buf = content.split('\n');
+    // 单行缓冲：对话格式 → speech（不论角色是否在演员表），否则 narration
+    if (lines_in_buf.length === 1) {
+      const sm = content.match(/^([^\s：:]+)[：:]\s*(.+)/);
+      if (sm && isSpeechFormat(content)) {
+        const char = resolveChar(sm[1]);
+        messages.push({ id: `s_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`, type: 'speech', characterId: char ? (char.id || sm[1]) : sm[1], content: sm[2].trim(), timestamp: Date.now() });
       } else {
-        // 角色不在演员表中 → 降级为叙事，去掉名字前缀
-        messages.push({
-          id: `n_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
-          type: 'narration',
-          content: sm[2].trim(),
-          timestamp: Date.now(),
-        });
+        messages.push({ id: `n_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`, type: 'narration', content, timestamp: Date.now() });
       }
-    } else {
-      messages.push({
-        id: `n_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
-        type: 'narration', content, timestamp: Date.now(),
-      });
+      buffer = '';
+      return;
+    }
+
+    // 多行缓冲：逐行扫描提取对话（不论角色是否在演员表）
+    let narrBuf = '';
+    for (const line of lines_in_buf) {
+      const sm = line.match(/^([^\s：:]+)[：:]\s*(.+)/);
+      if (sm) {
+        if (narrBuf.trim()) {
+          messages.push({ id: `n_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`, type: 'narration', content: narrBuf.trim(), timestamp: Date.now() });
+          narrBuf = '';
+        }
+        const char = resolveChar(sm[1]);
+        messages.push({ id: `s_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`, type: 'speech', characterId: char ? (char.id || sm[1]) : sm[1], content: sm[2].trim(), timestamp: Date.now() });
+      } else {
+        narrBuf += (narrBuf ? '\n' : '') + line;
+      }
+    }
+    if (narrBuf.trim()) {
+      messages.push({ id: `n_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`, type: 'narration', content: narrBuf.trim(), timestamp: Date.now() });
     }
     buffer = '';
   }
@@ -481,36 +486,23 @@ function parsePerformance(raw, charInfos, beatRows) {
       if (currentNode > 0) {
         const beat = beatRows.find(b => b.beat_order === currentNode);
         if (beat) {
-          messages.push({
-            id: `plot_${beat.id}`, type: 'plot_progress',
-            content: `📜 节点完成：${beat.description} ✓`, timestamp: Date.now(),
-          });
+          messages.push({ id: `plot_${beat.id}`, type: 'plot_progress', content: `📜 节点完成：${beat.description} ✓`, timestamp: Date.now() });
         }
       }
       currentNode = parseInt(nodeMatch[1]);
       const beat = beatRows.find(b => b.beat_order === currentNode);
       if (beat) {
-        messages.push({
-          id: `node_start_${beat.id}`, type: 'node_start',
-          content: `📍 节点${currentNode}：${beat.description}`, timestamp: Date.now(),
-        });
+        messages.push({ id: `node_start_${beat.id}`, type: 'node_start', content: `📍 节点${currentNode}：${beat.description}`, timestamp: Date.now() });
       }
       continue;
     }
 
-    // 对话行：格式匹配且角色在演员表中 → 气泡；否则 → 叙事
-    const sm = t.match(/^([^\s：:]+)[：:]\s*(.+)/);
-    if (sm && resolveChar(sm[1])) {
+    // 对话行检测：任何 名字：内容 格式都输出为 speech
+    const sm = t.match(/^([^\s：:]{1,12})[：:]\s*(.+)/);
+    if (sm) {
       flush();
-      buffer = t;
-      flush();
-      continue;
-    }
-    // 格式像对话但角色不在演员表 → 去掉名字，当叙事
-    if (sm && !resolveChar(sm[1])) {
-      flush();
-      buffer = sm[2];
-      flush();
+      const char = resolveChar(sm[1]);
+      messages.push({ id: `s_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`, type: 'speech', characterId: char ? (char.id || sm[1]) : sm[1], content: sm[2].trim(), timestamp: Date.now() });
       continue;
     }
 
@@ -521,10 +513,28 @@ function parsePerformance(raw, charInfos, beatRows) {
   if (currentNode > 0) {
     const beat = beatRows.find(b => b.beat_order === currentNode);
     if (beat) {
-      messages.push({
-        id: `plot_${beat.id}`, type: 'plot_progress',
-        content: `📜 节点完成：${beat.description} ✓`, timestamp: Date.now(),
-      });
+      messages.push({ id: `plot_${beat.id}`, type: 'plot_progress', content: `📜 节点完成：${beat.description} ✓`, timestamp: Date.now() });
+    }
+  }
+
+  // ── 后处理：最终扫描所有 narration，如果看起来是对话格式且有匹配角色，升级为 speech ──
+  return reclassifyMessages(messages, knownNames, resolveChar);
+}
+
+// ═══ 后处理：重新分类被误判为 narration 的对话行 ═══
+// 第二道防线 — 即使前面的解析有遗漏，这里也会纠正
+function reclassifyMessages(messages, knownNames, resolveChar) {
+  for (let i = 0; i < messages.length; i++) {
+    const msg = messages[i];
+    if (msg.type !== 'narration') continue;
+    const sm = msg.content.match(/^([^\s：:]{1,12})[：:]\s*(.+)/);
+    if (!sm) continue;
+    const char = resolveChar(sm[1]);
+    if (char) {
+      // 升级为 speech
+      msg.type = 'speech';
+      msg.characterId = char.id || sm[1];
+      msg.content = sm[2].trim();
     }
   }
   return messages;

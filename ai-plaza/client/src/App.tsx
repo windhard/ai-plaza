@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, useMemo, useCallback } from 'react';
+﻿import { useEffect, useState, useRef, useMemo, useCallback } from 'react';
 import { useStore } from './store/plazaStore';
 import type { Intervention } from './types';
 
@@ -299,16 +299,27 @@ export default function App() {
   // ── 消息渲染 ──
   // 生成中：对话气泡排队打字（一个说完下一个才出现），其他即时显示并推进队列
   const renderMessage = (msg: any, isTyping = true, onDone?: () => void) => {
-    const ch = getCharById(msg.characterId || '');
+    // 第二道防线：narration 如果看起来是对话格式且有匹配角色，按 speech 渲染
+    let effectiveType = msg.type;
+    let effectiveCharId = msg.characterId || '';
+    let effectiveContent = msg.content || '';
+    if (msg.type === 'narration' && /^[^\s：:]{1,12}[：:]\s*.+/.test(msg.content)) {
+      const pm = msg.content.match(/^([^\s：:]{1,12})[：:]\s*(.+)/);
+      if (pm) {
+        const chByName = characters.find((c: any) => c.name === pm[1] || c.id === pm[1] || c.name.endsWith(pm[1]) || pm[1].endsWith(c.name) || (pm[1].length >= 2 && c.name.includes(pm[1])));
+        if (chByName) { effectiveType = 'speech'; effectiveCharId = chByName.id || pm[1]; effectiveContent = pm[2]; }
+      }
+    }
+    const ch = getCharById(effectiveCharId || '');
     // 生成中且轮到本条消息，但本条不是对话 → 立刻完成，推进到下一个
-    if (generating && isTyping && msg.type !== 'speech' && onDone) {
+    if (generating && isTyping && effectiveType !== 'speech' && onDone) {
       setTimeout(onDone, 0);
     }
 
-    if (msg.type === 'speech') {
-      const actionMatch = msg.content.match(/^[（(]([^）)]+)[）)]\s*/);
+    if (effectiveType === 'speech') {
+      const actionMatch = effectiveContent.match(/^[（(]([^）)]+)[）)]\s*/);
       const action = actionMatch ? actionMatch[1] : null;
-      const dialogue = actionMatch ? msg.content.slice(actionMatch[0].length) : msg.content;
+      const dialogue = actionMatch ? effectiveContent.slice(actionMatch[0].length) : effectiveContent;
       // 生成中：轮到我才打字；非生成中：由 typingIdx 控制
       const dialogueSpeed = (generating || isTyping) ? 22 : 0;
       const bubbleBg = BG_DARK;
@@ -316,7 +327,7 @@ export default function App() {
         <div key={msg.id} style={{ display: 'flex', gap: 10, alignItems: 'flex-start', margin: '6px 0' }}>
           <div style={{ width: 34, height: 34, borderRadius: '50%', background: 'linear-gradient(135deg, #2a2a3a, #1a1a2e)', border: '1px solid rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16, flexShrink: 0, boxShadow: '0 2px 8px rgba(0,0,0,0.3)' }}>{ch?.emoji || '👤'}</div>
           <div style={{ maxWidth: '70%', minWidth: 80 }}>
-            <div style={{ fontSize: 10, fontWeight: 600, marginBottom: 4, color: ch ? ACCENT : TEXT_MUTED, letterSpacing: '0.03em' }}>{ch?.name || msg.characterId || '???'}</div>
+            <div style={{ fontSize: 10, fontWeight: 600, marginBottom: 4, color: ch ? ACCENT : TEXT_MUTED, letterSpacing: '0.03em' }}>{ch?.name || effectiveCharId || '???'}</div>
             {action && (
               <div style={{ fontSize: 11, color: '#f0a8c0', fontStyle: 'italic', padding: '3px 4px 5px 4px', marginBottom: 2, lineHeight: 1.5 }}>
                 <Typewriter text={action} speed={0} />
