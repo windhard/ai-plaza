@@ -344,7 +344,7 @@ export default function App() {
     // 非对话类型
     const sp = isTyping && !generating ? undefined : 0;
     if (msg.type === 'node_start') return (
-      <div key={msg.id} style={{ textAlign: 'center', fontSize: 10, color: 'rgba(34,211,238,0.6)', padding: '5px 0', fontWeight: 500, letterSpacing: '0.04em', borderTop: '1px solid rgba(34,211,238,0.08)', margin: '4px 0' }}>
+      <div key={msg.id} id={msg.id} style={{ textAlign: 'center', fontSize: 10, color: 'rgba(34,211,238,0.6)', padding: '5px 0', fontWeight: 500, letterSpacing: '0.04em', borderTop: '1px solid rgba(34,211,238,0.08)', margin: '4px 0' }}>
         <Typewriter text={msg.content} speed={sp ?? 30} onDone={generating ? undefined : onDone} />
       </div>
     );
@@ -518,7 +518,8 @@ export default function App() {
                   {ch.beats.map(b => {
                     const cls = b.status === 'done' ? GREEN : b.status === 'active' ? ACCENT : TEXT_MUTED;
                     const dotBg = b.status === 'done' ? GREEN : b.status === 'active' ? ACCENT : '#27272a';
-                    return <div key={b.id} style={{ fontSize: 8, color: cls, display: 'flex', alignItems: 'center', gap: 3, lineHeight: 1.4 }}><span style={{ width: 4, height: 4, borderRadius: '50%', background: dotBg, flexShrink: 0 }} />节点{b.beat_order}：{b.description}</div>;
+                    const beatMsgId = `node_start_${b.id}`;
+                    return <div key={b.id} onClick={() => { document.getElementById(beatMsgId)?.scrollIntoView({ behavior: 'smooth', block: 'center' }); }} style={{ fontSize: 8, color: cls, display: 'flex', alignItems: 'center', gap: 3, lineHeight: 1.4, cursor: 'pointer', padding: '1px 2px', borderRadius: 2 }} onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.04)'} onMouseLeave={e => e.currentTarget.style.background = 'transparent'} title="点击跳转到此节点"><span style={{ width: 4, height: 4, borderRadius: '50%', background: dotBg, flexShrink: 0 }} />节点{b.beat_order}：{b.description}</div>;
                   })}
                 </div>
               </div>
