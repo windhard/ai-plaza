@@ -194,7 +194,9 @@ export async function generateChapter(chapterId, poolInterventions = [], directo
     });
 
     if (!result) throw new Error('LLM returned empty');
-    const parsed = parsePerformance(result, charInfos, beatRows);
+    const charNames = charInfos.map(c => c.name);
+    const cleaned = preprocessLLMOutput(result, charNames);
+    const parsed = parsePerformance(cleaned, charInfos, beatRows);
     allMessages.push(...parsed);
   } catch (e) {
     console.error('Generate error:', e.message);
@@ -220,6 +222,23 @@ function interventionText(iv, beatOrder) {
   if (iv.type === 'speech') return `  🗣 节点${beatOrder || ''} → ${iv.character || ''} 必须说："${iv.content}"\n`;
   if (iv.type === 'event') return `  ⚡ 节点${beatOrder || ''}：${iv.content}\n`;
   return '';
+}
+
+// ═══ 预处理：清理LLM输出中的散文体、markdown标题等 ═══
+function preprocessLLMOutput(raw, charNames) {
+  let text = raw;
+  // 1. 删除markdown标题行（# ## ### 等）
+  text = text.replace(/^#{1,3}\s+.*$/gm, '');
+  // 2. 用演员表名字匹配散文体对话，转换为脚本格式
+  for (const name of charNames) {
+    const re = new RegExp('^(' + name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')([^：:"“]{1,40}?)[：:，,] *["“]([^"”]+)["”]', 'gm');
+    text = text.replace(re, (match, nm, action, dialogue) => {
+      const vm = action.match(/声音[^，,，]{0,15}/);
+      const expr = vm ? vm[0] : action.trim().slice(0, 10);
+      return nm + '：（' + expr + '）' + dialogue;
+    });
+  }
+  return text;
 }
 
 // ═══ 判断名字是否像人名（防止"清晨""温度"等场景词被误判为对话） ═══
@@ -385,6 +404,7 @@ class IncrementalParser {
 export async function generateChapterStream(chapterId, poolInterventions = [], directorId = 'default', onMessage, onProgress, signal) {
   const { systemPrompt, userPrompt, charInfos, beatRows, scenePrompt } =
     buildPromptContext(chapterId, poolInterventions, directorId);
+  const charNames = charInfos.map(c => c.name);
 
   // ── 氛围开头（立即发送） ──
   onMessage({ id: 'atm_start', type: 'atmosphere', content: `📍 ${scenePrompt}`, timestamp: Date.now() });
@@ -401,12 +421,21 @@ export async function generateChapterStream(chapterId, poolInterventions = [], d
       maxTokens: 12000,
       signal,
       onLine: (line) => {
-        // 空行 → flush 叙事缓冲
-        if (!line.trim()) {
-          parser.flush();
-        } else {
-          parser.feedLine(line.trim());
+        let t = line.trim();
+        if (!t) { parser.flush(); return; }
+        // 流式预处理：跳过markdown标题
+        if (/^#{1,3}\s/.test(t)) return;
+        // 散文体→脚本格式
+        for (const name of charNames) {
+          const re = new RegExp('^(' + name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')([^：:"“]{1,40}?)[：:，,] *["“]([^"”]+)["”]');
+          const m = t.match(re);
+          if (m) {
+            const vm = m[2].match(/声音[^，,，]{0,15}/);
+            t = m[1] + '：（' + (vm ? vm[0] : m[2].trim().slice(0, 10)) + '）' + m[3];
+            break;
+          }
         }
+        parser.feedLine(t);
       },
       onDone: () => {
         parser.finish();
