@@ -71,6 +71,137 @@ export async function llmCallBatch(calls) {
  * @param {{aggression:number}} personality - 角色人格参数
  * @returns {string}
  */
+/**
+ * 流式 LLM 调用 — 逐 token 回调
+ * @param {{
+ *   systemPrompt:string,
+ *   userMessage:string,
+ *   temperature?:number,
+ *   maxTokens?:number,
+ *   onToken?:(text:string)=>void,
+ *   onLine?:(line:string)=>void,
+ *   onDone?:()=>void,
+ *   signal?:AbortSignal,
+ * }} opts
+ * @returns {Promise<string>} 完整文本
+ */
+export async function llmCallStream({ systemPrompt, userMessage, temperature = 0.9, maxTokens = 12000, onToken, onLine, onDone, signal }) {
+  const body = {
+    model: DEEPSEEK_MODEL,
+    messages: [
+      { role: 'system', content: systemPrompt },
+      { role: 'user', content: userMessage },
+    ],
+    temperature,
+    max_tokens: maxTokens,
+    thinking: { type: 'disabled' },
+    stream: true,
+  };
+
+  const res = await fetch(DEEPSEEK_BASE, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${DEEPSEEK_KEY}`,
+    },
+    body: JSON.stringify(body),
+    signal: signal || AbortSignal.timeout(180000),
+  });
+
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(`LLM error ${res.status}: ${text.slice(0, 200)}`);
+  }
+
+  const reader = res.body.getReader();
+  const decoder = new TextDecoder('utf-8', { stream: true });
+  let fullText = '';
+  let lineBuf = '';
+  let sseBuf = '';
+
+  try {
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      const chunk = decoder.decode(value, { stream: true });
+      sseBuf += chunk;
+
+      // 按 \n 分割 SSE 行
+      const sseLines = sseBuf.split('\n');
+      sseBuf = sseLines.pop() || ''; // 保留不完整行
+
+      for (const sseLine of sseLines) {
+        if (!sseLine.startsWith('data: ')) continue;
+        const dataStr = sseLine.slice(6).trim();
+        if (!dataStr || dataStr === '[DONE]') continue;
+
+        try {
+          const parsed = JSON.parse(dataStr);
+          const delta = parsed.choices?.[0]?.delta?.content;
+          if (!delta) continue;
+
+          fullText += delta;
+          if (onToken) onToken(delta);
+
+          // 行缓冲：检测 \n 拆分完整行
+          lineBuf += delta;
+          if (lineBuf.includes('\n')) {
+            const lines = lineBuf.split('\n');
+            lineBuf = lines.pop() || ''; // 保留最后一个不完整行
+            for (const line of lines) {
+              if (onLine) onLine(line);
+            }
+          }
+        } catch { /* skip parse errors */ }
+      }
+    }
+
+    // flush 解码器
+    const final = decoder.decode();
+    if (final) {
+      sseBuf += final;
+      const sseLines = sseBuf.split('\n');
+      for (const sseLine of sseLines) {
+        if (!sseLine.startsWith('data: ')) continue;
+        const dataStr = sseLine.slice(6).trim();
+        if (!dataStr || dataStr === '[DONE]') continue;
+        try {
+          const parsed = JSON.parse(dataStr);
+          const delta = parsed.choices?.[0]?.delta?.content;
+          if (delta) {
+            fullText += delta;
+            if (onToken) onToken(delta);
+            lineBuf += delta;
+            if (lineBuf.includes('\n')) {
+              const lines = lineBuf.split('\n');
+              lineBuf = lines.pop() || '';
+              for (const line of lines) {
+                if (onLine) onLine(line);
+              }
+            }
+          }
+        } catch { /* skip */ }
+      }
+    }
+
+    // flush 最后的不完整行（如果有内容）
+    if (lineBuf.trim() && onLine) onLine(lineBuf);
+
+    if (onDone) onDone();
+  } catch (e) {
+    if (e.name === 'AbortError') {
+      // 正常中止，flush 已有内容
+      if (lineBuf.trim() && onLine) onLine(lineBuf);
+      if (onDone) onDone();
+    } else {
+      throw e;
+    }
+  }
+
+  return fullText;
+}
+
 export function expandFuzzyIntervention(raw, personality = {}) {
   const expansions = {
     '怒': '攥紧拳头，指节发白，胸口剧烈起伏',

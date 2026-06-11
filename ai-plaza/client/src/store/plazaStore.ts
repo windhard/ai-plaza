@@ -25,6 +25,20 @@ interface Store {
   saveOutline: (content: string) => Promise<void>;
 }
 
+// ═══ SSE 解析 ═══
+function parseSSE(block: string): { event: string; data: any } | null {
+  const lines = block.split('\n');
+  let event = 'message';
+  let dataStr = '';
+  for (const line of lines) {
+    if (line.startsWith('event: ')) event = line.slice(7);
+    else if (line.startsWith('data: ')) dataStr = line.slice(6);
+  }
+  if (!dataStr) return null;
+  try { return { event, data: JSON.parse(dataStr) }; }
+  catch { return null; }
+}
+
 export const useStore = create<Store>((set, get) => ({
   characters: [], states: {}, chapters: [], messages: [],
   plaza: null, generating: false, activeChapterId: null,
@@ -88,15 +102,54 @@ export const useStore = create<Store>((set, get) => ({
 
   generateChapter: async (chapterId, poolInterventions = [], director = 'default') => {
     set({ generating: true, messages: [] });
-    const res = await fetch('/api/generate', {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ chapterId, poolInterventions, director }),
-    });
-    const json = await res.json();
-    if (json.success) {
-      set({ messages: json.data.messages || [], generating: false });
-      await get().loadAll();
-    } else {
+
+    try {
+      const res = await fetch('/api/generate-stream', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ chapterId, poolInterventions, director }),
+      });
+
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      if (!res.body) throw new Error('No response body');
+
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let sseBuf = '';
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+
+        sseBuf += decoder.decode(value, { stream: true });
+        const blocks = sseBuf.split('\n\n');
+        sseBuf = blocks.pop() || '';
+
+        for (const block of blocks) {
+          if (!block.trim()) continue;
+          const parsed = parseSSE(block);
+          if (!parsed) continue;
+
+          switch (parsed.event) {
+            case 'message':
+              // 实时追加消息
+              set((state) => ({ messages: [...state.messages, parsed.data] }));
+              break;
+            case 'done':
+              set({ generating: false });
+              get().loadAll();
+              break;
+            case 'error':
+              set({ generating: false });
+              break;
+            case 'status':
+              // 状态更新可忽略
+              break;
+          }
+        }
+      }
+    } catch (e) {
+      console.error('Generate stream error:', e);
       set({ generating: false });
     }
   },

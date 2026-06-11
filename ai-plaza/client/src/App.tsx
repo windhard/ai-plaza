@@ -117,13 +117,13 @@ export default function App() {
   useEffect(() => { loadAll(); fetch('/api/directors').then(r=>r.json()).then(j=>{ setDirectors(j.data||[]); setSelectedDirector(j.data?.[0]?.id || 'default'); }); }, []);
   useEffect(() => { msgEndRef.current?.scrollIntoView({ behavior: 'smooth' }); }, [typingIdx]);
 
-  // 新消息到达时：已完成的章节跳过动画，新章节从头开始
+  // 新消息到达时：生成中不重置 typingIdx（由打字完成驱动），其余场景保持原逻辑
   useEffect(() => {
+    if (generating) return; // 生成中由 advanceTyping 全权控制节奏
     if (messages.length === 0) { setTypingIdx(0); return; }
     if (completedChapters.current.has(activeChapterId || '')) {
       setTypingIdx(messages.length);
     } else {
-      // 判断是否之前已经生成过（章节状态为 done + 有消息 = 之前看过）
       const ch = chapters.find(c => c.id === activeChapterId);
       if (ch?.status === 'done' && messages.length > 10) {
         completedChapters.current.add(activeChapterId || '');
@@ -132,7 +132,7 @@ export default function App() {
         setTypingIdx(0);
       }
     }
-  }, [messages, activeChapterId, chapters]);
+  }, [messages, activeChapterId, chapters, generating]);
 
   // 当前消息打完 → 显示下一条
   const advanceTyping = useCallback(() => {
@@ -297,66 +297,58 @@ export default function App() {
   };
 
   // ── 消息渲染 ──
+  // 生成中：对话气泡排队打字（一个说完下一个才出现），其他即时显示并推进队列
   const renderMessage = (msg: any, isTyping = true, onDone?: () => void) => {
-    const sp = isTyping ? undefined : 0;
     const ch = getCharById(msg.characterId || '');
+    // 生成中且轮到本条消息，但本条不是对话 → 立刻完成，推进到下一个
+    if (generating && isTyping && msg.type !== 'speech' && onDone) {
+      setTimeout(onDone, 0);
+    }
+
     if (msg.type === 'speech') {
-      // 分离动作和对话：检测（...）开头的动作描写
       const actionMatch = msg.content.match(/^[（(]([^）)]+)[）)]\s*/);
       const action = actionMatch ? actionMatch[1] : null;
       const dialogue = actionMatch ? msg.content.slice(actionMatch[0].length) : msg.content;
-      // 气泡底色跟页面背景一致
+      // 生成中：轮到我才打字；非生成中：由 typingIdx 控制
+      const dialogueSpeed = (generating || isTyping) ? 22 : 0;
       const bubbleBg = BG_DARK;
       return (
         <div key={msg.id} style={{ display: 'flex', gap: 10, alignItems: 'flex-start', margin: '6px 0' }}>
           <div style={{ width: 34, height: 34, borderRadius: '50%', background: 'linear-gradient(135deg, #2a2a3a, #1a1a2e)', border: '1px solid rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16, flexShrink: 0, boxShadow: '0 2px 8px rgba(0,0,0,0.3)' }}>{ch?.emoji || '👤'}</div>
           <div style={{ maxWidth: '70%', minWidth: 80 }}>
             <div style={{ fontSize: 10, fontWeight: 600, marginBottom: 4, color: ch ? ACCENT : TEXT_MUTED, letterSpacing: '0.03em' }}>{ch?.name || msg.characterId || '???'}</div>
-            {/* 神态动作 — 在气泡上方 */}
             {action && (
-              <div style={{
-                fontSize: 11, color: '#f0a8c0', fontStyle: 'italic',
-                padding: '3px 4px 5px 4px', marginBottom: 2,
-                lineHeight: 1.5,
-              }}>
-                <Typewriter text={action} speed={sp} />
+              <div style={{ fontSize: 11, color: '#f0a8c0', fontStyle: 'italic', padding: '3px 4px 5px 4px', marginBottom: 2, lineHeight: 1.5 }}>
+                <Typewriter text={action} speed={0} />
               </div>
             )}
-            {/* 对话气泡 */}
-            <div style={{
-              position: 'relative',
-              padding: '9px 13px',
-              borderRadius: action ? '2px 10px 10px 10px' : '4px 12px 12px 12px',
-              background: bubbleBg,
-              border: '1px solid rgba(255,255,255,0.08)',
-              fontSize: 13,
-              lineHeight: 1.85,
-              color: '#e0ddf0',
-            }}>
-              <Typewriter text={dialogue} speed={sp ?? 22} onDone={onDone} />
+            <div style={{ position: 'relative', padding: '9px 13px', borderRadius: action ? '2px 10px 10px 10px' : '4px 12px 12px 12px', background: bubbleBg, border: '1px solid rgba(255,255,255,0.08)', fontSize: 13, lineHeight: 1.85, color: '#e0ddf0' }}>
+              <Typewriter text={dialogue} speed={dialogueSpeed} onDone={onDone} />
             </div>
           </div>
         </div>
       );
     }
+    // 非对话类型
+    const sp = isTyping && !generating ? undefined : 0;
     if (msg.type === 'node_start') return (
       <div key={msg.id} style={{ textAlign: 'center', fontSize: 10, color: 'rgba(34,211,238,0.6)', padding: '5px 0', fontWeight: 500, letterSpacing: '0.04em', borderTop: '1px solid rgba(34,211,238,0.08)', margin: '4px 0' }}>
-        <Typewriter text={msg.content} speed={sp ?? 30} onDone={onDone} />
+        <Typewriter text={msg.content} speed={sp ?? 30} onDone={generating ? undefined : onDone} />
       </div>
     );
     if (msg.type === 'plot_progress') return (
       <div key={msg.id} style={{ textAlign: 'center', fontSize: 10, color: PINK, padding: '8px 0', fontWeight: 600, letterSpacing: '0.05em', background: 'linear-gradient(90deg, transparent, rgba(244,114,182,0.08), transparent)', margin: '8px 0', borderRadius: 4 }}>
-        ✦ <Typewriter text={msg.content} speed={sp ?? 40} onDone={onDone} />
+        ✦ <Typewriter text={msg.content} speed={sp ?? 40} onDone={generating ? undefined : onDone} />
       </div>
     );
     if (msg.type === 'narration') return (
       <div key={msg.id} style={{ margin: '6px 0', padding: '10px 16px', fontSize: 12, lineHeight: 1.9, color: '#b0a8c8', borderLeft: '3px solid rgba(180,160,200,0.4)', borderRadius: '0 6px 6px 0', background: 'rgba(160,140,200,0.04)' }}>
-        <Typewriter text={msg.content} speed={sp ?? 18} onDone={onDone} />
+        <Typewriter text={msg.content} speed={sp ?? 18} onDone={generating ? undefined : onDone} />
       </div>
     );
     if (msg.type === 'atmosphere') return (
       <div key={msg.id} style={{ padding: '6px 14px', fontSize: 12, color: '#9ca3af', textAlign: 'center', fontStyle: 'italic', borderTop: '1px dashed rgba(255,255,255,0.08)', borderBottom: '1px dashed rgba(255,255,255,0.08)', margin: '4px 0', letterSpacing: '0.02em' }}>
-        <Typewriter text={msg.content} speed={sp ?? 30} onDone={onDone} />
+        <Typewriter text={msg.content} speed={sp ?? 30} onDone={generating ? undefined : onDone} />
       </div>
     );
     if (msg.type === 'event') {

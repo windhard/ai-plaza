@@ -13,7 +13,7 @@ import {
   deleteChapter, cleanupOrphanCharacters,
 } from '../db/index.js';
 import { parseScript, parseIntervention, validateChapters, aiSeniorEdit } from '../parser.js';
-import { generateChapter } from '../director/index.js';
+import { generateChapter, generateChapterStream } from '../director/index.js';
 import { characterPool, getOrCreateCharacter, saveCharacterToMD, loadCharactersFromMD } from '../characterPool.js';
 
 // ═══ 启动时从 MD 加载角色 ═══
@@ -249,6 +249,71 @@ router.post('/generate', async (req, res) => {
   } catch (e) {
     console.error('Generate error:', e);
     res.json({ success: false, error: String(e) });
+  }
+});
+
+// ═══ SSE 辅助 ═══
+function sendSSE(res, event, data) {
+  res.write(`event: ${event}\n`);
+  res.write(`data: ${JSON.stringify(data)}\n\n`);
+}
+
+// ═══ 批量生成（SSE 流式） ═══
+router.post('/generate-stream', async (req, res) => {
+  try {
+    const { chapterId, poolInterventions, director } = req.body;
+    const ch = findChapter(chapterId);
+    if (!ch) return res.status(404).json({ success: false, error: 'Chapter not found' });
+
+    // SSE 响应头
+    res.setHeader('Content-Type', 'text/event-stream');
+    res.setHeader('Cache-Control', 'no-cache');
+    res.setHeader('Connection', 'keep-alive');
+    res.setHeader('X-Accel-Buffering', 'no');
+    res.flushHeaders();
+
+    // 更新状态
+    updateChapterStatus(chapterId, 'active');
+    updatePlaza({ current_chapter_id: chapterId, phase: 'generating' });
+    clearMessages(chapterId);
+
+    sendSSE(res, 'status', { phase: 'generating' });
+
+    // AbortController：客户端断开时中止 LLM（监听 response close）
+    const abortController = new AbortController();
+    res.on('close', () => {
+      if (!res.writableEnded) abortController.abort();
+    });
+
+    const savedMessages = [];
+
+    await generateChapterStream(
+      chapterId,
+      poolInterventions || [],
+      director || 'default',
+      // onMessage
+      (msg) => {
+        msg.chapter_id = chapterId;
+        savedMessages.push(msg);
+        sendSSE(res, 'message', msg);
+      },
+      // onProgress（可选）
+      null,
+      // signal
+      abortController.signal,
+    );
+
+    // 保存消息到 DB
+    insertMessages(savedMessages);
+    updateChapterStatus(chapterId, 'done');
+    updatePlaza({ phase: 'done' });
+
+    sendSSE(res, 'done', { messageCount: savedMessages.length });
+    res.end();
+  } catch (e) {
+    console.error('Generate stream error:', e);
+    try { sendSSE(res, 'error', { message: String(e) }); } catch {}
+    try { res.end(); } catch {}
   }
 });
 

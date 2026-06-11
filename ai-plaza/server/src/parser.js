@@ -683,3 +683,10 @@ export function parseIntervention(raw) {
   if (eventMatch) return { type: 'event', targetNode: parseInt(eventMatch[1]), content: eventMatch[2].trim() };
   return null;
 }
+
+// ═══ 干预挂载 ═══
+export function applyIntervention(beat, intervention) {
+  if (!beat || !intervention) return;
+  if (!Array.isArray(beat.interventions)) beat.interventions = [];
+  beat.interventions.push(intervention);
+}

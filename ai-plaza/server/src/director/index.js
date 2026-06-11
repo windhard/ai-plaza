@@ -2,7 +2,7 @@
 // 框架只负责：加载导演 .md → 注入动态上下文 → 调用 LLM → 解析输出
 // 所有风格、规则、示例全在 data/directors/*.md 中
 import { findChapter, findBeats, updateBeatStatus, updateChapterStatus, findCharacter, findAllChapters, findCharacterStates, getWorld, getOutline } from '../db/index.js';
-import { llmCall } from '../llm/index.js';
+import { llmCall, llmCallStream } from '../llm/index.js';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -15,7 +15,22 @@ function loadDirector(directorId) {
   const id = directorId || 'default';
   const fp = path.join(directorsDir, `${id}.md`);
   if (!fs.existsSync(fp)) {
-    return loadDirector('default');
+    // 回退：找目录中第一个可用的导演文件
+    if (fs.existsSync(directorsDir)) {
+      const files = fs.readdirSync(directorsDir).filter(f => f.endsWith('.md'));
+      if (files.length > 0 && path.join(directorsDir, files[0]) !== fp) {
+        return loadDirector(files[0].replace('.md', ''));
+      }
+    }
+    // 最终兜底：硬编码默认导演
+    return {
+      id: 'default',
+      name: '默认导演',
+      persona: '你是专业的故事导演。',
+      style: '平衡叙事与对话，自然流畅。',
+      rules: '',
+      example: '',
+    };
   }
   const raw = fs.readFileSync(fp, 'utf-8');
 
@@ -35,8 +50,8 @@ function loadDirector(directorId) {
   };
 }
 
-// ═══ 生成一章 ═══
-export async function generateChapter(chapterId, poolInterventions = [], directorId = 'default') {
+// ═══ 构建 Prompt 上下文（共享） ═══
+function buildPromptContext(chapterId, poolInterventions, directorId) {
   const director = loadDirector(directorId);
   const ch = findChapter(chapterId);
   if (!ch) throw new Error('Chapter not found');
@@ -56,24 +71,17 @@ export async function generateChapter(chapterId, poolInterventions = [], directo
   const scenePrompt = ch.scene_prompt || ch.scene || '';
   const beatRows = findBeats(chapterId);
   const currentOrder = ch.chapter_order || 1;
-  const allMessages = [];
 
-  // ── 氛围开头 ──
-  allMessages.push({ id: 'atm_start', type: 'atmosphere', content: `📍 ${scenePrompt}`, timestamp: Date.now() });
-
-  // ═══ 构建动态上下文（框架职责） ═══
+  // ═══ 构建动态上下文 ═══
   const ctxParts = [];
 
-  // 章节信息
   ctxParts.push(`【本章】第${currentOrder}章：${ch.title}`);
   ctxParts.push(`【本章目的】${ch.purpose || ''}`);
   if (ch.synopsis) ctxParts.push(`【本章梗概】${ch.synopsis}`);
   ctxParts.push(`【场景】${scenePrompt}`);
 
-  // 情节节点
   ctxParts.push(`【情节节点】\n${beatRows.map(b => `  节点${b.beat_order}：${b.description}`).join('\n')}`);
 
-  // 出场人物 —— 这就是本剧的全部演员表
   const charNames = charInfos.map(c => c.name);
   const charDescs = charInfos.map((c, i) =>
     `  ${i + 1}. ${c.name}（${c.title || ''}）：${c.personality?.core || ''} 说话风格：${c.personality?.speechStyle || '自然'}`
@@ -134,8 +142,7 @@ export async function generateChapter(chapterId, poolInterventions = [], directo
     ctxParts.push(`【角色当前状态（从上章继承）】\n${stateLines}`);
   }
 
-  // ═══ 组装 prompt ═══
-  // user prompt = 导演风格 + 规则 + 示例 + 动态上下文
+  // 组装 prompt
   const userPrompt = [
     director.style,
     director.rules,
@@ -146,10 +153,22 @@ export async function generateChapter(chapterId, poolInterventions = [], directo
     ...ctxParts,
   ].filter(Boolean).join('\n\n');
 
-  // system prompt = 导演人格
   const systemPrompt = director.persona
     ? `${director.persona}\n\n只输出内容，不要任何开场白或结束语。`
     : '只输出内容，不要任何开场白或结束语。';
+
+  return { systemPrompt, userPrompt, director, charInfos, beatRows, scenePrompt, ch };
+}
+
+// ═══ 生成一章（批量模式） ═══
+export async function generateChapter(chapterId, poolInterventions = [], directorId = 'default') {
+  const { systemPrompt, userPrompt, charInfos, beatRows, scenePrompt } =
+    buildPromptContext(chapterId, poolInterventions, directorId);
+
+  const allMessages = [];
+
+  // ── 氛围开头 ──
+  allMessages.push({ id: 'atm_start', type: 'atmosphere', content: `📍 ${scenePrompt}`, timestamp: Date.now() });
 
   // ═══ LLM 调用 ═══
   try {
@@ -189,7 +208,199 @@ function interventionText(iv, beatOrder) {
   return '';
 }
 
-// ═══ 解析 LLM 输出 → 消息列表 ═══
+// ═══ 流式增量解析器 ═══
+class IncrementalParser {
+  constructor(charInfos, beatRows, onMessage) {
+    this.charInfos = charInfos;
+    this.beatRows = beatRows;
+    this.onMessage = onMessage;
+    this.buffer = '';
+    this.currentNode = 0;
+
+    // 构建角色名查找表
+    this.knownNames = new Map();
+    for (const c of charInfos) {
+      this.knownNames.set(c.name, c);
+      if (c.id && c.id !== c.name) this.knownNames.set(c.id, c);
+    }
+  }
+
+  resolveChar(name) {
+    if (this.knownNames.has(name)) return this.knownNames.get(name);
+    for (const [k, v] of this.knownNames) {
+      if (k.endsWith(name) || name.endsWith(k) || (name.length >= 2 && k.includes(name))) {
+        return v;
+      }
+    }
+    return null;
+  }
+
+  emit(msg) {
+    this.onMessage(msg);
+  }
+
+  flush() {
+    const content = this.buffer.trim();
+    if (!content) { this.buffer = ''; return; }
+
+    // 检查是否为对话行
+    const sm = content.match(/^([^\s：:]+)[：:]\s*(.+)/);
+    if (sm && this.resolveChar(sm[1])) {
+      const char = this.resolveChar(sm[1]);
+      this.emit({
+        id: `s_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
+        type: 'speech',
+        characterId: char.id || sm[1],
+        content: sm[2].trim(),
+        timestamp: Date.now(),
+      });
+    } else if (sm && !this.resolveChar(sm[1])) {
+      // 格式像对话但角色不在演员表 → 降级为叙事
+      this.emit({
+        id: `n_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
+        type: 'narration',
+        content: sm[2].trim(),
+        timestamp: Date.now(),
+      });
+    } else {
+      this.emit({
+        id: `n_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
+        type: 'narration',
+        content,
+        timestamp: Date.now(),
+      });
+    }
+    this.buffer = '';
+  }
+
+  feedLine(line) {
+    // 分隔线、省略号：跳过
+    if (/^[-—]{2,}$/.test(line) || line === '"..."' || line === '...') return;
+
+    // 节点标记
+    const nodeMatch = line.match(/^【节点(\d+)】/);
+    if (nodeMatch) {
+      this.flush();
+      // 关闭上一个节点
+      if (this.currentNode > 0) {
+        const prevBeat = this.beatRows.find(b => b.beat_order === this.currentNode);
+        if (prevBeat) {
+          this.emit({
+            id: `plot_${prevBeat.id}`,
+            type: 'plot_progress',
+            content: `📜 节点完成：${prevBeat.description} ✓`,
+            timestamp: Date.now(),
+          });
+        }
+      }
+      // 开启新节点
+      this.currentNode = parseInt(nodeMatch[1]);
+      const beat = this.beatRows.find(b => b.beat_order === this.currentNode);
+      if (beat) {
+        this.emit({
+          id: `node_start_${beat.id}`,
+          type: 'node_start',
+          content: `📍 节点${this.currentNode}：${beat.description}`,
+          timestamp: Date.now(),
+        });
+      }
+      return;
+    }
+
+    // 对话行：名字：内容（角色在演员表中）
+    const sm = line.match(/^([^\s：:]+)[：:]\s*(.+)/);
+    if (sm && this.resolveChar(sm[1])) {
+      this.flush(); // flush 之前的叙事缓冲
+      const char = this.resolveChar(sm[1]);
+      this.emit({
+        id: `s_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
+        type: 'speech',
+        characterId: char.id || sm[1],
+        content: sm[2].trim(),
+        timestamp: Date.now(),
+      });
+      return;
+    }
+
+    // 格式像对话但角色不在演员表 → 降级为叙事
+    if (sm && !this.resolveChar(sm[1])) {
+      this.flush();
+      this.emit({
+        id: `n_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
+        type: 'narration',
+        content: sm[2].trim(),
+        timestamp: Date.now(),
+      });
+      return;
+    }
+
+    // 叙事：累积
+    this.buffer += (this.buffer ? '\n' : '') + line;
+  }
+
+  finish() {
+    this.flush();
+    // 关闭最后一个节点
+    if (this.currentNode > 0) {
+      const beat = this.beatRows.find(b => b.beat_order === this.currentNode);
+      if (beat) {
+        this.emit({
+          id: `plot_${beat.id}`,
+          type: 'plot_progress',
+          content: `📜 节点完成：${beat.description} ✓`,
+          timestamp: Date.now(),
+        });
+      }
+    }
+  }
+}
+
+// ═══ 流式生成一章 ═══
+export async function generateChapterStream(chapterId, poolInterventions = [], directorId = 'default', onMessage, onProgress, signal) {
+  const { systemPrompt, userPrompt, charInfos, beatRows, scenePrompt } =
+    buildPromptContext(chapterId, poolInterventions, directorId);
+
+  // ── 氛围开头（立即发送） ──
+  onMessage({ id: 'atm_start', type: 'atmosphere', content: `📍 ${scenePrompt}`, timestamp: Date.now() });
+
+  // ── 增量解析器 ──
+  const parser = new IncrementalParser(charInfos, beatRows, onMessage);
+
+  // ═══ 流式 LLM 调用 ═══
+  try {
+    await llmCallStream({
+      systemPrompt,
+      userMessage: userPrompt,
+      temperature: 0.9,
+      maxTokens: 12000,
+      signal,
+      onLine: (line) => {
+        // 空行 → flush 叙事缓冲
+        if (!line.trim()) {
+          parser.flush();
+        } else {
+          parser.feedLine(line.trim());
+        }
+      },
+      onDone: () => {
+        parser.finish();
+      },
+    });
+  } catch (e) {
+    console.error('Generate stream error:', e.message);
+    onMessage({
+      id: 'err_gen', type: 'narration',
+      content: `⚠️ 生成失败：${e.message}`,
+      timestamp: Date.now(),
+    });
+  }
+
+  // 更新状态
+  for (const beat of beatRows) {
+    updateBeatStatus(beat.id, 'done');
+  }
+  updateChapterStatus(chapterId, 'done');
+}
 function parsePerformance(raw, charInfos, beatRows) {
   const messages = [];
   const lines = raw.split('\n');
