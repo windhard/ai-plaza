@@ -1,4 +1,4 @@
-// ═══ 导演模块 v4：导演文件驱动 ═══
+﻿// ═══ 导演模块 v4：导演文件驱动 ═══
 // 框架只负责：加载导演 .md → 注入动态上下文 → 调用 LLM → 解析输出
 // 所有风格、规则、示例全在 data/directors/*.md 中
 import { findChapter, findBeats, updateBeatStatus, updateChapterStatus, findCharacter, findAllChapters, findCharacterStates, getWorld, getOutline } from '../db/index.js';
@@ -208,6 +208,14 @@ function interventionText(iv, beatOrder) {
   return '';
 }
 
+// ═══ 判断名字是否像人名（防止"清晨""温度"等场景词被误判为对话） ═══
+const NARRATIVE_KEYWORDS = /清晨|中午|下午|傍晚|晚上|凌晨|黄昏|黎明|温度|湿度|气温|天气|光线|气氛|灯光|音乐|广播|进行中|开始|结束|散场|距离|速度|高度|深度|宽度|面积|音量|人数|密度|气味|味道|颜色|形状|大小|长短|粗细|轻重/;
+function looksLikePersonName(name) {
+  if (!name || name.length < 2 || name.length > 4) return false;
+  if (NARRATIVE_KEYWORDS.test(name)) return false;
+  return /^[一-鿿]{2,4}$/.test(name);
+}
+
 // ═══ 流式增量解析器 ═══
 // 【永久规则】对话气泡的显示依赖 type==='speech'。本节代码是气泡渲染的第一道防线。
 // 任何对话行（名字：内容）必须被解析为 type:'speech'，严禁降级为 narration。
@@ -250,6 +258,12 @@ class IncrementalParser {
   }
 
   emit(msg) {
+    // 流式后处理：speech 的 characterId 不像人名 → 降级为 narration
+    if (msg.type === 'speech' && msg.characterId && !this.resolveChar(msg.characterId) && !looksLikePersonName(msg.characterId)) {
+      msg.type = 'narration';
+      msg.content = msg.characterId + '：' + msg.content;
+      delete msg.characterId;
+    }
     this.onMessage(msg);
   }
 
@@ -521,20 +535,37 @@ function parsePerformance(raw, charInfos, beatRows) {
   return reclassifyMessages(messages, knownNames, resolveChar);
 }
 
-// ═══ 后处理：重新分类被误判为 narration 的对话行 ═══
-// 第二道防线 — 即使前面的解析有遗漏，这里也会纠正
+// ═══ 后处理：双向纠正分类错误 ═══
+// 1. narration → speech：对话行被误标为叙事时升级
+// 2. speech → narration：场景词（"清晨""温度"等）被误标为对话时降级
 function reclassifyMessages(messages, knownNames, resolveChar) {
   for (let i = 0; i < messages.length; i++) {
     const msg = messages[i];
-    if (msg.type !== 'narration') continue;
-    const sm = msg.content.match(/^([^\s：:]{1,12})[：:]\s*(.+)/);
-    if (!sm) continue;
-    const char = resolveChar(sm[1]);
-    if (char) {
-      // 升级为 speech
-      msg.type = 'speech';
-      msg.characterId = char.id || sm[1];
-      msg.content = sm[2].trim();
+
+    // ── 方向1：narration → speech（已知角色被误判） ──
+    if (msg.type === 'narration') {
+      const sm = msg.content.match(/^([^\s：:]{1,12})[：:]\s*(.+)/);
+      if (!sm) continue;
+      const char = resolveChar(sm[1]);
+      if (char) {
+        msg.type = 'speech';
+        msg.characterId = char.id || sm[1];
+        msg.content = sm[2].trim();
+      }
+      continue;
+    }
+
+    // ── 方向2：speech → narration（场景词被误判为人名） ──
+    // 核心修复：characterId 不像人名（如"清晨""温度""晚宴进行中"）→ 降级为叙事
+    if (msg.type === 'speech' && msg.characterId) {
+      const cid = msg.characterId;
+      const char = resolveChar(cid);
+      if (!char && !looksLikePersonName(cid)) {
+        // 不是已知角色，且不像人名 → 把名字拼回内容，降级为 narration
+        msg.type = 'narration';
+        msg.content = cid + '：' + msg.content;
+        delete msg.characterId;
+      }
     }
   }
   return messages;
