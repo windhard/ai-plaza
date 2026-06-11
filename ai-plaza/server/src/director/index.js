@@ -153,9 +153,15 @@ function buildPromptContext(chapterId, poolInterventions, directorId) {
     ...ctxParts,
   ].filter(Boolean).join('\n\n');
 
+  const formatRule = `【铁律-脚本格式】所有角色说的话必须独占一行：角色名：（动作）台词。
+✅ 正确格式：林若溪：（声音很轻）……今天是周四，上午9点有部门会议。
+❌ 错误格式：林若溪盯着吐司，声音轻柔："……两片吐司。"（这是散文，不是脚本！名字没在行首、动作没在括号里、对话用了引号）
+角色开口=换行+署名+冒号。动作在中文括号（）里。禁止引号包裹对话。禁止markdown标题。`;
+  const castRule = `【铁律-演员表】本章出场人物共 ${charInfos.length} 人：${charNames.join('、')}。每个角色都必须在本章中说话并做出符合其人格的合理行为。不能遗漏任何人。`;
+
   const systemPrompt = director.persona
-    ? `${director.persona}\n\n【铁律1-脚本格式】所有角色说的话必须独占一行，格式为『角色名：台词』或『角色名：（动作）台词』。括号内只写该说话者本人的表情、语气、微动作（如抿嘴、握拳、声音发抖），不超过15字。禁止在括号内写场景级叙事（如"工具箱砸在地上""雨水溅起"）——这些都是叙事段落的事。禁止在叙事中用引号嵌入对话——凡是角色开口，必须换行、署名。禁止输出markdown标题（# ##等）。只输出表演内容，不要开场白结束语。`
-    : '【铁律1-脚本格式】所有角色说的话必须独占一行，格式为『角色名：台词』或『角色名：（动作）台词』。括号内只写该说话者本人的表情、语气、微动作（如抿嘴、握拳、声音发抖），不超过15字。禁止在括号内写场景级叙事（如"工具箱砸在地上""雨水溅起"）——这些都是叙事段落的事。禁止在叙事中用引号嵌入对话——凡是角色开口，必须换行、署名。禁止输出markdown标题（# ##等）。只输出表演内容，不要开场白结束语。';
+    ? `${director.persona}\n\n${castRule}\n\n${formatRule}\n只输出表演内容，不要开场白结束语。`
+    : `${castRule}\n\n${formatRule}\n只输出表演内容，不要开场白结束语。`;
 
   return { systemPrompt, userPrompt, director, charInfos, beatRows, scenePrompt, ch };
 }
