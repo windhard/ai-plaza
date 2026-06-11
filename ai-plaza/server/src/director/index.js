@@ -153,15 +153,18 @@ function buildPromptContext(chapterId, poolInterventions, directorId) {
     ...ctxParts,
   ].filter(Boolean).join('\n\n');
 
-  const formatRule = `【铁律-脚本格式】所有角色说的话必须独占一行：角色名：（动作）台词。
-✅ 正确格式：林若溪：（声音很轻）……今天是周四，上午9点有部门会议。
-❌ 错误格式：林若溪盯着吐司，声音轻柔："……两片吐司。"（这是散文，不是脚本！名字没在行首、动作没在括号里、对话用了引号）
-角色开口=换行+署名+冒号。动作在中文括号（）里。禁止引号包裹对话。禁止markdown标题。`;
-  const castRule = `【铁律-演员表】本章出场人物共 ${charInfos.length} 人：${charNames.join('、')}。每个角色都必须在本章中说话并做出符合其人格的合理行为。不能遗漏任何人。`;
+  const formatRule = `【⚠️ 最高优先级：输出格式——违反以下规则=生成完全失败】
+你的输出是一个舞台剧本。剧本只有两种元素：
+1. 叙事行：场景描写、动作描写、氛围描写。用（括号）或普通文字。
+2. 对话行：角色名：台词 或 角色名：（表情语气）台词
+——对话行必须以角色名开头，紧跟中文冒号。括号里是该说话者的表情和语气。
+——绝不允许："角色名 动作描写：\"台词\""这种散文体。这不是小说，是剧本。
+——所有角色说的话都是对话行。没有例外。`;
+  const castRule = `【演员表】本章出场：${charNames.join('、')}（共${charInfos.length}人）。每个角色都必须在本章说话并做出合理行为。`;
 
   const systemPrompt = director.persona
-    ? `${director.persona}\n\n${castRule}\n\n${formatRule}\n只输出表演内容，不要开场白结束语。`
-    : `${castRule}\n\n${formatRule}\n只输出表演内容，不要开场白结束语。`;
+    ? `${formatRule}\n\n${castRule}\n\n${director.persona}\n只输出表演内容，不要开场白结束语。`
+    : `${formatRule}\n\n${castRule}\n只输出表演内容，不要开场白结束语。`;
 
   return { systemPrompt, userPrompt, director, charInfos, beatRows, scenePrompt, ch };
 }
