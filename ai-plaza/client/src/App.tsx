@@ -273,8 +273,13 @@ export default function App() {
 
   const confirmOverwrite = async () => {
     if (!overwriteConfirm) return;
-    await saveParsedChapters(overwriteConfirm.chapters, overwriteConfirm.characters);
-    setScriptInput(''); setShowDesigner(false); setOverwriteConfirm(null);
+    try {
+      await saveParsedChapters(overwriteConfirm.chapters, overwriteConfirm.characters);
+      setScriptInput(''); setShowDesigner(false); setOverwriteConfirm(null);
+    } catch (e: any) {
+      console.error('Overwrite failed:', e);
+      setParseError('覆盖失败：' + (e.message || '未知错误'));
+    }
   };
 
   const saveCharacter = async () => {
