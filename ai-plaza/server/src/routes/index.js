@@ -48,22 +48,26 @@ router.get('/characters', (_req, res) => {
   const chars = findAllCharacters();
   res.json({ success: true, data: chars });
 });
-router.post('/characters', (req, res) => {
-  const existing = findAllCharacters().find(c => c.id === req.body.id);
-  const merged = req.body;
-  if (existing) {
-    merged.personality = { ...existing.personality, ...req.body.personality };
-  }
-  upsertCharacter(req.body.id || merged.name, JSON.stringify(merged));
-  characterPool.set(req.body.id || merged.name, merged);
-  saveCharacterToMD(merged);
-  // 异步用LLM丰富角色设定（不阻塞响应）
-  enrichCharacterWithLLM(merged).then(enriched => {
+router.post('/characters', async (req, res) => {
+  try {
+    const existing = findAllCharacters().find(c => c.id === req.body.id);
+    const merged = req.body;
+    if (existing) {
+      merged.personality = { ...existing.personality, ...req.body.personality };
+    }
+    upsertCharacter(req.body.id || merged.name, JSON.stringify(merged));
+    characterPool.set(req.body.id || merged.name, merged);
+    saveCharacterToMD(merged);
+    // 同步等待LLM丰富角色设定
+    const enriched = await enrichCharacterWithLLM(merged);
     upsertCharacter(enriched.id || enriched.name, JSON.stringify(enriched));
     characterPool.set(enriched.id || enriched.name, enriched);
     saveCharacterToMD(enriched);
-  });
-  res.json({ success: true });
+    res.json({ success: true });
+  } catch (e) {
+    console.error('POST /api/characters error:', e.message);
+    res.json({ success: true }); // 即使富化失败也返回成功（基础版本已保存）
+  }
 });
 router.delete('/characters/:id', (req, res) => {
   deleteCharacter(req.params.id);

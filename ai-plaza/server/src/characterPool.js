@@ -192,7 +192,9 @@ export function getOrCreateCharacter(nameHint, roleHint, personalityHint) {
       socialTendency: inferTrait(personalityHint, 'social'),
     },
     secrets: [], triggers: [],
-    systemPrompt: `你是${actualName}，${role}。${personalityHint || ''}`,
+    systemPrompt: personalityHint
+      ? `你是${actualName}，${role}。${personalityHint}`
+      : `你是${actualName}，${role}。根据场景和对话自然展现你的性格和行为。`,
     chapterPersonas: [],
   };
 
