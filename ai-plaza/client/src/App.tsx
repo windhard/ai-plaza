@@ -271,14 +271,18 @@ export default function App() {
     }
   };
 
+  const [overwriting, setOverwriting] = useState(false);
   const confirmOverwrite = async () => {
-    if (!overwriteConfirm) return;
+    if (!overwriteConfirm || overwriting) return;
+    setOverwriting(true);
     try {
       await saveParsedChapters(overwriteConfirm.chapters, overwriteConfirm.characters);
       setScriptInput(''); setShowDesigner(false); setOverwriteConfirm(null);
     } catch (e: any) {
       console.error('Overwrite failed:', e);
       setParseError('覆盖失败：' + (e.message || '未知错误'));
+    } finally {
+      setOverwriting(false);
     }
   };
 
@@ -708,7 +712,7 @@ export default function App() {
           <div style={{ width: 420, background: BG_PANEL, border: BORDER, borderRadius: 10, boxShadow: '0 16px 48px rgba(0,0,0,0.5)', padding: 20 }}>
             <div style={{ fontSize: 14, fontWeight: 700, marginBottom: 10 }}>⚠️ 确认覆盖</div>
             <div style={{ fontSize: 12, color: TEXT_SECONDARY, lineHeight: 1.6, marginBottom: 16 }}>数据库中已存在章节「<b style={{ color: ACCENT }}>{overwriteConfirm.overlapTitle}</b>」。<br />确认要覆盖该章节吗？</div>
-            <div style={{ display: 'flex', gap: 8, justifyContent: 'flex-end' }}><button onClick={() => setOverwriteConfirm(null)} style={{ padding: '6px 14px', borderRadius: 4, border: BORDER, background: 'transparent', color: TEXT_SECONDARY, cursor: 'pointer', fontSize: 11 }}>取消</button><button onClick={confirmOverwrite} style={{ padding: '6px 18px', borderRadius: 4, border: 'none', background: RED, color: 'white', cursor: 'pointer', fontSize: 11, fontWeight: 600 }}>确认覆盖</button></div>
+            <div style={{ display: 'flex', gap: 8, justifyContent: 'flex-end' }}><button onClick={() => setOverwriteConfirm(null)} style={{ padding: '6px 14px', borderRadius: 4, border: BORDER, background: 'transparent', color: TEXT_SECONDARY, cursor: 'pointer', fontSize: 11 }}>取消</button><button onClick={confirmOverwrite} disabled={overwriting} style={{ padding: '6px 18px', borderRadius: 4, border: 'none', background: overwriting ? '#555' : RED, color: 'white', cursor: overwriting ? 'not-allowed' : 'pointer', fontSize: 11, fontWeight: 600 }}>{overwriting ? '⏳ 覆盖中...' : '确认覆盖'}</button></div>
           </div>
         </div>
       )}
