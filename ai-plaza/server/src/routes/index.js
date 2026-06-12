@@ -50,7 +50,11 @@ router.get('/characters', (_req, res) => {
 });
 router.post('/characters', async (req, res) => {
   try {
-    const existing = findAllCharacters().find(c => c.id === req.body.id || c.name === req.body.name);
+    const charId = req.body.id || req.body.name;
+    let existing = findAllCharacters().find(c => c.id === charId);
+    if (!existing && req.body.name) {
+      existing = findAllCharacters().find(c => c.name === req.body.name);
+    }
     // 规范化结构：确保有 personality 嵌套对象和 appearance 字段
     const merged = {
       name: req.body.name || '',
@@ -73,7 +77,6 @@ router.post('/characters', async (req, res) => {
       merged.appearance = merged.appearance || existing.appearance;
       merged.systemPrompt = merged.systemPrompt || existing.systemPrompt;
     }
-    const charId = req.body.id || req.body.name;
     upsertCharacter(charId, JSON.stringify(merged));
     // 改名全局同步
     if (existing && existing.name && merged.name && existing.name !== merged.name) {
@@ -99,6 +102,11 @@ router.post('/characters', async (req, res) => {
       }
       const poolChar = characterPool.get(charId);
       if (poolChar) poolChar.name = newName;
+      // 删除旧 MD 文件，防止出现两个同名角色
+      const oldMdPath = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..', 'data', 'characters', charId + '.md');
+      if (fs.existsSync(oldMdPath)) fs.unlinkSync(oldMdPath);
+      // 清理 characterPool 里的旧 key
+      if (characterPool.has(oldName)) characterPool.delete(oldName);
     }
     characterPool.set(req.body.id || req.body.name, merged);
     saveCharacterToMD(merged);
