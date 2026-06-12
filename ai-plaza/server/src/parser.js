@@ -390,7 +390,6 @@ export async function llmEnhanceParse(chapters, originalText) {
 
 // ═══ 章节号校验 ═══
 export function validateChapters(mdText) {
-  // 必须包含「第X章」或「第X章」字样（X为数位或中文数字）
   const chapterPattern = /第[一二三四五六七八九十百零\d]+章/;
   if (!chapterPattern.test(mdText)) {
     return { valid: false, error: '文本中未检测到章节标记（如「第一章」「第1章」），请用 MD 格式或自由格式包含第X章字样。' };
