@@ -318,8 +318,8 @@ function preprocessLLMOutput(raw, charNames) {
   }
   // 3. 对话括号内动作过长（>10字）→拆分为叙事行+精简对话行
   text = text.replace(/^([^\s（(：:]{2,4})[：:]\s*（([^）]{10,})）(.+)$/gm, (match, name, longAction, dialogue) => {
-    const vm = longAction.match(/(声音|语调|语气|眼眶|嘴角|嘴唇|眼神|脸色|表情)[^，,]{0,6}/);
-    const expr = vm ? vm[0].slice(0, 6) : '';
+    const vm = longAction.match(/(声音|语调|语气|眼眶|嘴角|嘴唇|眼神|脸色|表情|抿嘴|咬牙|握拳|发抖|颤抖|抽泣|啜泣|微笑|冷笑|哭腔|鼻音|叹息)/);
+    const expr = vm ? vm[0] : '';
     return '（' + name + longAction + '）\n' + name + (expr ? '：（' + expr + '）' : '：') + dialogue;
   });
   return text;

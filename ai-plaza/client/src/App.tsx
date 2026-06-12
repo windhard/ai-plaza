@@ -331,9 +331,10 @@ export default function App() {
       const actionMatch = effectiveContent.match(/^[（(]([^）)]+)[）)]\s*/);
       const action = actionMatch ? actionMatch[1] : null;
       const dialogue = actionMatch ? effectiveContent.slice(actionMatch[0].length) : effectiveContent;
-      // 动作>15字→独立叙事块，只取前6字神态放气泡上方
+      // 长动作→独立叙事块，只提取神态语气关键词放气泡上方
       const isLongAction = action && action.length > 15;
-      const shortAction = isLongAction ? action.slice(0, 6) : action;
+      const toneMatch = action && action.match(/(声音|语调|语气|眼眶|嘴角|嘴唇|眼神|脸色|表情|抿嘴|咬牙|握拳|发抖|颤抖|抽泣|啜泣|微笑|冷笑|哭腔|鼻音|叹息)/);
+      const shortAction = isLongAction ? (toneMatch ? toneMatch[0] : '') : action;
       const dialogueSpeed = (generating || isTyping) ? 45 : 0;
       return (
         <div key={msg.id}>
