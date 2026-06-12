@@ -316,9 +316,11 @@ function preprocessLLMOutput(raw, charNames) {
       return nm + '：（' + expr + '）' + dialogue;
     });
   }
-  // 3. 对话括号内动作过长（>10字）→拆分为叙事行+对话行（不再加括号，让LLM自己写的神态自然呈现）
-  text = text.replace(/^([^\s（(：:]{2,4})[：:]\s*（([^）]{15,})）(.+)$/gm, (match, name, longAction, dialogue) => {
-    return '（' + name + longAction + '）\n' + name + '：' + dialogue;
+  // 3. 对话括号内动作极长（>40字）→拆分为叙事+对话，保留简短神态
+  text = text.replace(/^([^\s（(：:]{2,4})[：:]\s*（([^）]{40,})）(.+)$/gm, (match, name, longAction, dialogue) => {
+    // 取前12字作为神态保留
+    const shortExpr = longAction.slice(0, 12);
+    return '（' + name + longAction + '）\n' + name + '：（' + shortExpr + '）' + dialogue;
   });
   return text;
 }

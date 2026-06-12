@@ -338,7 +338,7 @@ export default function App() {
       return (
         <div key={msg.id}>
           {isLongAction && (
-            <div style={{ margin: '4px 0', padding: '8px 14px', fontSize: 12, lineHeight: 1.8, color: '#b0a8c8', borderLeft: '3px solid rgba(180,160,200,0.4)', borderRadius: '0 6px 6px 0', background: 'rgba(160,140,200,0.04)' }}>
+            <div style={{ margin: '4px 0', padding: '8px 14px', fontSize: 12, lineHeight: 1.8, color: '#c8b0a0', borderLeft: '3px solid rgba(200,176,160,0.5)', borderRadius: '0 6px 6px 0', background: 'rgba(180,150,120,0.06)' }}>
               <Typewriter text={action} speed={0} />
             </div>
           )}
