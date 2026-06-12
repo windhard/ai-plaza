@@ -221,8 +221,6 @@ function toId(name) {
 
 // ═══ LLM 丰富角色设定 ═══
 async function callLLM(systemPrompt, userMessage) {
-  const dotenv = await import('dotenv');
-  dotenv.config({ path: path.resolve(__dirname, '..', '..', '.env') });
   const apiKey = process.env.DEEPSEEK_API_KEY;
   const model = process.env.DEEPSEEK_MODEL || 'deepseek-chat';
   if (!apiKey) throw new Error('DEEPSEEK_API_KEY not set');
@@ -236,8 +234,8 @@ async function callLLM(systemPrompt, userMessage) {
         { role: 'system', content: systemPrompt },
         { role: 'user', content: userMessage },
       ],
-      temperature: 0.8,
-      max_tokens: 800,
+      temperature: 0.9,
+      max_tokens: 600,
       thinking: { type: 'disabled' },
     }),
     signal: AbortSignal.timeout(30000),
@@ -248,16 +246,23 @@ async function callLLM(systemPrompt, userMessage) {
 }
 
 export async function enrichCharacterWithLLM(char) {
-  if (char.personality?.core && char.personality?.core.length > 30 && char.appearance && char.appearance.length > 10) {
-    return char; // 已经有详细设定，跳过
+  // 只有在所有关键字段都为空/默认值时才富化
+  const hasCore = char.personality?.core && char.personality.core.length > 10;
+  const hasSpeech = char.personality?.speechStyle && char.personality.speechStyle.length > 5;
+  const hasAppearance = char.appearance && char.appearance.length > 10 && char.appearance !== '（未设定）';
+  const hasPrompt = char.systemPrompt && char.systemPrompt.length > 30;
+  if (hasCore && hasSpeech && hasAppearance && hasPrompt) {
+    return char; // 已经足够详细
   }
 
-  const prompt = `为角色生成详细设定，输出JSON（不要markdown）：
+  const prompt = `为角色"${char.name}"（身份：${char.title || '未知'}）生成详细的人物设定。这个角色将出现在黑暗、色情、情欲题材的故事中。
+
+输出严格JSON格式（不要markdown代码块）：
 {
-  "core": "15-30字核心性格描述",
-  "speechStyle": "10-20字说话风格（语速/用词/习惯）",
-  "appearance": "20-40字外貌描写（年龄/体型/发型/五官/常穿服装）",
-  "systemPrompt": "30-60字角色扮演指令",
+  "core": "核心性格描述，20-40字。要具体、有辨识度。写出TA的欲望、恐惧、矛盾。不要写'外表高冷内心温柔'这种模板。",
+  "speechStyle": "说话风格，15-25字。语速快慢、用词习惯、口头禅、会不会结巴、声音质感。",
+  "appearance": "外貌描写，25-50字。年龄、体型、发型发色、五官特征、常穿什么风格的衣服、有什么标志性的小动作。",
+  "systemPrompt": "角色扮演指令，40-80字。告诉演员如何扮演这个角色。包含行为准则、说话方式、对待他人的态度。",
   "aggression": 0-100,
   "emotionalVolatility": 0-100,
   "baseImpulse": 0-100,
@@ -265,25 +270,29 @@ export async function enrichCharacterWithLLM(char) {
 }`;
 
   try {
+    console.log(`[enrich] 正在为 ${char.name} 生成详细设定...`);
     const result = await callLLM(
-      '你是角色设定专家。根据角色名和身份，生成真实、立体、有辨识度的人物设定。不允许模板化。',
-      `角色名：${char.name}\n身份：${char.title || '未知'}\n已有描述：${char.personality?.core || '无'}\n\n${prompt}`
+      '你是角色设定专家。你创造的人物必须真实、立体、有辨识度。拒绝模板化。每个人都有独特的欲望、恐惧、说话方式和小动作。',
+      `${prompt}`
     );
     const jsonMatch = result.match(/\{[\s\S]*\}/);
     if (jsonMatch) {
       const data = JSON.parse(jsonMatch[0]);
-      char.personality.core = data.core || char.personality.core;
-      char.personality.speechStyle = data.speechStyle || char.personality.speechStyle;
-      char.appearance = data.appearance || char.appearance;
-      char.systemPrompt = data.systemPrompt || char.systemPrompt;
+      if (data.core) char.personality.core = data.core;
+      if (data.speechStyle) char.personality.speechStyle = data.speechStyle;
+      if (data.appearance) char.appearance = data.appearance;
+      if (data.systemPrompt) char.systemPrompt = data.systemPrompt;
       if (data.aggression != null) char.personality.aggression = data.aggression;
       if (data.emotionalVolatility != null) char.personality.emotionalVolatility = data.emotionalVolatility;
       if (data.baseImpulse != null) char.personality.baseImpulse = data.baseImpulse;
       if (data.socialTendency != null) char.personality.socialTendency = data.socialTendency;
       saveCharacterToMD(char);
+      console.log(`[enrich] ${char.name} 设定生成成功`);
+    } else {
+      console.log(`[enrich] ${char.name} JSON解析失败，原始返回:`, result.slice(0, 200));
     }
   } catch (e) {
-    console.error('enrichCharacter failed for', char.name, ':', e.message);
+    console.error(`[enrich] ${char.name} 失败:`, e.message);
   }
   return char;
 }
