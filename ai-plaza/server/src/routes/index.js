@@ -14,7 +14,7 @@ import {
 } from '../db/index.js';
 import { parseScript, parseIntervention, validateChapters, aiSeniorEdit } from '../parser.js';
 import { generateChapter, generateChapterStream } from '../director/index.js';
-import { characterPool, getOrCreateCharacter, saveCharacterToMD, loadCharactersFromMD } from '../characterPool.js';
+import { characterPool, getOrCreateCharacter, saveCharacterToMD, loadCharactersFromMD, enrichCharacterWithLLM } from '../characterPool.js';
 
 // ═══ 启动时从 MD 加载角色 ═══
 loadCharactersFromMD();
@@ -56,8 +56,13 @@ router.post('/characters', (req, res) => {
   }
   upsertCharacter(req.body.id || merged.name, JSON.stringify(merged));
   characterPool.set(req.body.id || merged.name, merged);
-  // 自动输出 MD 文件
   saveCharacterToMD(merged);
+  // 异步用LLM丰富角色设定（不阻塞响应）
+  enrichCharacterWithLLM(merged).then(enriched => {
+    upsertCharacter(enriched.id || enriched.name, JSON.stringify(enriched));
+    characterPool.set(enriched.id || enriched.name, enriched);
+    saveCharacterToMD(enriched);
+  });
   res.json({ success: true });
 });
 router.delete('/characters/:id', (req, res) => {

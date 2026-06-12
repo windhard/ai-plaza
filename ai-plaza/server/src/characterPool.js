@@ -179,9 +179,10 @@ export function getOrCreateCharacter(nameHint, roleHint, personalityHint) {
   const usedEmojis = new Set(Array.from(characterPool.values()).map(c => c.emoji));
   const emoji = emojis.find(e => !usedEmojis.has(e)) || '👤';
 
+  const role = roleHint || '未知身份';
   const char = {
     id, name: actualName, displayName: `${actualName} ${emoji}`,
-    emoji, avatarUrl: '', title: roleHint || '未知', appearance: '',
+    emoji, avatarUrl: '', title: role, appearance: '',
     personality: {
       core: personalityHint || '',
       speechStyle: '',
@@ -191,7 +192,7 @@ export function getOrCreateCharacter(nameHint, roleHint, personalityHint) {
       socialTendency: inferTrait(personalityHint, 'social'),
     },
     secrets: [], triggers: [],
-    systemPrompt: `你是${nameHint}，${roleHint || '一名角色'}。${personalityHint || ''}`,
+    systemPrompt: `你是${actualName}，${role}。${personalityHint || ''}`,
     chapterPersonas: [],
   };
 
@@ -214,6 +215,75 @@ function toId(name) {
     .toLowerCase()
     .replace(/_{2,}/g, '_')
     .replace(/^_|_$/g, '') || 'unknown';
+}
+
+// ═══ LLM 丰富角色设定 ═══
+async function callLLM(systemPrompt, userMessage) {
+  const dotenv = await import('dotenv');
+  dotenv.config({ path: path.resolve(__dirname, '..', '..', '.env') });
+  const apiKey = process.env.DEEPSEEK_API_KEY;
+  const model = process.env.DEEPSEEK_MODEL || 'deepseek-chat';
+  if (!apiKey) throw new Error('DEEPSEEK_API_KEY not set');
+
+  const res = await fetch('https://api.deepseek.com/v1/chat/completions', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
+    body: JSON.stringify({
+      model,
+      messages: [
+        { role: 'system', content: systemPrompt },
+        { role: 'user', content: userMessage },
+      ],
+      temperature: 0.8,
+      max_tokens: 800,
+      thinking: { type: 'disabled' },
+    }),
+    signal: AbortSignal.timeout(30000),
+  });
+  const j = await res.json();
+  if (!res.ok) throw new Error(`LLM error ${res.status}: ${j.error?.message || ''}`);
+  return j.choices[0].message.content.trim();
+}
+
+export async function enrichCharacterWithLLM(char) {
+  if (char.personality?.core && char.personality?.core.length > 30 && char.appearance && char.appearance.length > 10) {
+    return char; // 已经有详细设定，跳过
+  }
+
+  const prompt = `为角色生成详细设定，输出JSON（不要markdown）：
+{
+  "core": "15-30字核心性格描述",
+  "speechStyle": "10-20字说话风格（语速/用词/习惯）",
+  "appearance": "20-40字外貌描写（年龄/体型/发型/五官/常穿服装）",
+  "systemPrompt": "30-60字角色扮演指令",
+  "aggression": 0-100,
+  "emotionalVolatility": 0-100,
+  "baseImpulse": 0-100,
+  "socialTendency": 0-100
+}`;
+
+  try {
+    const result = await callLLM(
+      '你是角色设定专家。根据角色名和身份，生成真实、立体、有辨识度的人物设定。不允许模板化。',
+      `角色名：${char.name}\n身份：${char.title || '未知'}\n已有描述：${char.personality?.core || '无'}\n\n${prompt}`
+    );
+    const jsonMatch = result.match(/\{[\s\S]*\}/);
+    if (jsonMatch) {
+      const data = JSON.parse(jsonMatch[0]);
+      char.personality.core = data.core || char.personality.core;
+      char.personality.speechStyle = data.speechStyle || char.personality.speechStyle;
+      char.appearance = data.appearance || char.appearance;
+      char.systemPrompt = data.systemPrompt || char.systemPrompt;
+      if (data.aggression != null) char.personality.aggression = data.aggression;
+      if (data.emotionalVolatility != null) char.personality.emotionalVolatility = data.emotionalVolatility;
+      if (data.baseImpulse != null) char.personality.baseImpulse = data.baseImpulse;
+      if (data.socialTendency != null) char.personality.socialTendency = data.socialTendency;
+      saveCharacterToMD(char);
+    }
+  } catch (e) {
+    console.error('enrichCharacter failed for', char.name, ':', e.message);
+  }
+  return char;
 }
 
 function inferTrait(hint, trait) {
