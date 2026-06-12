@@ -69,6 +69,8 @@ export default function App() {
 
   // ── 删除章节确认 ──
   const [deleteChConfirm, setDeleteChConfirm] = useState<string | null>(null);
+  const [batchDeleteMode, setBatchDeleteMode] = useState(false);
+  const [selectedChapters, setSelectedChapters] = useState<Set<string>>(new Set());
 
   // ── 世界观 / 大纲弹窗 ──
   const [showContentModal, setShowContentModal] = useState(false);
@@ -546,12 +548,32 @@ export default function App() {
             </div>
           )}
           <div style={{ padding: '8px 12px' }}>
-            <div style={{ fontSize: 9, textTransform: 'uppercase', letterSpacing: 1, color: TEXT_MUTED, marginBottom: 5 }}>📖 章节进度</div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 5 }}>
+              <span style={{ fontSize: 9, textTransform: 'uppercase', letterSpacing: 1, color: TEXT_MUTED }}>📖 章节进度</span>
+              {chapters.length > 0 && (
+                <div style={{ display: 'flex', gap: 4 }}>
+                  {batchDeleteMode && selectedChapters.size > 0 && (
+                    <button onClick={async () => { for (const id of selectedChapters) { await removeChapter(id); } setSelectedChapters(new Set()); setBatchDeleteMode(false); }}
+                      style={{ fontSize: 8, padding: '2px 6px', borderRadius: 3, border: 'none', background: RED, color: 'white', cursor: 'pointer' }}>删除({selectedChapters.size})</button>
+                  )}
+                  <button onClick={() => { setBatchDeleteMode(!batchDeleteMode); setSelectedChapters(new Set()); }}
+                    style={{ fontSize: 8, padding: '2px 6px', borderRadius: 3, border: BORDER, background: batchDeleteMode ? 'rgba(255,255,255,0.08)' : 'transparent', color: batchDeleteMode ? TEXT_PRIMARY : TEXT_MUTED, cursor: 'pointer' }}>
+                    {batchDeleteMode ? '取消' : '批量删除'}
+                  </button>
+                </div>
+              )}
+            </div>
             {chapters.map((ch, ci) => (
               <div key={ch.id} style={{ marginBottom: 6, opacity: ch.id === activeChapterId ? 1 : 0.5 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-                  <div style={{ flex: 1, fontSize: 10, fontWeight: 600, color: ch.id === activeChapterId ? ACCENT : TEXT_PRIMARY, cursor: 'pointer' }} onClick={() => switchChapter(ch.id)}>{ci === 0 ? '✦ ' : '· '}第{ch.chapter_order}章：{ch.title}</div>
-                  <button onClick={(e) => { e.stopPropagation(); setDeleteChConfirm(ch.id); }} title="删除此章" style={{ width: 16, height: 16, borderRadius: 3, border: 'none', background: 'transparent', color: TEXT_MUTED, cursor: 'pointer', fontSize: 12, lineHeight: '14px', padding: 0, opacity: 0.5, flexShrink: 0 }}>×</button>
+                  {batchDeleteMode && (
+                    <input type="checkbox" checked={selectedChapters.has(ch.id)} onChange={e => { const ns = new Set(selectedChapters); e.target.checked ? ns.add(ch.id) : ns.delete(ch.id); setSelectedChapters(ns); }}
+                      style={{ width: 12, height: 12, cursor: 'pointer', flexShrink: 0, accentColor: RED }} />
+                  )}
+                  <div style={{ flex: 1, fontSize: 10, fontWeight: 600, color: ch.id === activeChapterId ? ACCENT : TEXT_PRIMARY, cursor: 'pointer' }} onClick={() => batchDeleteMode ? null : switchChapter(ch.id)}>{ci === 0 ? '✦ ' : '· '}第{ch.chapter_order}章：{ch.title}</div>
+                  {!batchDeleteMode && (
+                    <button onClick={(e) => { e.stopPropagation(); setDeleteChConfirm(ch.id); }} title="删除此章" style={{ width: 16, height: 16, borderRadius: 3, border: 'none', background: 'transparent', color: TEXT_MUTED, cursor: 'pointer', fontSize: 12, lineHeight: '14px', padding: 0, opacity: 0.5, flexShrink: 0 }}>×</button>
+                  )}
                 </div>
                 <div style={{ paddingLeft: 6, display: 'flex', flexDirection: 'column', gap: 1 }}>
                   {ch.beats.map(b => {
