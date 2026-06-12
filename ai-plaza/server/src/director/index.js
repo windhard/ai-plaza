@@ -185,7 +185,7 @@ ${dialogueExcerpts || '（无对话记录）'}
 你是剧本。三种元素按顺序出现：
 1. 节点标记：每个情节节点开始时，独占一行写【节点N】。N从1开始递增。这是结构骨架，必须写。
 2. 叙事行：用（括号）包裹。写场景、身体反应、动作、氛围。每段叙事必须包含性张力/权力压迫/身体失控/羞耻反应中的至少一项。
-3. 对话行：角色名：台词 或 角色名：（神态语气）台词。括号内只写该说话者的面部表情和声音质感。
+3. 对话行：角色名：台词 或 角色名：（神态语气）台词。角色名=纯粹的名字（2-3字），不要在名字前加职位。写"孙晓晓"不写"同事孙晓晓"。括号内只写面部表情和声音。
 禁止：markdown标题、散文体（"某某说：\"...\""）、引号包裹对话。`;
   const castRule = `【演员表——铁律：无人可缺席】
 本章出场人物共${charInfos.length}人：${charNames.join('、')}。
@@ -322,9 +322,13 @@ function preprocessLLMOutput(raw, charNames) {
 // ═══ 判断名字是否像人名（防止"清晨""温度"等场景词被误判为对话） ═══
 const NARRATIVE_KEYWORDS = /清晨|中午|下午|傍晚|晚上|凌晨|黄昏|黎明|温度|湿度|气温|天气|光线|气氛|灯光|音乐|广播|进行中|开始|结束|散场|距离|速度|高度|深度|宽度|面积|音量|人数|密度|气味|味道|颜色|形状|大小|长短|粗细|轻重/;
 function looksLikePersonName(name) {
-  if (!name || name.length < 2 || name.length > 4) return false;
-  if (NARRATIVE_KEYWORDS.test(name)) return false;
-  return /^[一-鿿]{2,4}$/.test(name);
+  if (!name || name.length < 1) return false;
+  // 去掉常见前缀再判断（"同事孙晓晓"→"孙晓晓"）
+  const stripped = name.replace(/^(同事|保安|服务员|前台|司机|快递|外卖|清洁工|门卫|厨师|秘书|助理|经理|主管|总监|保洁|电工)/, '');
+  const target = stripped.length >= 2 ? stripped : name;
+  if (target.length < 2 || target.length > 4) return false;
+  if (NARRATIVE_KEYWORDS.test(target)) return false;
+  return /^[一-鿿\w]{2,4}$/.test(target);
 }
 
 // ═══ 流式增量解析器 ═══
@@ -370,10 +374,17 @@ class IncrementalParser {
 
   emit(msg) {
     // 流式后处理：speech 的 characterId 不像人名 → 降级为 narration
-    if (msg.type === 'speech' && msg.characterId && !this.resolveChar(msg.characterId) && !looksLikePersonName(msg.characterId)) {
-      msg.type = 'narration';
-      msg.content = msg.characterId + '：' + msg.content;
-      delete msg.characterId;
+    // 先尝试去掉职位前缀后匹配（"同事孙晓晓"→"孙晓晓"）
+    if (msg.type === 'speech' && msg.characterId && !this.resolveChar(msg.characterId)) {
+      const stripped = msg.characterId.replace(/^(同事|保安|服务员|前台|司机|快递|外卖|清洁工|门卫|厨师|秘书|助理|经理|主管|总监|保洁|电工)/, '');
+      const resolved = stripped !== msg.characterId ? this.resolveChar(stripped) : null;
+      if (!resolved && !looksLikePersonName(msg.characterId)) {
+        msg.type = 'narration';
+        msg.content = msg.characterId + '：' + msg.content;
+        delete msg.characterId;
+      } else if (resolved) {
+        msg.characterId = resolved.id || stripped;
+      }
     }
     this.onMessage(msg);
   }
