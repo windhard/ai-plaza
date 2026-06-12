@@ -185,7 +185,7 @@ ${dialogueExcerpts || '（无对话记录）'}
 你是剧本。三种元素按顺序出现：
 1. 节点标记：每个情节节点开始时，独占一行写【节点N】。N从1开始递增。这是结构骨架，必须写。
 2. 叙事行：用（括号）包裹。写场景、身体反应、动作、氛围。每段叙事必须包含性张力/权力压迫/身体失控/羞耻反应中的至少一项。
-3. 对话行：角色名：台词 或 角色名：（神态≤6字）台词。括号内只能写脸上的表情或声音的变化，如（抿嘴）（眼眶红）（声音轻颤）。严禁写肢体动作。身体移动和接触物体的动作全部写进叙事行。括号内不要千篇一律用"声音"，要变化：眼眶泛红、指尖发抖、抿紧嘴唇、喉结滚动、声音越来越轻、嘴角微颤。
+3. 对话行：角色名：台词 或 角色名：（神态语气）台词。括号内写该角色说这句话时的表情神态和声音质感，要生动有变化。严禁写肢体动作——身体移动和接触物体的动作全部写进叙事行。
 禁止：markdown标题、散文体（"某某说：\"...\""）、引号包裹对话。`;
   const castRule = `【演员表——铁律：无人可缺席】
 本章出场人物共${charInfos.length}人：${charNames.join('、')}。
@@ -318,9 +318,8 @@ function preprocessLLMOutput(raw, charNames) {
   }
   // 3. 对话括号内动作极长（>40字）→拆分为叙事+对话，保留简短神态
   text = text.replace(/^([^\s（(：:]{2,4})[：:]\s*（([^）]{40,})）(.+)$/gm, (match, name, longAction, dialogue) => {
-    // 取前12字作为神态保留
     const shortExpr = longAction.slice(0, 12);
-    return '（' + name + longAction + '）\n' + name + '：（' + shortExpr + '）' + dialogue;
+    return name + longAction + '\n' + name + '：（' + shortExpr + '）' + dialogue;
   });
   return text;
 }
