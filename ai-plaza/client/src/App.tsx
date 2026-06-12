@@ -331,9 +331,7 @@ export default function App() {
       const actionMatch = effectiveContent.match(/^[（(]([^）)]+)[）)]\s*/);
       const action = actionMatch ? actionMatch[1] : null;
       const dialogue = actionMatch ? effectiveContent.slice(actionMatch[0].length) : effectiveContent;
-      // 动作>15字→独立叙事块（加主语）+气泡上方保留简短神态
       const isLongAction = action && action.length > 15;
-      const shortAction = isLongAction ? action.slice(0, 12) : action;
       const charName = ch?.name || effectiveCharId || '';
       const dialogueSpeed = (generating || isTyping) ? 45 : 0;
       return (
@@ -347,12 +345,12 @@ export default function App() {
             <div style={{ width: 34, height: 34, borderRadius: '50%', background: 'linear-gradient(135deg, #2a2a3a, #1a1a2e)', border: '1px solid rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16, flexShrink: 0, boxShadow: '0 2px 8px rgba(0,0,0,0.3)' }}>{ch?.emoji || '👤'}</div>
             <div style={{ maxWidth: '70%', minWidth: 80 }}>
               <div style={{ fontSize: 10, fontWeight: 600, marginBottom: 4, color: ch ? ACCENT : TEXT_MUTED, letterSpacing: '0.03em' }}>{ch?.name || effectiveCharId || '???'}</div>
-              {shortAction && (
+              {action && !isLongAction && (
                 <div style={{ fontSize: 11, color: '#f0a8c0', fontStyle: 'italic', padding: '3px 4px 5px 4px', marginBottom: 2, lineHeight: 1.5 }}>
-                  <Typewriter text={shortAction} speed={0} />
+                  <Typewriter text={action} speed={0} />
                 </div>
               )}
-              <div style={{ position: 'relative', padding: '9px 13px', borderRadius: shortAction ? '2px 10px 10px 10px' : '4px 12px 12px 12px', background: BG_DARK, border: '1px solid rgba(255,255,255,0.08)', fontSize: 13, lineHeight: 1.85, color: '#e0ddf0' }}>
+              <div style={{ position: 'relative', padding: '9px 13px', borderRadius: (action && !isLongAction) ? '2px 10px 10px 10px' : '4px 12px 12px 12px', background: BG_DARK, border: '1px solid rgba(255,255,255,0.08)', fontSize: 13, lineHeight: 1.85, color: '#e0ddf0' }}>
                 <Typewriter text={dialogue} speed={dialogueSpeed} onDone={onDone} />
               </div>
             </div>
