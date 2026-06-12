@@ -73,7 +73,33 @@ router.post('/characters', async (req, res) => {
       merged.appearance = merged.appearance || existing.appearance;
       merged.systemPrompt = merged.systemPrompt || existing.systemPrompt;
     }
-    upsertCharacter(req.body.id || req.body.name, JSON.stringify(merged));
+    const charId = req.body.id || req.body.name;
+    upsertCharacter(charId, JSON.stringify(merged));
+    // 改名全局同步
+    if (existing && existing.name && merged.name && existing.name !== merged.name) {
+      const oldName = existing.name;
+      const newName = merged.name;
+      // 更新章节 cast_list
+      for (const ch of findAllChapters()) {
+        let cl = [];
+        try { cl = typeof ch.cast_list === 'string' ? JSON.parse(ch.cast_list) : (ch.cast_list || []); } catch { cl = []; }
+        if (cl.includes(oldName)) {
+          upsertChapter(ch.id, { ...ch, cast_list: JSON.stringify(cl.map(c => c === oldName ? newName : c)) });
+        }
+      }
+      // 更新消息 characterId
+      for (const m of findAllMessages()) {
+        if (m.characterId === oldName) m.characterId = newName;
+      }
+      // 更新角色状态 key + 内存池名字
+      for (const s of findCharacterStates()) {
+        if (s.character_id === oldName) {
+          upsertCharacterState({ ...s, character_id: newName });
+        }
+      }
+      const poolChar = characterPool.get(charId);
+      if (poolChar) poolChar.name = newName;
+    }
     characterPool.set(req.body.id || req.body.name, merged);
     saveCharacterToMD(merged);
     // 同步等待LLM丰富角色设定
