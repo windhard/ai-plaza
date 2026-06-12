@@ -50,23 +50,43 @@ router.get('/characters', (_req, res) => {
 });
 router.post('/characters', async (req, res) => {
   try {
-    const existing = findAllCharacters().find(c => c.id === req.body.id);
-    const merged = req.body;
+    const existing = findAllCharacters().find(c => c.id === req.body.id || c.name === req.body.name);
+    // 规范化结构：确保有 personality 嵌套对象和 appearance 字段
+    const merged = {
+      name: req.body.name || '',
+      title: req.body.title || req.body.role || '',
+      appearance: req.body.appearance || '',
+      personality: {
+        core: req.body.personalityHint || req.body.personality?.core || '',
+        speechStyle: req.body.personality?.speechStyle || '',
+        humorLevel: req.body.personality?.humorLevel ?? 50,
+        aggression: req.body.personality?.aggression ?? 40,
+        emotionalVolatility: req.body.personality?.emotionalVolatility ?? 50,
+        baseImpulse: req.body.personality?.baseImpulse ?? 35,
+        socialTendency: req.body.personality?.socialTendency ?? 50,
+      },
+      systemPrompt: req.body.systemPrompt || '',
+      emoji: req.body.emoji || '👤',
+    };
     if (existing) {
-      merged.personality = { ...existing.personality, ...req.body.personality };
+      merged.personality = { ...existing.personality, ...merged.personality };
+      merged.appearance = merged.appearance || existing.appearance;
+      merged.systemPrompt = merged.systemPrompt || existing.systemPrompt;
     }
-    upsertCharacter(req.body.id || merged.name, JSON.stringify(merged));
-    characterPool.set(req.body.id || merged.name, merged);
+    upsertCharacter(req.body.id || req.body.name, JSON.stringify(merged));
+    characterPool.set(req.body.id || req.body.name, merged);
     saveCharacterToMD(merged);
     // 同步等待LLM丰富角色设定
+    console.log(`[enrich] 开始为 ${merged.name} 生成详细设定...`);
     const enriched = await enrichCharacterWithLLM(merged);
     upsertCharacter(enriched.id || enriched.name, JSON.stringify(enriched));
     characterPool.set(enriched.id || enriched.name, enriched);
     saveCharacterToMD(enriched);
+    console.log(`[enrich] ${enriched.name} 完成`);
     res.json({ success: true });
   } catch (e) {
     console.error('POST /api/characters error:', e.message);
-    res.json({ success: true }); // 即使富化失败也返回成功（基础版本已保存）
+    res.json({ success: true });
   }
 });
 router.delete('/characters/:id', (req, res) => {

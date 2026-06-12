@@ -155,9 +155,22 @@ function randomRealName() {
 }
 
 // 检测是否匿名代称
-const ANONYMOUS_PATTERNS = /^(路人|无名|路人甲|某人|陌生|同事|服务员|保安|司机|快递|外卖|清洁工|保安大叔|前台|陌生人|无名氏|某某|路人乙|路人丙|群众|围观者)$/;
+// 检测非人名：代称、职位、称号、超自然头衔等
 function isAnonymousName(name) {
-  return ANONYMOUS_PATTERNS.test(name) || /路人|无名|某人|陌生|编号|同事[A-Z\d]/.test(name);
+  if (!name || name.length < 2) return true;
+  // 只有姓氏或单字 → 不算人名
+  if (name.length === 1) return true;
+  // 代称
+  if (/^(路人|无名|某人|陌生|群众|围观者|某某|路人[甲乙丙丁戊己庚辛壬癸]|无名氏|神秘人|陌生人)$/.test(name)) return true;
+  // 纯职位/身份（没有姓氏）
+  if (/^(保安|司机|快递|外卖|清洁工|前台|服务员|门卫|厨师|秘书|助理|经理|老板|主管|总监|同事|保洁|电工|保安大叔|快递员|外卖员)$/.test(name)) return true;
+  // 称号/超自然头衔（不像真实姓名）
+  if (/主宰|之神|之王|之魔|大帝|魔王|恶魔|天使|精灵|巨龙|魔兽|神仙|妖怪|鬼怪|幽灵|巫师|术士|战神|法神|剑圣|刀皇|枪神|箭神|使者|守护者|审判者|毁灭者|创造者|支配者|统治者|主宰者/.test(name)) return true;
+  // 编号式
+  if (/同事[A-Z\d]|角色[A-Z\d]|NPC\d|路人\d/.test(name)) return true;
+  // 纯英文/数字
+  if (/^[A-Za-z0-9]+$/.test(name)) return true;
+  return false;
 }
 
 // 根据章节中的人物描述生成/获取角色
