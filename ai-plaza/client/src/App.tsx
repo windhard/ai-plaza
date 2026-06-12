@@ -332,7 +332,7 @@ export default function App() {
       const action = actionMatch ? actionMatch[1] : null;
       const dialogue = actionMatch ? effectiveContent.slice(actionMatch[0].length) : effectiveContent;
       // 生成中：轮到我才打字；非生成中：由 typingIdx 控制
-      const dialogueSpeed = (generating || isTyping) ? 22 : 0;
+      const dialogueSpeed = (generating || isTyping) ? 45 : 0;
       const bubbleBg = BG_DARK;
       return (
         <div key={msg.id} style={{ display: 'flex', gap: 10, alignItems: 'flex-start', margin: '6px 0' }}>
@@ -355,22 +355,22 @@ export default function App() {
     const sp = isTyping && !generating ? undefined : 0;
     if (msg.type === 'node_start') return (
       <div key={msg.id} id={msg.id} style={{ textAlign: 'center', fontSize: 10, color: 'rgba(34,211,238,0.6)', padding: '5px 0', fontWeight: 500, letterSpacing: '0.04em', borderTop: '1px solid rgba(34,211,238,0.08)', margin: '4px 0' }}>
-        <Typewriter text={msg.content} speed={sp ?? 30} onDone={generating ? undefined : onDone} />
+        <Typewriter text={msg.content} speed={sp ?? 60} onDone={generating ? undefined : onDone} />
       </div>
     );
     if (msg.type === 'plot_progress') return (
       <div key={msg.id} style={{ textAlign: 'center', fontSize: 10, color: PINK, padding: '8px 0', fontWeight: 600, letterSpacing: '0.05em', background: 'linear-gradient(90deg, transparent, rgba(244,114,182,0.08), transparent)', margin: '8px 0', borderRadius: 4 }}>
-        ✦ <Typewriter text={msg.content} speed={sp ?? 40} onDone={generating ? undefined : onDone} />
+        ✦ <Typewriter text={msg.content} speed={sp ?? 80} onDone={generating ? undefined : onDone} />
       </div>
     );
     if (msg.type === 'narration') return (
       <div key={msg.id} style={{ margin: '6px 0', padding: '10px 16px', fontSize: 12, lineHeight: 1.9, color: '#b0a8c8', borderLeft: '3px solid rgba(180,160,200,0.4)', borderRadius: '0 6px 6px 0', background: 'rgba(160,140,200,0.04)' }}>
-        <Typewriter text={msg.content} speed={sp ?? 18} onDone={generating ? undefined : onDone} />
+        <Typewriter text={msg.content} speed={sp ?? 36} onDone={generating ? undefined : onDone} />
       </div>
     );
     if (msg.type === 'atmosphere') return (
       <div key={msg.id} style={{ padding: '6px 14px', fontSize: 12, color: '#9ca3af', textAlign: 'center', fontStyle: 'italic', borderTop: '1px dashed rgba(255,255,255,0.08)', borderBottom: '1px dashed rgba(255,255,255,0.08)', margin: '4px 0', letterSpacing: '0.02em' }}>
-        <Typewriter text={msg.content} speed={sp ?? 30} onDone={generating ? undefined : onDone} />
+        <Typewriter text={msg.content} speed={sp ?? 60} onDone={generating ? undefined : onDone} />
       </div>
     );
     if (msg.type === 'event') {
