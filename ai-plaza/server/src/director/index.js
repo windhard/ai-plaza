@@ -1,7 +1,7 @@
 ﻿// ═══ 导演模块 v4：导演文件驱动 ═══
 // 框架只负责：加载导演 .md → 注入动态上下文 → 调用 LLM → 解析输出
 // 所有风格、规则、示例全在 data/directors/*.md 中
-import { findChapter, findBeats, updateBeatStatus, updateChapterStatus, findCharacter, findAllChapters, findCharacterStates, getWorld, getOutline, findAllMessages } from '../db/index.js';
+import { findChapter, findBeats, updateBeatStatus, updateChapterStatus, findCharacter, findAllChapters, findCharacterStates, getWorld, getOutline, findAllMessages, upsertCharacterState } from '../db/index.js';
 import { llmCall, llmCallStream } from '../llm/index.js';
 import fs from 'fs';
 import path from 'path';
@@ -142,16 +142,26 @@ ${dialogueExcerpts || '（无对话记录）'}
     ctxParts.push(`【前情提要——最近${recent.length}章的剧情、对话、人物行为】\n${lines.join('\n\n')}`);
   }
 
-  // 角色当前状态
+  // 角色当前状态——数字翻译为行为描述
   const allStates = findCharacterStates();
   const relevantStates = allStates.filter(s => castList.includes(s.character_id));
   if (relevantStates.length > 0) {
     const stateLines = relevantStates.map(s => {
       const c = charInfos.find(ci => ci.id === s.character_id);
       const name = c?.name || s.character_id;
-      return `  ${name}：情绪${Math.round(s.mood || 50)} 精力${Math.round(s.energy || 80)} 冲动${Math.round(s.impulse || 30)}${s.inner_thought ? ` 内心："${s.inner_thought}"` : ''}`;
+      const mood = Math.round(s.mood || 50);
+      const energy = Math.round(s.energy || 80);
+      const impulse = Math.round(s.impulse || 30);
+      const shame = Math.round(s.shame || 0);
+      // 翻译为行为描述
+      const moodDesc = mood > 70 ? '情绪高昂，容易激动' : mood < 30 ? '情绪低落，消沉敏感' : mood < 45 ? '情绪偏低，有些低落' : '情绪平稳';
+      const energyDesc = energy > 70 ? '精力充沛，行动力强' : energy < 30 ? '精疲力竭，反应迟钝' : energy < 50 ? '精力不足，容易疲倦' : '精力正常';
+      const impulseDesc = impulse > 70 ? '冲动强烈，难以自控，随时可能做出出格行为' : impulse > 50 ? '冲动偏高，自控力下降' : impulse < 20 ? '极度克制，压抑自己' : '冲动正常，能控制自己';
+      const shameDesc = shame > 60 ? `羞耻感极强——${shame > 80 ? '已到崩溃边缘，任何刺激都可能让她彻底瓦解' : '对自己的身体反应感到极度羞耻，但仍试图维持表面'}` : shame > 30 ? '有些羞耻，但正在适应' : '';
+      const innerLine = s.inner_thought ? ` 内心独白："${s.inner_thought}"` : '';
+      return `  ${name}：${moodDesc}。${energyDesc}。${impulseDesc}。${shameDesc}${innerLine}`;
     }).join('\n');
-    ctxParts.push(`【角色当前状态（从上章继承）】\n${stateLines}`);
+    ctxParts.push(`【角色当前状态——这些描述决定角色在本章的行为方式。状态来自前章剧情发展，必须严格遵循】\n${stateLines}`);
   }
 
   // 组装 prompt — 硬规则放最前和最后（首因+近因效应）
@@ -230,8 +240,58 @@ export async function generateChapter(chapterId, poolInterventions = [], directo
     updateBeatStatus(beat.id, 'done');
   }
   updateChapterStatus(chapterId, 'done');
+  updateCharacterStatesAfterChapter(charInfos, allMessages);
 
   return { messages: allMessages };
+}
+
+// ═══ 章后自动更新角色状态 ═══
+function updateCharacterStatesAfterChapter(charInfos, messages) {
+  for (const c of charInfos) {
+    if (!c.id) continue;
+    const st = findCharacterStates().find(s => s.character_id === c.id);
+    if (!st) continue;
+    // 统计该角色本章的对话
+    const speeches = messages.filter(m => m.characterId === c.id && m.type === 'speech');
+    const speechCount = speeches.length;
+    // 检查是否有羞辱/失控关键词
+    const allText = speeches.map(s => s.content).join(' ') + messages.filter(m => m.type === 'narration').map(m => m.content).join(' ');
+    const hasHumiliation = /母狗|贱|骚|羞辱|下贱|崩溃|失控|喷|高潮|哭|求|不要/.test(allText);
+    const hasControl = /专业|克制|维持|忍住|不能|冷静/.test(allText);
+
+    // 更新冲动：说话多+有失控→冲动升；有克制→冲动微降
+    let impulseChange = 0;
+    if (hasHumiliation) impulseChange += 15;
+    if (hasControl) impulseChange -= 5;
+    if (speechCount > 10) impulseChange += 5;
+    const newImpulse = Math.max(0, Math.min(100, (st.impulse || 30) + impulseChange));
+
+    // 更新羞耻：有羞辱内容→羞耻大幅上升
+    let shameChange = 0;
+    if (hasHumiliation) shameChange += 20;
+    const newShame = Math.max(0, Math.min(100, (st.shame || 0) + shameChange));
+
+    // 更新精力：参与度高→消耗精力
+    let energyChange = -5;
+    if (speechCount > 15) energyChange -= 10;
+    const newEnergy = Math.max(0, Math.min(100, (st.energy || 80) + energyChange));
+
+    // 更新情绪：有羞辱→情绪波动加剧
+    let moodChange = 0;
+    if (hasHumiliation) moodChange -= 15; // 情绪走低
+    if (hasControl) moodChange += 5; // 维持专业带来短暂满足
+    const newMood = Math.max(0, Math.min(100, (st.mood || 50) + moodChange));
+
+    upsertCharacterState({
+      character_id: c.id,
+      mood: newMood,
+      energy: newEnergy,
+      impulse: newImpulse,
+      shame: newShame,
+      inner_thought: '',
+      appearance_status: 'active',
+    });
+  }
 }
 
 // ═══ 干预文本 ═══
@@ -473,6 +533,8 @@ export async function generateChapterStream(chapterId, poolInterventions = [], d
     updateBeatStatus(beat.id, 'done');
   }
   updateChapterStatus(chapterId, 'done');
+  const allMsgs = findAllMessages(chapterId);
+  updateCharacterStatesAfterChapter(charInfos, allMsgs);
 }
 function parsePerformance(raw, charInfos, beatRows) {
   const messages = [];
