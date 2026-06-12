@@ -331,21 +331,29 @@ export default function App() {
       const actionMatch = effectiveContent.match(/^[（(]([^）)]+)[）)]\s*/);
       const action = actionMatch ? actionMatch[1] : null;
       const dialogue = actionMatch ? effectiveContent.slice(actionMatch[0].length) : effectiveContent;
-      // 生成中：轮到我才打字；非生成中：由 typingIdx 控制
+      // 动作>15字→独立叙事块，只取前6字神态放气泡上方
+      const isLongAction = action && action.length > 15;
+      const shortAction = isLongAction ? action.slice(0, 6) : action;
       const dialogueSpeed = (generating || isTyping) ? 45 : 0;
-      const bubbleBg = BG_DARK;
       return (
-        <div key={msg.id} style={{ display: 'flex', gap: 10, alignItems: 'flex-start', margin: '6px 0' }}>
-          <div style={{ width: 34, height: 34, borderRadius: '50%', background: 'linear-gradient(135deg, #2a2a3a, #1a1a2e)', border: '1px solid rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16, flexShrink: 0, boxShadow: '0 2px 8px rgba(0,0,0,0.3)' }}>{ch?.emoji || '👤'}</div>
-          <div style={{ maxWidth: '70%', minWidth: 80 }}>
-            <div style={{ fontSize: 10, fontWeight: 600, marginBottom: 4, color: ch ? ACCENT : TEXT_MUTED, letterSpacing: '0.03em' }}>{ch?.name || effectiveCharId || '???'}</div>
-            {action && (
-              <div style={{ fontSize: 11, color: '#f0a8c0', fontStyle: 'italic', padding: '3px 4px 5px 4px', marginBottom: 2, lineHeight: 1.5 }}>
-                <Typewriter text={action} speed={0} />
+        <div key={msg.id}>
+          {isLongAction && (
+            <div style={{ margin: '4px 0', padding: '8px 14px', fontSize: 12, lineHeight: 1.8, color: '#b0a8c8', borderLeft: '3px solid rgba(180,160,200,0.4)', borderRadius: '0 6px 6px 0', background: 'rgba(160,140,200,0.04)' }}>
+              <Typewriter text={action} speed={0} />
+            </div>
+          )}
+          <div style={{ display: 'flex', gap: 10, alignItems: 'flex-start', margin: '6px 0' }}>
+            <div style={{ width: 34, height: 34, borderRadius: '50%', background: 'linear-gradient(135deg, #2a2a3a, #1a1a2e)', border: '1px solid rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16, flexShrink: 0, boxShadow: '0 2px 8px rgba(0,0,0,0.3)' }}>{ch?.emoji || '👤'}</div>
+            <div style={{ maxWidth: '70%', minWidth: 80 }}>
+              <div style={{ fontSize: 10, fontWeight: 600, marginBottom: 4, color: ch ? ACCENT : TEXT_MUTED, letterSpacing: '0.03em' }}>{ch?.name || effectiveCharId || '???'}</div>
+              {shortAction && (
+                <div style={{ fontSize: 11, color: '#f0a8c0', fontStyle: 'italic', padding: '3px 4px 5px 4px', marginBottom: 2, lineHeight: 1.5 }}>
+                  <Typewriter text={shortAction} speed={0} />
+                </div>
+              )}
+              <div style={{ position: 'relative', padding: '9px 13px', borderRadius: shortAction ? '2px 10px 10px 10px' : '4px 12px 12px 12px', background: BG_DARK, border: '1px solid rgba(255,255,255,0.08)', fontSize: 13, lineHeight: 1.85, color: '#e0ddf0' }}>
+                <Typewriter text={dialogue} speed={dialogueSpeed} onDone={onDone} />
               </div>
-            )}
-            <div style={{ position: 'relative', padding: '9px 13px', borderRadius: action ? '2px 10px 10px 10px' : '4px 12px 12px 12px', background: bubbleBg, border: '1px solid rgba(255,255,255,0.08)', fontSize: 13, lineHeight: 1.85, color: '#e0ddf0' }}>
-              <Typewriter text={dialogue} speed={dialogueSpeed} onDone={onDone} />
             </div>
           </div>
         </div>
