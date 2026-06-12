@@ -307,7 +307,7 @@ function preprocessLLMOutput(raw, charNames) {
   let text = raw;
   // 1. 删除markdown标题行（# ## ### 等）
   text = text.replace(/^#{1,3}\s+.*$/gm, '');
-  // 2. 用演员表名字匹配散文体对话，转换为脚本格式
+  // 2. 散文体→脚本格式
   for (const name of charNames) {
     const re = new RegExp('^(' + name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')([^：:"“]{1,40}?)[：:，,] *["“]([^"”]+)["”]', 'gm');
     text = text.replace(re, (match, nm, action, dialogue) => {
@@ -316,6 +316,12 @@ function preprocessLLMOutput(raw, charNames) {
       return nm + '：（' + expr + '）' + dialogue;
     });
   }
+  // 3. 对话括号内动作过长（>10字）→拆分为叙事行+精简对话行
+  text = text.replace(/^([^\s（(：:]{2,4})[：:]\s*（([^）]{10,})）(.+)$/gm, (match, name, longAction, dialogue) => {
+    const vm = longAction.match(/(声音|语调|语气|眼眶|嘴角|嘴唇|眼神|脸色|表情)[^，,]{0,6}/);
+    const expr = vm ? vm[0].slice(0, 6) : '';
+    return '（' + name + longAction + '）\n' + name + (expr ? '：（' + expr + '）' : '：') + dialogue;
+  });
   return text;
 }
 
