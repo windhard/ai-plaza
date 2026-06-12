@@ -61,6 +61,8 @@ export default function App() {
   const [editingCharId, setEditingCharId] = useState<string | null>(null);
   const [scriptInput, setScriptInput] = useState('');
   const [parseError, setParseError] = useState('');
+  const [parsing, setParsing] = useState(false);
+  const [parseProgress, setParseProgress] = useState('');
   const [selectedEditor, setSelectedEditor] = useState('default');
   const [editors, setEditors] = useState<{ id: string; name: string; desc: string }[]>([]);
   const [overwriteConfirm, setOverwriteConfirm] = useState<any>(null);
@@ -248,16 +250,24 @@ export default function App() {
   const handleParse = async () => {
     setParseError('');
     if (!scriptInput.trim()) { setParseError('脚本为空'); return; }
-    const result = await parseScript(scriptInput, selectedEditor);
-    if (!result.success) { setParseError('解析失败'); return; }
-    const parsed = result.data;
-    if (!parsed) { setParseError('解析失败'); return; }
-    const { chapters: parsedCh, characters: parsedChars, hasOverlap, overlapTitle } = parsed;
-    if (hasOverlap) {
-      setOverwriteConfirm({ chapters: parsedCh, characters: parsedChars, overlapTitle });
-    } else {
-      await saveParsedChapters(parsedCh, parsedChars);
-      setScriptInput(''); setShowDesigner(false);
+    setParsing(true); setParseProgress('正在解析章节结构...');
+    try {
+      const result = await parseScript(scriptInput, selectedEditor);
+      if (!result.success) { setParseError('解析失败'); setParsing(false); return; }
+      const parsed = result.data;
+      if (!parsed) { setParseError('解析失败'); setParsing(false); return; }
+      setParseProgress('正在保存章节...');
+      const { chapters: parsedCh, characters: parsedChars, hasOverlap, overlapTitle } = parsed;
+      if (hasOverlap) {
+        setOverwriteConfirm({ chapters: parsedCh, characters: parsedChars, overlapTitle });
+      } else {
+        await saveParsedChapters(parsedCh, parsedChars);
+        setScriptInput(''); setShowDesigner(false);
+      }
+    } catch (e: any) {
+      setParseError(e.message || '解析失败');
+    } finally {
+      setParsing(false); setParseProgress('');
     }
   };
 
@@ -612,7 +622,10 @@ export default function App() {
               </div>
               <textarea value={scriptInput} onChange={e => setScriptInput(e.target.value)} placeholder="自由文本 / MD 格式均可，必须包含第X章：&#10;&#10;## 第一章：完美秘书的日常&#10;**目的**：展示极端自律与压抑&#10;**场景**：清晨办公室&#10;**情节**：&#10;- 早晨仪式感日常&#10;- 帮助同事却保持距离&#10;**人物A**：陈都灵，主角，极端自律&#10;&#10;## 第二章：暴雨夜的意外&#10;..." style={{ minHeight: 300, padding: 12, borderRadius: 6, border: parseError ? `1px solid ${RED}` : BORDER, background: BG_INPUT, color: TEXT_PRIMARY, fontSize: 11, fontFamily: "'Cascadia Code', Consolas, monospace", lineHeight: 1.7, resize: 'vertical', outline: 'none' }} />
               {parseError && <div style={{ color: RED, fontSize: 10, padding: '4px 8px', background: 'rgba(248,113,113,0.08)', borderRadius: 4, border: '1px solid rgba(248,113,113,0.2)' }}>{parseError}</div>}
-              <button onClick={handleParse} style={{ alignSelf: 'flex-start', padding: '8px 20px', borderRadius: 6, border: 'none', background: ACCENT_DIM, color: 'white', fontSize: 12, fontWeight: 600, cursor: 'pointer' }}>🔍 AI 解析并生成章节设计</button>
+              <button onClick={handleParse} disabled={parsing}
+                style={{ alignSelf: 'flex-start', padding: '8px 20px', borderRadius: 6, border: 'none', background: parsing ? '#555' : ACCENT_DIM, color: 'white', fontSize: 12, fontWeight: 600, cursor: parsing ? 'not-allowed' : 'pointer', opacity: parsing ? 0.7 : 1 }}>
+                {parsing ? `⏳ ${parseProgress}` : '🔍 AI 解析并生成章节设计'}
+              </button>
               <div style={{ fontSize: 9, color: TEXT_MUTED, lineHeight: 1.5 }}>支持：① MD 格式 ② 自由文本（AI 推断）③ 纯关键词 · AI 高级编辑会优化章节名和人物性格</div>
             </div>
             <div style={{ padding: '8px 14px', borderTop: BORDER, display: 'flex', justifyContent: 'flex-end', gap: 5, alignItems: 'center' }}><button onClick={() => { setShowDesigner(false); setParseError(''); }} style={{ padding: '5px 14px', borderRadius: 4, border: BORDER, background: 'transparent', color: TEXT_SECONDARY, cursor: 'pointer', fontSize: 10 }}>取消</button><button onClick={() => setShowDesigner(false)} style={{ padding: '5px 18px', borderRadius: 4, border: 'none', background: ACCENT_DIM, color: 'white', fontSize: 10, fontWeight: 600, cursor: 'pointer' }}>✅ 保存</button></div>
