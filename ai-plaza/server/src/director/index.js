@@ -1,7 +1,7 @@
 ﻿// ═══ 导演模块 v4：导演文件驱动 ═══
 // 框架只负责：加载导演 .md → 注入动态上下文 → 调用 LLM → 解析输出
 // 所有风格、规则、示例全在 data/directors/*.md 中
-import { findChapter, findBeats, updateBeatStatus, updateChapterStatus, findCharacter, findAllChapters, findCharacterStates, getWorld, getOutline } from '../db/index.js';
+import { findChapter, findBeats, updateBeatStatus, updateChapterStatus, findCharacter, findAllChapters, findCharacterStates, getWorld, getOutline, findAllMessages } from '../db/index.js';
 import { llmCall, llmCallStream } from '../llm/index.js';
 import fs from 'fs';
 import path from 'path';
@@ -112,22 +112,34 @@ function buildPromptContext(chapterId, poolInterventions, directorId) {
     ctxParts.push(`【故事大纲】\n${outlineContent.slice(0, 1500)}`);
   }
 
-  // 前情提要
+  // 前情提要——取前5章，包含对话和行为摘录
   const allChapters = findAllChapters();
   const prevChapters = allChapters
     .filter(c => (c.chapter_order || 999) < currentOrder)
     .sort((a, b) => (a.chapter_order || 0) - (b.chapter_order || 0));
   if (prevChapters.length > 0) {
-    const recent = prevChapters.slice(-3);
-    const earlier = prevChapters.slice(0, -3);
+    const recent = prevChapters.slice(-5);
     const lines = [];
-    if (earlier.length > 0) {
-      lines.push(`更早章节：${earlier.map(c => `第${c.chapter_order}章「${c.title}」`).join('、')}`);
+    for (const pc of recent) {
+      const msgs = findAllMessages(pc.id) || [];
+      // 提取对话行（前15条），摘录具体台词和行为
+      const speeches = msgs.filter(m => m.type === 'speech').slice(0, 15);
+      const dialogueExcerpts = speeches.map(s => {
+        const charName = s.characterId || '??';
+        const text = (s.content || '').slice(0, 60);
+        return `  ${charName}：${text}`;
+      }).join('\n');
+      const narrationExcerpts = msgs
+        .filter(m => m.type === 'narration')
+        .slice(0, 3)
+        .map(n => (n.content || '').slice(0, 80))
+        .join('；');
+      lines.push(`第${pc.chapter_order}章「${pc.title}」：${pc.synopsis || ''}
+主要对话：
+${dialogueExcerpts || '（无对话记录）'}
+关键事件：${narrationExcerpts || '（无）'}`);
     }
-    lines.push(recent.map(c =>
-      `第${c.chapter_order}章「${c.title}」：${c.synopsis || c.purpose || '（无摘要）'}`
-    ).join('\n'));
-    ctxParts.push(`【前情提要】\n${lines.join('\n')}`);
+    ctxParts.push(`【前情提要——最近${recent.length}章的剧情、对话、人物行为】\n${lines.join('\n\n')}`);
   }
 
   // 角色当前状态
