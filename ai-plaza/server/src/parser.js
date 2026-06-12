@@ -272,6 +272,7 @@ function regexParse(mdText) {
 // ═══ LLM 增强解析 ═══
 export async function llmEnhanceParse(chapters, originalText) {
   try {
+    const isPureLLM = !chapters || chapters.length === 0;
     const prompt = `你是资深剧本解析师。将以下文本解析为结构化 JSON。只输出 JSON。
 
 格式：
@@ -324,22 +325,40 @@ export async function llmEnhanceParse(chapters, originalText) {
     const parsed = JSON.parse(clean);
     if (!parsed.chapters?.length) return null;
 
-    // 统计 LLM 输出的总节数
     const llmTotalBeats = parsed.chapters.reduce((sum, ch) => sum + (ch.beats || []).length, 0);
-    const regexTotalBeats = chapters.reduce((sum, ch) => sum + (ch.beats || []).length, 0);
+    console.log(`  ✅ LLM解析: ${parsed.chapters.length} 章, ${llmTotalBeats} 节`);
 
-    // 仅当 LLM 节数 >= regex 节数时才使用 LLM 增强结果
-    // 特例：regex 为 0 时，LLM 结果直接采纳
+    // 纯LLM解析（无regex数据）→ 直接返回LLM结果
+    if (isPureLLM) {
+      return parsed.chapters.map((ch, o) => ({
+        id: `ch_${o + 1}`,
+        order: o + 1,
+        title: (ch.title || '').replace(/^第[一二三四五六七八九十\d]+章[：:]\s*/, ''),
+        purpose: ch.purpose || '',
+        scene: ch.scene || '',
+        synopsis: ch.synopsis || '',
+        beats: (ch.beats || []).map((d, i) => ({
+          id: `ch_${o + 1}_b_${i + 1}`,
+          order: i + 1,
+          description: typeof d === 'string' ? d : (d.description || ''),
+          status: o === 0 && i === 0 ? 'active' : 'pending',
+        })),
+        characters: (ch.characters || []).map(c => ({
+          name: c.name,
+          role: c.role || '',
+          personalityHint: c.personalityHint || '',
+        })),
+      }));
+    }
+
+    // 有regex数据 → 合并增强
+    const regexTotalBeats = chapters.reduce((sum, ch) => sum + (ch.beats || []).length, 0);
     if (regexTotalBeats > 0 && llmTotalBeats < regexTotalBeats) {
-      console.log(`  ⚠ LLM 增强节数(${llmTotalBeats}) < regex(${regexTotalBeats})，保留 regex 结果`);
+      console.log(`  ⚠ LLM节数(${llmTotalBeats}) < regex(${regexTotalBeats})，保留regex`);
       return null;
     }
 
-    console.log(`  ✅ LLM 增强: ${llmTotalBeats} 节 (regex: ${regexTotalBeats})`);
-
-    // 生成增强后的章节
     const enhanced = parsed.chapters.map((ch, o) => {
-      // 保留 regex 的 ID 前缀
       const regexCh = chapters[o] || chapters[0];
       let cleanTitle = (ch.title || regexCh.title).replace(/^第[一二三四五六七八九十\d]+章[：:]\s*/, '');
       return {
@@ -467,18 +486,18 @@ export async function aiSeniorEdit(chapters, originalText, editorId = 'default')
 export async function parseScript(mdText, { useLLM = true } = {}) {
   console.log(`\n📝 解析剧本 (${mdText.length} 字符, LLM=${useLLM})`);
 
-  // 1. Regex 解析
-  const regexChapters = regexParse(mdText);
-  const totalBeats = regexChapters.reduce((s, c) => s + c.beats.length, 0);
-  const totalChars = regexChapters.reduce((s, c) => s + c.characters.length, 0);
-  console.log(`  Regex: ${regexChapters.length} 章, ${totalBeats} 节, ${totalChars} 人物`);
-
-  // 2. LLM 增强（可选）
-  let chapters = regexChapters;
-  const totalRegexBeats = regexChapters.reduce((s, c) => s + c.beats.length, 0);
+  // 1. LLM 主解析（能理解任何格式）
+  let chapters = null;
   if (useLLM && API_KEY) {
-    const enhanced = await llmEnhanceParse(regexChapters, mdText);
-    if (enhanced) chapters = enhanced;
+    chapters = await llmEnhanceParse(null, mdText);
+  }
+  // 2. Regex 兜底（LLM 失败时用）
+  if (!chapters || chapters.length === 0) {
+    const regexChapters = regexParse(mdText);
+    chapters = regexChapters;
+    console.log(`  LLM失败，回退Regex: ${chapters.length} 章`);
+  } else {
+    console.log(`  LLM解析成功: ${chapters.length} 章`);
   }
 
   // 3. 去重角色（跨章同名合并）—— 同时归一化 name/role
