@@ -331,15 +331,16 @@ export default function App() {
       const actionMatch = effectiveContent.match(/^[（(]([^）)]+)[）)]\s*/);
       const action = actionMatch ? actionMatch[1] : null;
       const dialogue = actionMatch ? effectiveContent.slice(actionMatch[0].length) : effectiveContent;
-      // 动作>15字→独立叙事块；短动作直接显示；长动作不硬加神态（让LLM自然形成）
+      // 动作>15字→独立叙事块（加主语）+气泡上方保留简短神态
       const isLongAction = action && action.length > 15;
-      const shortAction = isLongAction ? null : action;
+      const shortAction = isLongAction ? action.slice(0, 12) : action;
+      const charName = ch?.name || effectiveCharId || '';
       const dialogueSpeed = (generating || isTyping) ? 45 : 0;
       return (
         <div key={msg.id}>
           {isLongAction && (
             <div style={{ margin: '4px 0', padding: '8px 14px', fontSize: 12, lineHeight: 1.8, color: '#c8b0a0', borderLeft: '3px solid rgba(200,176,160,0.5)', borderRadius: '0 6px 6px 0', background: 'rgba(180,150,120,0.06)' }}>
-              <Typewriter text={action} speed={0} />
+              <Typewriter text={charName + action} speed={0} />
             </div>
           )}
           <div style={{ display: 'flex', gap: 10, alignItems: 'flex-start', margin: '6px 0' }}>

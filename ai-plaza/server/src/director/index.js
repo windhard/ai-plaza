@@ -316,11 +316,6 @@ function preprocessLLMOutput(raw, charNames) {
       return nm + '：（' + expr + '）' + dialogue;
     });
   }
-  // 3. 对话括号内动作极长（>40字）→拆分为叙事+对话，保留简短神态
-  text = text.replace(/^([^\s（(：:]{2,4})[：:]\s*（([^）]{40,})）(.+)$/gm, (match, name, longAction, dialogue) => {
-    const shortExpr = longAction.slice(0, 12);
-    return name + longAction + '\n' + name + '：（' + shortExpr + '）' + dialogue;
-  });
   return text;
 }
 
