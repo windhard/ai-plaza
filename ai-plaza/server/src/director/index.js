@@ -217,7 +217,7 @@ export async function generateChapter(chapterId, poolInterventions = [], directo
     const result = await llmCall({
       systemPrompt,
       userMessage: userPrompt,
-      temperature: 0.9,
+      temperature: 1.2,
       maxTokens: 12000,
     });
 
@@ -506,7 +506,7 @@ export async function generateChapterStream(chapterId, poolInterventions = [], d
     await llmCallStream({
       systemPrompt,
       userMessage: userPrompt,
-      temperature: 0.9,
+      temperature: 1.2,
       maxTokens: 12000,
       signal,
       onLine: (line) => {
